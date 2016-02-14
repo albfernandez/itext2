@@ -234,24 +234,9 @@ class PdfStamperImp extends PdfWriter {
         	altMetadata = xmpMetadata;
         }
         // if there is XMP data to add: add it
-        PdfDate date = new PdfDate();
+
         if (altMetadata != null) {
-        	PdfStream xmp;
-        	try {
-        		XmpReader xmpr = new XmpReader(altMetadata);
-        		if (!xmpr.replace("http://ns.adobe.com/pdf/1.3/", "Producer", producer))
-        			xmpr.add("rdf:Description", "http://ns.adobe.com/pdf/1.3/", "pdf:Producer", producer);
-        		if (!xmpr.replace("http://ns.adobe.com/xap/1.0/", "ModifyDate", date.getW3CDate()))
-        			xmpr.add("rdf:Description", "http://ns.adobe.com/xap/1.0/", "xmp:ModifyDate", date.getW3CDate());
-        		xmpr.replace("http://ns.adobe.com/xap/1.0/", "MetadataDate", date.getW3CDate());
-            	xmp = new PdfStream(xmpr.serializeDoc());
-        	}
-        	catch(SAXException e) {
-        		xmp = new PdfStream(altMetadata);
-        	}
-        	catch(IOException e) {
-        		xmp = new PdfStream(altMetadata);
-        	}
+        	PdfStream xmp = new PdfStream(altMetadata);
         	xmp.put(PdfName.TYPE, PdfName.METADATA);
         	xmp.put(PdfName.SUBTYPE, PdfName.XML);
         	if (crypto != null && !crypto.isMetadataEncrypted()) {
@@ -341,8 +326,6 @@ class PdfStamperImp extends PdfWriter {
                     newInfo.put(keyName, new PdfString(value, PdfObject.TEXT_UNICODE));
             }
         }
-        newInfo.put(PdfName.MODDATE, date);
-        newInfo.put(PdfName.PRODUCER, new PdfString(producer));
         if (append) {
             if (iInfo == null)
                 info = addToBody(newInfo, false).getIndirectReference();
