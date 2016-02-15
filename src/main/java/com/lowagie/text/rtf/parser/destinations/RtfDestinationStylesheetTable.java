@@ -91,7 +91,7 @@ public class RtfDestinationStylesheetTable extends RtfDestination {
 	 */
 	private int alignment = Element.ALIGN_LEFT;
 	/**
-	 * Percentage of line occupied by Kashida justification (0 � low, 10 � medium, 20 � high).
+	 * Percentage of line occupied by Kashida justification (0 low, 10 medium, 20 high).
 	 * \qkN
 	 */
 	private int justificationPercentage = 0;
