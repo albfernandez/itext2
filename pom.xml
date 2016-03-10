@@ -6,7 +6,7 @@
 	<version>2.1.8-SNAPSHOT</version>
 	<url>https://github.com/albfernandez/itext2</url>
 	<packaging>jar</packaging>
-		<licenses>
+	<licenses>
 		<license>
 			<name>GNU LESSER GENERAL PUBLIC LICENSE, version 3 (GPL-3.0)</name>
 			<url>http://www.gnu.org/licenses/lgpl.txt</url>
@@ -20,7 +20,7 @@
 			<organizationUrl>https://github.com/albfernandez/</organizationUrl>
 		</developer>
 	</developers>
-	
+
 	<scm>
 		<connection>scm:git:git@github.com:albfernandez/itext2.git</connection>
 		<developerConnection>scm:git:git@github.com:albfernandez/itext2.git</developerConnection>
@@ -30,8 +30,21 @@
 		<system>GitHub</system>
 		<url>https://github.com/albfernandez/itext2/issues</url>
 	</issueManagement>
-	
+
 	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+			<scope>test</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>org.bouncycastle</groupId>
 			<artifactId>bcprov-jdk15on</artifactId>
@@ -48,7 +61,7 @@
 			<version>1.51</version>
 		</dependency>
 	</dependencies>
-	
+
 	<build>
 		<plugins>
 			<plugin>
@@ -133,23 +146,23 @@
 				</executions>
 			</plugin>
 			<plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-                <version>1.6</version>
-                <configuration>
-              		<keyname>${gpg.keyname}</keyname>
-              		<passphraseServerId>${gpg.keyname}</passphraseServerId>
-              	</configuration>
-                <executions>
-                    <execution>
-                        <id>sign-artifacts</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>sign</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>1.6</version>
+				<configuration>
+					<keyname>${gpg.keyname}</keyname>
+					<passphraseServerId>${gpg.keyname}</passphraseServerId>
+				</configuration>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.sonatype.plugins</groupId>
 				<artifactId>nexus-staging-maven-plugin</artifactId>
@@ -161,7 +174,7 @@
 					<autoReleaseAfterClose>true</autoReleaseAfterClose>
 				</configuration>
 			</plugin>
-			
+
 		</plugins>
 	</build>
 
