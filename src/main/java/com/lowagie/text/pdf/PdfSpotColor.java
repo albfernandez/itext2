@@ -69,6 +69,19 @@ public class PdfSpotColor{
     public Color altcs;
     // constructors
     
+    
+    /**
+     * Constructs a new <CODE>PdfSpotColor</CODE>.
+     *
+     * @param		name		a String value
+     * @param		tint		a tint value between 0 and 1
+     * @param		altcs		an alternative colorspace value
+     */
+    
+    public PdfSpotColor(String name, Color altcs) {
+        this.name = new PdfName(name);
+        this.altcs = altcs;
+    }
     /**
      * Constructs a new <CODE>PdfSpotColor</CODE>.
      *
