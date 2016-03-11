@@ -495,7 +495,7 @@ public class Font implements Comparable {
 	}
 
 	/**
-	 * checks if this font is Bold.
+	 * checks if this font is Italic.
 	 * 
 	 * @return a <CODE>boolean</CODE>
 	 */
