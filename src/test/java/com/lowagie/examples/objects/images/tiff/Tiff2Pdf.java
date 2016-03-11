@@ -14,11 +14,13 @@
 
 package com.lowagie.examples.objects.images.tiff;
 
+import java.io.File;
 import java.io.FileOutputStream;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.Image;
 import com.lowagie.text.Paragraph;
+import com.lowagie.text.RunAllExamplesTest;
 import com.lowagie.text.pdf.PdfContentByte;
 import com.lowagie.text.pdf.PdfWriter;
 import com.lowagie.text.pdf.RandomAccessFileOrArray;
@@ -45,15 +47,16 @@ public class Tiff2Pdf {
 			System.out.println("Usage: com.lowagie.examples.objects.images.tiff.Tiff2Pdf file1.tif [file2.tif ... fileN.tif]");
 			System.exit(1);
 		}
+		File destDir = new File (RunAllExamplesTest.OUTPUT_DIR);
 		String tiff_file;
 		String pdf_file;
 		for (int i = 0; i < args.length; i++) {
 			tiff_file = args[i];
-			pdf_file = tiff_file.substring(0, tiff_file.lastIndexOf('.') + 1) + "pdf";
+			File tf = new File(tiff_file);
+			pdf_file = tf.getName().substring(0, tf.getName().lastIndexOf('.') + 1) + "pdf";
 			Document document = new Document();
 			try {
-				PdfWriter writer = PdfWriter.getInstance(document,
-						new FileOutputStream(pdf_file));
+				PdfWriter writer = PdfWriter.getInstance(document,	new FileOutputStream(new File(destDir, pdf_file)));
 				int pages = 0;
 				document.open();
 				PdfContentByte cb = writer.getDirectContent();

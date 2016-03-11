@@ -92,11 +92,11 @@ public class RunAllExamplesTest {
         runSingleTest(com.lowagie.examples.general.copystamp.AddWatermarkPageNumbers.class);
         runSingleTest(com.lowagie.examples.general.copystamp.Register.class);
         runSingleTest(com.lowagie.examples.general.copystamp.EncryptorExample.class);
-        runSingleTest(com.lowagie.examples.general.copystamp.Concatenate.class, "HelloWorldMeta.pdf", "ChapterSection.pdf", "Concatenate.pdf");
+        runSingleTest(com.lowagie.examples.general.copystamp.Concatenate.class, RESOURCES_DIR + "HelloWorldMeta.pdf", RESOURCES_DIR + "ChapterSection.pdf", OUTPUT_DIR + "Concatenate.pdf");
         runSingleTest(com.lowagie.examples.general.copystamp.ConcatenateForms.class);
         runSingleTest(com.lowagie.examples.general.copystamp.TwoOnOne.class);
         runSingleTest(com.lowagie.examples.general.Margins.class);
-        runSingleTest(com.lowagie.examples.general.read.Info.class, "HelloWorldMeta.pdf", "ChapterSection.pdf", "Concatenate.pdf");
+        runSingleTest(com.lowagie.examples.general.read.Info.class, RESOURCES_DIR + "HelloWorldMeta.pdf", RESOURCES_DIR + "ChapterSection.pdf", RESOURCES_DIR + "Concatenate.pdf");
         runSingleTest(com.lowagie.examples.general.read.ReadEncrypted.class);
         runSingleTest(com.lowagie.examples.general.LandscapePortrait.class);
         runSingleTest(com.lowagie.examples.general.CustomPageSize.class);
@@ -164,8 +164,8 @@ public class RunAllExamplesTest {
         runSingleTest(com.lowagie.examples.objects.images.tiff.ExamplePDF417.class);
         runSingleTest(com.lowagie.examples.objects.images.tiff.Barcodes.class);
         runSingleTest(com.lowagie.examples.objects.images.tiff.ExampleEAN128.class);
-        runSingleTest(com.lowagie.examples.objects.images.tiff.OddEven.class, RunAllExamplesTest.RESOURCES_DIR +"odd.tif", RunAllExamplesTest.RESOURCES_DIR +"even.tif", RunAllExamplesTest.OUTPUT_DIR +  "OddEven.pdf");
-        runSingleTest(com.lowagie.examples.objects.images.tiff.Tiff2Pdf.class, "12.tif", "338814-00.tif", "odd.tif", "even.tif");
+        runSingleTest(com.lowagie.examples.objects.images.tiff.OddEven.class, RESOURCES_DIR +"odd.tif", RESOURCES_DIR +"even.tif", OUTPUT_DIR +  "OddEven.pdf");
+        runSingleTest(com.lowagie.examples.objects.images.tiff.Tiff2Pdf.class, RESOURCES_DIR + "12.tif", RESOURCES_DIR + "338814-00.tif", RESOURCES_DIR + "odd.tif", RESOURCES_DIR + "even.tif");
         runSingleTest(com.lowagie.examples.objects.images.RawData.class);
         /**/
     }
