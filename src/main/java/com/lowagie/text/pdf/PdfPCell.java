@@ -970,7 +970,7 @@ public class PdfPCell extends Rectangle{
 			setBottom(getTop() - getEffectivePaddingTop() - getEffectivePaddingBottom() - refHeight);
 		}
 		else {
-			if (pivoted && hasFixedHeight())
+			if ((pivoted && hasFixedHeight()) || getColumn() == null)
 				setBottom(getTop() - getFixedHeight());
 			else {
 				ColumnText ct = ColumnText.duplicate(getColumn());
@@ -985,7 +985,7 @@ public class PdfPCell extends Rectangle{
 					right = isNoWrap() ? PdfPRow.RIGHT_LIMIT : getRight() - getEffectivePaddingRight();
 					top = getTop() - getEffectivePaddingTop();
 					left = getLeft() + getEffectivePaddingLeft();
-					bottom = hasFixedHeight() ? top + getEffectivePaddingBottom() - getFixedHeight() : PdfPRow.BOTTOM_LIMIT;
+					bottom = hasFixedHeight() ? getTop() + getEffectivePaddingBottom() - getFixedHeight() : PdfPRow.BOTTOM_LIMIT;
 				}
 				PdfPRow.setColumn(ct, left, bottom, right, top);
 				try {
