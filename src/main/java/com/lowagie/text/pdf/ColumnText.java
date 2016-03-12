@@ -453,11 +453,11 @@ public class ColumnText {
         	try {
 				element = ((SimpleTable)element).createPdfPTable();
 			} catch (DocumentException e) {
-				throw new IllegalArgumentException("Element not allowed.");
+				throw new IllegalArgumentException("Element not allowed." + element.type(), e);
 			}
         }
         else if (element.type() != Element.PARAGRAPH && element.type() != Element.LIST && element.type() != Element.PTABLE && element.type() != Element.YMARK)
-            throw new IllegalArgumentException("Element not allowed.");
+            throw new IllegalArgumentException("Element not allowed." + element.type());
         if (!composite) {
             composite = true;
             compositeElements = new LinkedList();
