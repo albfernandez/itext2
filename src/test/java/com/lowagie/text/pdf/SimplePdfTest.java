@@ -2,7 +2,6 @@ package com.lowagie.text.pdf;
 
 import java.io.FileNotFoundException;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import com.lowagie.text.Annotation;
