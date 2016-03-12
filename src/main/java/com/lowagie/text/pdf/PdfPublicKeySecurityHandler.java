@@ -109,7 +109,7 @@ import javax.crypto.SecretKey;
 
 import org.bouncycastle.asn1.ASN1InputStream;
 import org.bouncycastle.asn1.ASN1Primitive;
-import org.bouncycastle.asn1.DERObjectIdentifier;
+import org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import org.bouncycastle.asn1.DEROctetString;
 import org.bouncycastle.asn1.DEROutputStream;
 import org.bouncycastle.asn1.DERSet;
@@ -297,7 +297,7 @@ public class PdfPublicKeySecurityHandler {
         DEROctetString deroctetstring = new DEROctetString(abyte1);
         KeyTransRecipientInfo keytransrecipientinfo = computeRecipientInfo(cert, secretkey.getEncoded());
         DERSet derset = new DERSet(new RecipientInfo(keytransrecipientinfo));
-        AlgorithmIdentifier algorithmidentifier = new AlgorithmIdentifier(new DERObjectIdentifier(s), derobject);
+        AlgorithmIdentifier algorithmidentifier = new AlgorithmIdentifier(new ASN1ObjectIdentifier(s), derobject);
         EncryptedContentInfo encryptedcontentinfo = 
             new EncryptedContentInfo(PKCSObjectIdentifiers.data, algorithmidentifier, deroctetstring);
         EnvelopedData env = new EnvelopedData(null, derset, encryptedcontentinfo, (org.bouncycastle.asn1.ASN1Set) null);
@@ -313,12 +313,12 @@ public class PdfPublicKeySecurityHandler {
             new ASN1InputStream(new ByteArrayInputStream(x509certificate.getTBSCertificate()));
         TBSCertificateStructure tbscertificatestructure = 
             TBSCertificateStructure.getInstance(asn1inputstream.readObject());
-        AlgorithmIdentifier algorithmidentifier = tbscertificatestructure.getSubjectPublicKeyInfo().getAlgorithmId();
+        AlgorithmIdentifier algorithmidentifier = tbscertificatestructure.getSubjectPublicKeyInfo().getAlgorithm();
         IssuerAndSerialNumber issuerandserialnumber = 
             new IssuerAndSerialNumber(
                 tbscertificatestructure.getIssuer(), 
                 tbscertificatestructure.getSerialNumber().getValue());
-        Cipher cipher = Cipher.getInstance(algorithmidentifier.getObjectId().getId());        
+        Cipher cipher = Cipher.getInstance(algorithmidentifier.getAlgorithm().getId());        
         cipher.init(1, x509certificate);
         DEROctetString deroctetstring = new DEROctetString(cipher.doFinal(abyte0));
         RecipientIdentifier recipId = new RecipientIdentifier(issuerandserialnumber);
