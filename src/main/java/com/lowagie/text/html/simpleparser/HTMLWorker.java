@@ -96,6 +96,8 @@ public class HTMLWorker implements SimpleXMLDocHandler, DocListener {
 	private boolean pendingTD = false;
 
 	private boolean pendingLI = false;
+	
+	private boolean pendingUL = false;
 
 	private StyleSheet style = new StyleSheet();
 
@@ -180,6 +182,10 @@ public class HTMLWorker implements SimpleXMLDocHandler, DocListener {
 		if (!tagsSupported.containsKey(tag))
 			return;
 		try {
+			 if(!pendingLI && pendingUL && !tag.equals(HtmlTags.LISTITEM)) {
+				 endElement(HtmlTags.UNORDEREDLIST);
+				 pendingUL = false;
+			 }
 			style.applyStyle(tag, h);
 			String follow = (String) FactoryProperties.followTags.get(tag);
 			if (follow != null) {
@@ -393,6 +399,12 @@ public class HTMLWorker implements SimpleXMLDocHandler, DocListener {
 			if (tag.equals(HtmlTags.LISTITEM)) {
 				if (pendingLI)
 					endElement(HtmlTags.LISTITEM);
+				
+				Object list = stack.size() > 0 ? stack.peek() : null;
+				if ((!(list instanceof com.lowagie.text.List) && !(list instanceof com.lowagie.text.ListItem)) || list == null) {
+					startElement(HtmlTags.UNORDEREDLIST, h);
+					pendingUL = true;
+				}
 				skipText = false;
 				pendingLI = true;
 				cprops.addToChain(tag, h);
