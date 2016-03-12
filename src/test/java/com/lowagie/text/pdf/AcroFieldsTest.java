@@ -2,12 +2,17 @@ package com.lowagie.text.pdf;
 
 import java.io.ByteArrayOutputStream;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import com.lowagie.text.RunAllExamplesTest;
 
 public class AcroFieldsTest {
     
+	@Before
+	public void createOpututDir() {
+		RunAllExamplesTest.createOutputDir();
+	}
     @Test
     public void testSetFields() throws Exception {
         singleTest(RunAllExamplesTest.RESOURCES_DIR +"register.xfdf");

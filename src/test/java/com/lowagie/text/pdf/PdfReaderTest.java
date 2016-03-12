@@ -2,15 +2,23 @@ package com.lowagie.text.pdf;
 
 import static org.junit.Assert.assertTrue;
 
-import com.lowagie.text.*;
-
 import java.io.ByteArrayOutputStream;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import com.lowagie.text.Document;
+import com.lowagie.text.PageSize;
+import com.lowagie.text.RunAllExamplesTest;
+
 public class PdfReaderTest {
+	
+	@Before
+	public void createOutputDir() {
+		RunAllExamplesTest.createOutputDir();
+	}
 
     @Test
     public void testPartialReadOpenFile() throws Exception {
@@ -18,7 +26,7 @@ public class PdfReaderTest {
 	 * the constructor contract is kept, i.e. file is still open
 	 */
         RandomAccessFileOrArray f = new RandomAccessFileOrArray(RunAllExamplesTest.RESOURCES_DIR +"RomeoJuliet.pdf");
-        PdfReader r = new PdfReader(f, null);
+        new PdfReader(f, null);
 
         assertTrue("kept open", f.isOpen());
     }
@@ -32,7 +40,7 @@ public class PdfReaderTest {
 		ByteArrayOutputStream());
 	document.open();
 	document.newPage();
-	List links = currentReader.getLinks(1);
+	List<?> links = currentReader.getLinks(1);
 	PdfAnnotation.PdfImportedLink link =
 		(PdfAnnotation.PdfImportedLink) links.get(0);
 	writer.addAnnotation(link.createAnnotation(writer));

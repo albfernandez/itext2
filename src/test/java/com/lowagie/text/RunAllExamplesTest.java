@@ -10,7 +10,7 @@ import org.junit.Test;
 
 public class RunAllExamplesTest {
 	
-	public static final String OUTPUT_DIR = "target/tests-generated-files/";
+	public static final String OUTPUT_DIR = "target/test-output-files/";
 	public static final String RESOURCES_DIR = "src/test/resources/";
 
     public static void main(String args[]) throws Exception {
@@ -32,7 +32,7 @@ public class RunAllExamplesTest {
         r.testWindowsFonts();
     }
 
-    public void runSingleTest(Class c, String... args) {
+    public void runSingleTest(Class<?> c, String... args) {
         try {
             Method m = c.getMethod("main", String[].class);
             m.invoke(null, new Object[] {args});
@@ -43,11 +43,15 @@ public class RunAllExamplesTest {
     }
     @Before
     public void before() {
-    	File dest = new File(OUTPUT_DIR);
+    	createOutputDir();
+    }
+
+	public static void createOutputDir() {
+		File dest = new File(OUTPUT_DIR);
     	if (!dest.exists()) {
     		dest.mkdirs();
     	}
-    }
+	}
 
     @Test
     public void testFormExamples() {
@@ -306,6 +310,7 @@ public class RunAllExamplesTest {
 
     @Test
     public void testWindowsFonts() {
+    	// TODO Only windows ??
         if (System.getProperty("os.name").startsWith("Windows")) {
             runSingleTest(com.lowagie.examples.fonts.TrueType.class);
             runSingleTest(com.lowagie.examples.fonts.FullFontNames.class);

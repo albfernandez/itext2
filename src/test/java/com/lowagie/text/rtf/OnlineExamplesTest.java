@@ -2,9 +2,13 @@ package com.lowagie.text.rtf;
 
 import static org.junit.Assert.fail;
 
+
 import java.lang.reflect.Method;
 
+import org.junit.Before;
 import org.junit.Test;
+
+import com.lowagie.text.RunAllExamplesTest;
 
 public class OnlineExamplesTest {
 
@@ -14,7 +18,7 @@ public class OnlineExamplesTest {
         r.testRtfExamples();
     }
 
-    public void runSingleTest(Class c, String... args) {
+    public void runSingleTest(Class<?> c, String... args) {
         try {
             Method m = c.getMethod("main", String[].class);
             m.invoke(null, new Object[] {args});
@@ -24,6 +28,10 @@ public class OnlineExamplesTest {
         }
     }
 
+    @Before
+    public void before() {
+    	RunAllExamplesTest.createOutputDir();
+    }
     @Test
     public void testRtfExamples() {
         runSingleTest(com.lowagie.examples.general.HelloWorldMultiple.class);

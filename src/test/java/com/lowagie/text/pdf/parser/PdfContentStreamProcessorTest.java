@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ListIterator;
 
+import com.lowagie.text.RunAllExamplesTest;
 import com.lowagie.text.pdf.PRIndirectReference;
 import com.lowagie.text.pdf.PRStream;
 import com.lowagie.text.pdf.PdfArray;
@@ -35,7 +36,7 @@ public class PdfContentStreamProcessorTest
   
   @BeforeClass
   public static void setUpClass() throws Exception {
-      resourceRoot = new File("src/test/resources");
+      resourceRoot = new File(RunAllExamplesTest.RESOURCES_DIR);
   }
 
   @Before
@@ -53,25 +54,22 @@ public class PdfContentStreamProcessorTest
   }
 
 
-  private byte[] readDocument(final File file) throws IOException {
+	private byte[] readDocument(final File file) throws IOException {
 
-    final InputStream inputStream = new FileInputStream(file);
+		try (ByteArrayOutputStream fileBytes = new ByteArrayOutputStream();
+				InputStream inputStream = new FileInputStream(file)) {
+			final byte[] buffer = new byte[8192];
+			while (true) {
+				final int bytesRead = inputStream.read(buffer);
+				if (bytesRead == -1) {
+					break;
+				}
+				fileBytes.write(buffer, 0, bytesRead);
+			}
+			return fileBytes.toByteArray();
+		}
 
-    final ByteArrayOutputStream fileBytes = new ByteArrayOutputStream();
-    final byte[] buffer = new byte[8192];
-    while (true)
-    {
-      final int bytesRead = inputStream.read(buffer);
-      if (bytesRead == -1)
-      {
-        break;
-      }
-      fileBytes.write(buffer, 0, bytesRead);
-    }
-
-    return fileBytes.toByteArray();
-  }
-
+	}
 
   private void processBytes(
       final byte[] pdfBytes,
@@ -111,7 +109,7 @@ public class PdfContentStreamProcessorTest
         // processContent() resets state.
         final ByteArrayOutputStream allBytes = new ByteArrayOutputStream();
         final PdfArray contentArray = (PdfArray) contentObject;
-        final ListIterator iter = contentArray.listIterator();
+        final ListIterator<?> iter = contentArray.listIterator();
         while (iter.hasNext())
         {
           final PdfObject element = (PdfObject) iter.next();

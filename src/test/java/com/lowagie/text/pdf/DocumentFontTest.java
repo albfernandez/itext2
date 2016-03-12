@@ -8,12 +8,13 @@ package com.lowagie.text.pdf;
 
 import java.io.File;
 
-import junit.framework.Assert;
-
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import com.lowagie.text.RunAllExamplesTest;
 
 /**
  * @author kevin
@@ -24,7 +25,7 @@ public class DocumentFontTest {
     
     @BeforeClass
     public static void setUpClass() throws Exception {
-        resourceRoot = new File("src/test/resources");
+        resourceRoot = new File(RunAllExamplesTest.RESOURCES_DIR);
     }
     
     @Before
