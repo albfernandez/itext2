@@ -13,10 +13,10 @@
  */
 package com.lowagie.examples.directcontent.graphics2D;
 
-import java.awt.Graphics2D;
-import java.awt.geom.Rectangle2D;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+//import java.awt.Graphics2D;
+//import java.awt.geom.Rectangle2D;
+//import java.io.FileNotFoundException;
+//import java.io.FileOutputStream;
 
 //import org.jfree.chart.ChartFactory;
 //import org.jfree.chart.JFreeChart;
@@ -27,14 +27,14 @@ import java.io.FileOutputStream;
 //import org.jfree.data.xy.XYSeriesCollection;
 
 
-import com.lowagie.text.Document;
-import com.lowagie.text.DocumentException;
-import com.lowagie.text.Rectangle;
-import com.lowagie.text.RunAllExamplesTest;
-import com.lowagie.text.pdf.DefaultFontMapper;
-import com.lowagie.text.pdf.PdfContentByte;
-import com.lowagie.text.pdf.PdfTemplate;
-import com.lowagie.text.pdf.PdfWriter;
+//import com.lowagie.text.Document;
+//import com.lowagie.text.DocumentException;
+//import com.lowagie.text.Rectangle;
+//import com.lowagie.text.RunAllExamplesTest;
+//import com.lowagie.text.pdf.DefaultFontMapper;
+//import com.lowagie.text.pdf.PdfContentByte;
+//import com.lowagie.text.pdf.PdfTemplate;
+//import com.lowagie.text.pdf.PdfWriter;
 
 /**
  * JFreeChart example.
