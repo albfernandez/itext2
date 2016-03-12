@@ -586,8 +586,9 @@ public class TIFFFaxDecoder {
         
         this.bitPointer = 0;
         this.bytePointer = 0;
-        this.prevChangingElems = new int[w];
-        this.currChangingElems = new int[w];
+        final int changingElemsSize = w * 2;
+        this.prevChangingElems = new int[changingElemsSize];
+        this.currChangingElems = new int[changingElemsSize];
     }
     
     /**
