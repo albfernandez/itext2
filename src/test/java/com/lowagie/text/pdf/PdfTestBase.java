@@ -9,18 +9,28 @@ import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.PageSize;
 import com.lowagie.text.Rectangle;
-import com.lowagie.text.RunAllExamplesTest;
 
 public class PdfTestBase {
-
+	public static final String OUTPUT_DIR = "target/test-output-files/";
+	
+	public static File getOutputDir() {
+		File outputDir = new File(OUTPUT_DIR);
+		if (!outputDir.exists()) {
+			outputDir.mkdirs();
+		}
+		return outputDir;
+	}
+	public static File getOutputFile(String name) {
+		return new File(getOutputDir(), name);
+	}
 	
 	public static void createOutputDir() {
-		RunAllExamplesTest.createOutputDir();
+		getOutputDir();
 	}
 	public static Document createPdf(String filename)
 			throws FileNotFoundException, DocumentException {
-		createOutputDir();
-		return createPdf(new FileOutputStream(new File(RunAllExamplesTest.OUTPUT_DIR + filename)));
+		
+		return createPdf(new FileOutputStream(getOutputFile(filename)));
 
 	}
 	
