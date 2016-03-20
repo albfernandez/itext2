@@ -358,9 +358,7 @@ public class PdfGraphics2D extends Graphics2D {
             return;
         setFillPaint();
         if (onlyShapes) {
-            drawGlyphVector(this.font.layoutGlyphVector(getFontRenderContext(), s.toCharArray(), 0, s.length(), java.awt.Font.LAYOUT_LEFT_TO_RIGHT), x, y);
-//            Use the following line to compile in JDK 1.3    
-//            drawGlyphVector(this.font.createGlyphVector(getFontRenderContext(), s), x, y);
+            drawGlyphVector(this.font.layoutGlyphVector(getFontRenderContext(), s.toCharArray(), 0, s.length(), Font.LAYOUT_LEFT_TO_RIGHT), x, y);
         }
         else {
         	boolean restoreTextRenderingMode = false;
@@ -1638,9 +1636,10 @@ public class PdfGraphics2D extends Graphics2D {
         }
     }
     
-    private synchronized void waitForImage(java.awt.Image image) {
-        if (mediaTracker == null)
+    private synchronized void waitForImage(Image image) {
+        if (mediaTracker == null) {
             mediaTracker = new MediaTracker(new PdfGraphics2D.FakeComponent());
+        }
         mediaTracker.addImage(image, 0);
         try {
             mediaTracker.waitForID(0);
