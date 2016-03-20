@@ -60,6 +60,7 @@ public class CMYKColor extends ExtendedColor {
     float magenta;
     float yellow;
     float black;
+    int alpha;
 
     /**
      * Constructs a CMYK Color based on 4 color values (values are integers from 0 to 255).
@@ -80,50 +81,68 @@ public class CMYKColor extends ExtendedColor {
      * @param floatBlack
      */
     public CMYKColor(float floatCyan, float floatMagenta, float floatYellow, float floatBlack) {
+    	this(floatCyan, floatMagenta, floatYellow, floatBlack, 255);
+    }
+
+    /**
+     * Construct a CMYK Color.
+     * @param floatCyan
+     * @param floatMagenta
+     * @param floatYellow
+     * @param floatBlack
+     * @param alpha An int between 0 and 255, 255 being completely opaque
+     */
+    public CMYKColor(float floatCyan, float floatMagenta, float floatYellow, float floatBlack, int alpha) {
         super(TYPE_CMYK, 1f - floatCyan - floatBlack, 1f - floatMagenta - floatBlack, 1f - floatYellow - floatBlack);
-        cyan = normalize(floatCyan);
-        magenta = normalize(floatMagenta);
-        yellow = normalize(floatYellow);
-        black = normalize(floatBlack);
+        this.cyan = normalize(floatCyan);
+        this.magenta = normalize(floatMagenta);
+        this.yellow = normalize(floatYellow);
+        this.black = normalize(floatBlack);
+        this.alpha = alpha;
     }
     
     /**
      * @return the cyan value
      */
     public float getCyan() {
-        return cyan;
+        return this.cyan;
     }
 
     /**
      * @return the magenta value
      */
     public float getMagenta() {
-        return magenta;
+        return this.magenta;
     }
 
     /**
      * @return the yellow value
      */
     public float getYellow() {
-        return yellow;
+        return this.yellow;
     }
 
     /**
      * @return the black value
      */
     public float getBlack() {
-        return black;
+        return this.black;
+    }
+    
+    public int getAlpha() {
+    	return this.alpha;
     }
 
     public boolean equals(Object obj) {
-        if (!(obj instanceof CMYKColor))
+        if (!(obj instanceof CMYKColor)) {
             return false;
+        }
         CMYKColor c2 = (CMYKColor)obj;
-        return (cyan == c2.cyan && magenta == c2.magenta && yellow == c2.yellow && black == c2.black);
+        return (cyan == c2.cyan && magenta == c2.magenta && yellow == c2.yellow && black == c2.black && alpha == c2.alpha);
     }
     
     public int hashCode() {
-        return Float.floatToIntBits(cyan) ^ Float.floatToIntBits(magenta) ^ Float.floatToIntBits(yellow) ^ Float.floatToIntBits(black); 
+        return Float.floatToIntBits(cyan) ^ Float.floatToIntBits(magenta) ^ Float.floatToIntBits(yellow) ^ Float.floatToIntBits(black) ^ alpha; 
     }
     
 }
