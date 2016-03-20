@@ -87,7 +87,7 @@ public class BadElementException extends DocumentException {
     /**
      * Constructs a <code>BadElementException</code> with a message.
      * @param		message			a message describing the exception
-     * @cause The cause
+     * @param cause The cause
      */
     public BadElementException(String message, Throwable cause) {
     	super(message, cause);

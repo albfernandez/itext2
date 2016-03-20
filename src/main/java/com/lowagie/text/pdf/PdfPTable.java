@@ -1444,7 +1444,7 @@ public class PdfPTable implements LargeElement{
      * When set the last row will be extended to fill all the remaining space
      * to the bottom boundary.
      * 
-     * @param extendLastRow true to extend the last row; false otherwise
+     * @param extendLastRows true to extend the last row; false otherwise
      */
     public void setExtendLastRow(boolean extendLastRows) {
     	extendLastRow[0] = extendLastRows;

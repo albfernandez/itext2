@@ -74,7 +74,6 @@ public class PdfSpotColor{
      * Constructs a new <CODE>PdfSpotColor</CODE>.
      *
      * @param		name		a String value
-     * @param		tint		a tint value between 0 and 1
      * @param		altcs		an alternative colorspace value
      */
     
