@@ -63,9 +63,18 @@ public class PdfXConformanceException extends RuntimeException {
     
     /**
      * Creates a new instance of PdfXConformanceException.
-     * @param s
+     * @param message a message describing the exception
      */
-    public PdfXConformanceException(String s) {
-        super(s);
-    }    
+    public PdfXConformanceException(String message) {
+        super(message);
+    } 
+    /**
+     * Creates a new instance of PdfXConformanceException.
+     * @param message a message describing the exception
+     * @param cause The cause
+     */
+    public PdfXConformanceException(String message, Throwable cause) {
+        super(message, cause);
+    } 
+    
 }
