@@ -2,7 +2,7 @@
 
 Java Library to create and manipulate PDF on the fly
 
-This is a fork of 2.1.7 version, the las version under MPL/LGPL
+This is a fork of 2.1.7 version, the last version under MPL/LGPL
 
 ## License
 
