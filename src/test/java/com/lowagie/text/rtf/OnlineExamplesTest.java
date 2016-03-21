@@ -34,9 +34,7 @@ public class OnlineExamplesTest {
     }
     @Test
     public void testRtfExamples() {
-        runSingleTest(com.lowagie.examples.general.HelloWorldMultiple.class);
         runSingleTest(com.lowagie.examples.objects.tables.alternatives.TablePdfPTable.class);
-        runSingleTest(com.lowagie.examples.fonts.styles.ExtraStyles.class);
 
         runSingleTest(com.lowagie.examples.rtf.HelloWorld.class);
         runSingleTest(com.lowagie.examples.rtf.extensions.hf.ExtendedHeaderFooter.class);
