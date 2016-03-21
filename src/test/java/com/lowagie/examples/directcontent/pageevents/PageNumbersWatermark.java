@@ -140,15 +140,16 @@ public class PageNumbersWatermark extends PdfPageEventHelper {
             cb.endText();
             cb.addTemplate(tpl, document.right() - adjust, textBase);
         }
-        cb.saveState();
+
         // draw a Rectangle around the page
         cb.setColorStroke(Color.orange);
         cb.setLineWidth(2);
         cb.rectangle(20, 20, document.getPageSize().getWidth() - 40, document.getPageSize().getHeight() - 40);
         cb.stroke();
-        cb.restoreState();
+
         // starting on page 3, a watermark with an Image that is made transparent
         if (writer.getPageNumber() >= 3) {
+
             cb.setGState(gstate);
             cb.setColorFill(Color.red);
             cb.beginText();
@@ -161,8 +162,8 @@ public class PageNumbersWatermark extends PdfPageEventHelper {
             catch(Exception e) {
                 throw new ExceptionConverter(e);
             }
-            cb.restoreState();
         }
+        cb.restoreState();
         cb.sanityCheck();
     }
     
