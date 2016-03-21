@@ -39,7 +39,6 @@ public class XandYcoordinatesTest {
 	@Test
 	public void main() throws Exception {
         
-        System.out.println("X and Y coordinate system");        
         // step 1: creation of a document-object
         Document document = new Document();
         

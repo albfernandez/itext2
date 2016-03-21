@@ -33,7 +33,6 @@ public class PdfVersionTest {
 	@Test
 	public void main() throws Exception {
 
-		System.out.println("PDF version");
 		// step 1: creation of a document-object
 		Document document = new Document();
 

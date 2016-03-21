@@ -39,7 +39,6 @@ public class UpsideDownTest {
 	@Test
 	public void main() throws Exception {
         
-        System.out.println("UpsideDown");        
         // step 1: creation of a document-object
         Document document = new Document(PageSize.A4);
         
