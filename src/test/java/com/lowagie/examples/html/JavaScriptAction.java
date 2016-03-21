@@ -14,15 +14,15 @@
 
 package com.lowagie.examples.html;
 
-import java.io.FileOutputStream;
+import org.junit.Test;
 
 import com.lowagie.text.Anchor;
 import com.lowagie.text.Document;
 import com.lowagie.text.Header;
 import com.lowagie.text.Phrase;
-import com.lowagie.text.RunAllExamplesTest;
 import com.lowagie.text.html.HtmlTags;
 import com.lowagie.text.html.HtmlWriter;
+import com.lowagie.text.pdf.PdfTestBase;
 
 /**
  * Creates a documents with different named actions.
@@ -35,56 +35,47 @@ public class JavaScriptAction {
 	/**
 	 * Creates a document with Named Actions.
 	 * 
-	 * @param args
-	 *            no arguments needed
 	 */
-	public static void main(String[] args) {
-
-		System.out.println("Open Application");
+	@Test
+	public void main() throws Exception {
 
 		// step 1: creation of a document-object
 		Document document = new Document();
 
-		try {
+		// step 2:
+		HtmlWriter.getInstance(document, PdfTestBase.getOutputStream("JavaScriptAction.html"));
+		// step 3: we add Javascript as Metadata and we open the document
 
-			// step 2:
-			HtmlWriter.getInstance(document, new FileOutputStream(
-					RunAllExamplesTest.OUTPUT_DIR + "JavaScriptAction.html"));
-			// step 3: we add Javascript as Metadata and we open the document
-			
-			StringBuffer javaScriptSection = new StringBuffer();
-            javaScriptSection.append("\t\tfunction load() {\n");
-            javaScriptSection.append("\t\t  alert('Page has been loaded.');\n");
-            javaScriptSection.append("\t\t}\n");
-          
-            javaScriptSection.append("\t\tfunction unload(){\n");
-            javaScriptSection.append("\t\t  alert('Page has been unloaded.');\n");
-            javaScriptSection.append("\t\t}\n");
+		StringBuffer javaScriptSection = new StringBuffer();
+		javaScriptSection.append("\t\tfunction load() {\n");
+		javaScriptSection.append("\t\t  alert('Page has been loaded.');\n");
+		javaScriptSection.append("\t\t}\n");
 
-            javaScriptSection.append("\t\tfunction sayHi(){\n");
-            javaScriptSection.append("\t\t  alert('Hi !!!');\n");
-            javaScriptSection.append("\t\t}");
+		javaScriptSection.append("\t\tfunction unload(){\n");
+		javaScriptSection.append("\t\t  alert('Page has been unloaded.');\n");
+		javaScriptSection.append("\t\t}\n");
 
-            document.add(new Header(HtmlTags.JAVASCRIPT, javaScriptSection.toString()));
-            document.setJavaScript_onLoad  ("load()");
-            document.setJavaScript_onUnLoad("unload()");
-            
-			document.open();
-			// step 4: we add some content
-			Phrase phrase1 = new Phrase("There are 3 JavaScript functions in the HTML page, load(), unload() and sayHi().\n\n" +
-                                   "The first one will be called when the HTML page has been loaded by your browser.\n" +
-                                   "The second one will be called when the HTML page is being unloaded,\n" +
-                                   "for example when you go to another page.\n");
-              document.add(phrase1);
+		javaScriptSection.append("\t\tfunction sayHi(){\n");
+		javaScriptSection.append("\t\t  alert('Hi !!!');\n");
+		javaScriptSection.append("\t\t}");
 
-            // add a HTML link <A HREF="...">
-              Anchor anchor = new Anchor("Click here to execute the third JavaScript function.");
-              anchor.setReference("JavaScript:sayHi()");
-              document.add(anchor);
+		document.add(new Header(HtmlTags.JAVASCRIPT, javaScriptSection.toString()));
+		document.setJavaScript_onLoad("load()");
+		document.setJavaScript_onUnLoad("unload()");
 
-		} catch (Exception de) {
-			de.printStackTrace();
-		}
+		document.open();
+		// step 4: we add some content
+		Phrase phrase1 = new Phrase(
+				"There are 3 JavaScript functions in the HTML page, load(), unload() and sayHi().\n\n"
+						+ "The first one will be called when the HTML page has been loaded by your browser.\n"
+						+ "The second one will be called when the HTML page is being unloaded,\n"
+						+ "for example when you go to another page.\n");
+		document.add(phrase1);
+
+		// add a HTML link <A HREF="...">
+		Anchor anchor = new Anchor("Click here to execute the third JavaScript function.");
+		anchor.setReference("JavaScript:sayHi()");
+		document.add(anchor);
 
 		// step 5: we close the document
 		document.close();

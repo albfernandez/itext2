@@ -17,6 +17,8 @@ import java.awt.Color;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import org.junit.Test;
+
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.RunAllExamplesTest;
@@ -32,11 +34,9 @@ public class GState {
 	/**
 	 * Changing the Graphics State with PdfGState.
 	 * 
-	 * @param args
-	 *            no arguments needed
 	 */
-	public static void main(String[] args) {
-		System.out.println("Changing the Graphics State with PdfGState");
+	@Test
+	public void main() throws Exception {
 
 		// step 1: creation of a document-object
 		Document document = new Document();

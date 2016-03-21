@@ -15,18 +15,17 @@
 package com.lowagie.examples.fonts.styles;
 
 import java.awt.Color;
-import java.io.FileOutputStream;
-import java.io.IOException;
+
+import org.junit.Test;
 
 import com.lowagie.text.Chunk;
 import com.lowagie.text.Document;
-import com.lowagie.text.DocumentException;
 import com.lowagie.text.Font;
 import com.lowagie.text.FontFactory;
 import com.lowagie.text.Paragraph;
-import com.lowagie.text.RunAllExamplesTest;
 import com.lowagie.text.pdf.BaseFont;
 import com.lowagie.text.pdf.PdfContentByte;
+import com.lowagie.text.pdf.PdfTestBase;
 import com.lowagie.text.pdf.PdfWriter;
 
 /**
@@ -40,44 +39,36 @@ public class FontColor {
 	/**
 	 * Changing Font colors
 	 * 
-	 * @param args no arguments needed here
 	 */
-	public static void main(String[] args) {
-
-		System.out.println("ChunkColor");
+	@Test
+	public void main() throws Exception {
 
 		// step 1: creation of a document-object
 		Document document = new Document();
-		try {
-			// step 2:
-			// we create a writer that listens to the document
-			PdfWriter writer = PdfWriter.getInstance(document,
-					new FileOutputStream(RunAllExamplesTest.OUTPUT_DIR + "FontColor.pdf"));
+		// step 2:
+		// we create a writer that listens to the document
+		PdfWriter writer = PdfWriter.getInstance(document, PdfTestBase.getOutputStream("FontColor.pdf"));
 
-			// step 3: we open the document
-			document.open();
-			// step 4:
-			Font red = FontFactory.getFont(FontFactory.HELVETICA, Font.DEFAULTSIZE, Font.BOLD, new Color(0xFF, 0x00, 0x00));
-			Font blue = FontFactory.getFont(FontFactory.HELVETICA, Font.DEFAULTSIZE, Font.ITALIC, new Color(0x00, 0x00, 0xFF));
-			Paragraph p;
-			p = new Paragraph("Roses are ");
-			p.add(new Chunk("red", red));
-			document.add(p);
-			p = new Paragraph("Violets are ");
-			p.add(new Chunk("blue", blue));
-			document.add(p);
-			BaseFont bf = FontFactory.getFont(FontFactory.COURIER).getCalculatedBaseFont(false);
-			PdfContentByte cb = writer.getDirectContent();
-			cb.beginText();
-			cb.setColorFill(new Color(0x00, 0xFF, 0x00));
-			cb.setFontAndSize(bf, 12);
-			cb.showTextAligned(PdfContentByte.ALIGN_CENTER, "Grass is green", 250, 700, 0);
-			cb.endText();
-		} catch (DocumentException de) {
-			System.err.println(de.getMessage());
-		} catch (IOException ioe) {
-			System.err.println(ioe.getMessage());
-		}
+		// step 3: we open the document
+		document.open();
+		// step 4:
+		Font red = FontFactory.getFont(FontFactory.HELVETICA, Font.DEFAULTSIZE, Font.BOLD, new Color(0xFF, 0x00, 0x00));
+		Font blue = FontFactory.getFont(FontFactory.HELVETICA, Font.DEFAULTSIZE, Font.ITALIC, new Color(0x00, 0x00,
+				0xFF));
+		Paragraph p;
+		p = new Paragraph("Roses are ");
+		p.add(new Chunk("red", red));
+		document.add(p);
+		p = new Paragraph("Violets are ");
+		p.add(new Chunk("blue", blue));
+		document.add(p);
+		BaseFont bf = FontFactory.getFont(FontFactory.COURIER).getCalculatedBaseFont(false);
+		PdfContentByte cb = writer.getDirectContent();
+		cb.beginText();
+		cb.setColorFill(new Color(0x00, 0xFF, 0x00));
+		cb.setFontAndSize(bf, 12);
+		cb.showTextAligned(PdfContentByte.ALIGN_CENTER, "Grass is green", 250, 700, 0);
+		cb.endText();
 
 		// step 5: we close the document
 		document.close();

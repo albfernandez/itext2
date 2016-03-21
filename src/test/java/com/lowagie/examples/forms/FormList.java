@@ -15,13 +15,7 @@
 package com.lowagie.examples.forms;
 
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Map;
-
-import com.lowagie.text.*;
-import com.lowagie.text.pdf.*;
+import org.junit.Test;
 
 /**
  * Generates an Acroform with a List
@@ -30,11 +24,12 @@ import com.lowagie.text.pdf.*;
 public class FormList {
     /**
      * Generates an Acroform with a list
-     * @param args no arguments needed here
      */
-    public static void main(String[] args) {
+	@Test
+    public void main() throws Exception {
         
-        System.out.println("List");
+        
+//        System.out.println("List");
         
 //        // step 1: creation of a document-object
 //        Document document = new Document(PageSize.A4);

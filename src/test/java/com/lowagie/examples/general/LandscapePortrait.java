@@ -14,58 +14,46 @@
 
 package com.lowagie.examples.general;
 
-
-import java.io.FileOutputStream;
-import java.io.IOException;
+import org.junit.Test;
 
 import com.lowagie.text.Document;
-import com.lowagie.text.DocumentException;
 import com.lowagie.text.PageSize;
 import com.lowagie.text.Paragraph;
-import com.lowagie.text.RunAllExamplesTest;
+import com.lowagie.text.pdf.PdfTestBase;
 import com.lowagie.text.pdf.PdfWriter;
 
 /**
  * Demonstrates the creating PDF in portrait/landscape.
+ * 
  * @author blowagie
  */
 public class LandscapePortrait {
-    /**
-     * Creates a PDF document with pages in portrait/landscape.
-     * @param args no arguments needed here
-     */
-    public static void main(String[] args) {
-        
-        System.out.println("Documents in Landscape and Portrait format");
-        // step 1: creation of a document-object
-        Document document = new Document(PageSize.A4.rotate());
-        
-        try {
-            
-            // step 2:
-            // we create a writer that listens to the document
-            // and directs a PDF-stream to a file
-            
-            PdfWriter.getInstance(document, new FileOutputStream(RunAllExamplesTest.OUTPUT_DIR + "LandscapePortrait.pdf"));
-            
-            // step 3: we open the document
-            document.open();
-            
-            // step 4: we add some content
-            document.add(new Paragraph("To create a document in landscape format, just make the height smaller than the width. For instance by rotating the PageSize Rectangle: PageSize.A4.rotate()"));
-            document.setPageSize(PageSize.A4);
-            document.newPage();
-            document.add(new Paragraph("This is portrait again"));
-            
-        }
-        catch(DocumentException de) {
-            System.err.println(de.getMessage());
-        }
-        catch(IOException ioe) {
-            System.err.println(ioe.getMessage());
-        }
-        
-        // step 5: we close the document
-        document.close();
-    }
+	/**
+	 * Creates a PDF document with pages in portrait/landscape.
+	 */
+	@Test
+	public void main() throws Exception {
+
+		// step 1: creation of a document-object
+		Document document = new Document(PageSize.A4.rotate());
+
+		// step 2:
+		// we create a writer that listens to the document
+		// and directs a PDF-stream to a file
+
+		PdfWriter.getInstance(document, PdfTestBase.getOutputStream("LandscapePortrait.pdf"));
+
+		// step 3: we open the document
+		document.open();
+
+		// step 4: we add some content
+		document.add(new Paragraph(
+				"To create a document in landscape format, just make the height smaller than the width. For instance by rotating the PageSize Rectangle: PageSize.A4.rotate()"));
+		document.setPageSize(PageSize.A4);
+		document.newPage();
+		document.add(new Paragraph("This is portrait again"));
+
+		// step 5: we close the document
+		document.close();
+	}
 }

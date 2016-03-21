@@ -11,6 +11,8 @@ import com.lowagie.text.PageSize;
 import com.lowagie.text.Rectangle;
 
 public class PdfTestBase {
+	
+	public static final String RESOURCES_DIR = "src/test/resources/";
 	public static final String OUTPUT_DIR = "target/test-output-files/";
 	
 	public static File getOutputDir() {
@@ -22,6 +24,9 @@ public class PdfTestBase {
 	}
 	public static File getOutputFile(String name) {
 		return new File(getOutputDir(), name);
+	}
+	public static OutputStream getOutputStream(String name) throws FileNotFoundException {
+		return new FileOutputStream(getOutputFile(name));
 	}
 	
 	public static void createOutputDir() {
@@ -46,6 +51,9 @@ public class PdfTestBase {
 		// generate file
 		PdfWriter.getInstance(document, out);
 		return document;
+	}
+	public static boolean isWindows() {
+		return System.getProperty("os.name").startsWith("Windows");
 	}
 
 }

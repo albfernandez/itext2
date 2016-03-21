@@ -14,7 +14,8 @@
 package com.lowagie.examples.fonts.styles;
 
 import java.awt.Color;
-import java.io.FileOutputStream;
+
+import org.junit.Test;
 
 import com.lowagie.text.Chunk;
 import com.lowagie.text.Document;
@@ -22,12 +23,12 @@ import com.lowagie.text.Element;
 import com.lowagie.text.Font;
 import com.lowagie.text.PageSize;
 import com.lowagie.text.Phrase;
-import com.lowagie.text.RunAllExamplesTest;
 import com.lowagie.text.pdf.BaseFont;
 import com.lowagie.text.pdf.ColumnText;
 import com.lowagie.text.pdf.PdfContentByte;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
+import com.lowagie.text.pdf.PdfTestBase;
 import com.lowagie.text.pdf.PdfWriter;
 
 /**
@@ -37,91 +38,90 @@ public class RightToLeft {
 
     /**
      * Writing RTL text such as Arabic or Hebrew.
-     * @param args no arguments needed
      */
-    public static void main(String[] args) {
-        try {
-        	// step 1
-            Document document = new Document(PageSize.A4, 50, 50, 50, 50);
-            // step 2
-            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(RunAllExamplesTest.OUTPUT_DIR + "righttoleft.pdf"));
-            // step 3
-            document.open();
-            // step 4
-            PdfContentByte cb = writer.getDirectContent();
-            BaseFont bf = BaseFont.createFont("c:\\windows\\fonts\\times.ttf", BaseFont.IDENTITY_H, true);
-            Font f2 = new Font(bf, 24, Font.NORMAL, Color.BLUE);
-            float llx = 100;
-            float lly = 100;
-            float urx = 500;
-            float ury = 800;
-            ColumnText ct = new ColumnText(cb);
-            ct.setSimpleColumn(llx, lly, urx, ury, 24, Element.ALIGN_LEFT);
-            ct.setSpaceCharRatio(PdfWriter.NO_SPACE_CHAR_RATIO);
-            ct.setLeading(0, 1);
-            ct.setRunDirection(PdfWriter.RUN_DIRECTION_RTL);
-            ct.setAlignment(Element.ALIGN_CENTER);
-            ct.addText(new Chunk(ar1, new Font(bf, 16)));
-            ct.addText(new Chunk(ar2, new Font(bf, 16, Font.NORMAL, Color.red)));
-            ct.go();
-            ct.setAlignment(Element.ALIGN_JUSTIFIED);
-            ct.addText(new Chunk(ar3, new Font(bf, 12)));
-            ct.go();
-            ct.setAlignment(Element.ALIGN_CENTER);
-            ct.addText(new Chunk(ar4, new Font(bf, 14)));
-            ct.go();
-            
-            ct.setSpaceCharRatio(PdfWriter.SPACE_CHAR_RATIO_DEFAULT);
-            ct.setAlignment(Element.ALIGN_CENTER);
-            ct.addText(new Chunk("\n\n\n", new Font(bf, 16)));
-            ct.addText(new Chunk(he1, new Font(bf, 16)));
-            ct.addText(new Chunk(he2, new Font(bf, 16, Font.NORMAL, Color.red)));
-            ct.go();
-            ct.setAlignment(Element.ALIGN_JUSTIFIED);
-            ct.addText(new Chunk(he3, new Font(bf, 12)));
-            ct.go();
-            ct.setAlignment(Element.ALIGN_CENTER);
-            ct.addText(new Chunk(he4, new Font(bf, 14)));
-            ct.go();
-            
-            document.newPage();
-            String atext = "\u062a\u0635\u0628\u062d ";
-            PdfPTable table = new PdfPTable(5);
-            table.setWidthPercentage(100);
-            table.setRunDirection(PdfWriter.RUN_DIRECTION_NO_BIDI);
-            for (int k = 0; k < 5; ++k) {
-                PdfPCell cell = new PdfPCell(new Phrase(10, atext + k, f2));
-                if (k == 2) {
-                    cell.setColspan(2);
-                    ++k;
-                }
-                table.addCell(cell);
+	@Test
+    public  void main() throws Exception {
+		if (!PdfTestBase.isWindows()) {
+			return;
+		}
+    	// step 1
+        Document document = new Document(PageSize.A4, 50, 50, 50, 50);
+        // step 2
+        PdfWriter writer = PdfWriter.getInstance(document, PdfTestBase.getOutputStream("righttoleft.pdf"));
+        // step 3
+        document.open();
+        // step 4
+        PdfContentByte cb = writer.getDirectContent();
+        BaseFont bf = BaseFont.createFont("c:\\windows\\fonts\\times.ttf", BaseFont.IDENTITY_H, true);
+        Font f2 = new Font(bf, 24, Font.NORMAL, Color.BLUE);
+        float llx = 100;
+        float lly = 100;
+        float urx = 500;
+        float ury = 800;
+        ColumnText ct = new ColumnText(cb);
+        ct.setSimpleColumn(llx, lly, urx, ury, 24, Element.ALIGN_LEFT);
+        ct.setSpaceCharRatio(PdfWriter.NO_SPACE_CHAR_RATIO);
+        ct.setLeading(0, 1);
+        ct.setRunDirection(PdfWriter.RUN_DIRECTION_RTL);
+        ct.setAlignment(Element.ALIGN_CENTER);
+        ct.addText(new Chunk(ar1, new Font(bf, 16)));
+        ct.addText(new Chunk(ar2, new Font(bf, 16, Font.NORMAL, Color.red)));
+        ct.go();
+        ct.setAlignment(Element.ALIGN_JUSTIFIED);
+        ct.addText(new Chunk(ar3, new Font(bf, 12)));
+        ct.go();
+        ct.setAlignment(Element.ALIGN_CENTER);
+        ct.addText(new Chunk(ar4, new Font(bf, 14)));
+        ct.go();
+        
+        ct.setSpaceCharRatio(PdfWriter.SPACE_CHAR_RATIO_DEFAULT);
+        ct.setAlignment(Element.ALIGN_CENTER);
+        ct.addText(new Chunk("\n\n\n", new Font(bf, 16)));
+        ct.addText(new Chunk(he1, new Font(bf, 16)));
+        ct.addText(new Chunk(he2, new Font(bf, 16, Font.NORMAL, Color.red)));
+        ct.go();
+        ct.setAlignment(Element.ALIGN_JUSTIFIED);
+        ct.addText(new Chunk(he3, new Font(bf, 12)));
+        ct.go();
+        ct.setAlignment(Element.ALIGN_CENTER);
+        ct.addText(new Chunk(he4, new Font(bf, 14)));
+        ct.go();
+        
+        document.newPage();
+        String atext = "\u062a\u0635\u0628\u062d ";
+        PdfPTable table = new PdfPTable(5);
+        table.setWidthPercentage(100);
+        table.setRunDirection(PdfWriter.RUN_DIRECTION_NO_BIDI);
+        for (int k = 0; k < 5; ++k) {
+            PdfPCell cell = new PdfPCell(new Phrase(10, atext + k, f2));
+            if (k == 2) {
+                cell.setColspan(2);
+                ++k;
             }
-            table.setRunDirection(PdfWriter.RUN_DIRECTION_LTR);
-            for (int k = 0; k < 5; ++k) {
-                PdfPCell cell = new PdfPCell(new Phrase(10, atext + k, f2));
-                if (k == 2) {
-                    cell.setColspan(2);
-                    ++k;
-                }
-                table.addCell(cell);
-            }
-            table.setRunDirection(PdfWriter.RUN_DIRECTION_RTL);
-            for (int k = 0; k < 5; ++k) {
-                PdfPCell cell = new PdfPCell(new Phrase(10, atext + k, f2));
-                if (k == 2) {
-                    cell.setColspan(2);
-                    ++k;
-                }
-                table.addCell(cell);
-            }
-            document.add(table);
-            // step 5
-            document.close();
+            table.addCell(cell);
         }
-        catch (Exception e) {
-            e.printStackTrace();
+        table.setRunDirection(PdfWriter.RUN_DIRECTION_LTR);
+        for (int k = 0; k < 5; ++k) {
+            PdfPCell cell = new PdfPCell(new Phrase(10, atext + k, f2));
+            if (k == 2) {
+                cell.setColspan(2);
+                ++k;
+            }
+            table.addCell(cell);
         }
+        table.setRunDirection(PdfWriter.RUN_DIRECTION_RTL);
+        for (int k = 0; k < 5; ++k) {
+            PdfPCell cell = new PdfPCell(new Phrase(10, atext + k, f2));
+            if (k == 2) {
+                cell.setColspan(2);
+                ++k;
+            }
+            table.addCell(cell);
+        }
+        document.add(table);
+        // step 5
+        document.close();
+
     }
 
     /** arabic text */

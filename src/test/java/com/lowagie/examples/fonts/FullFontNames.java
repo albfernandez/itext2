@@ -16,8 +16,10 @@ package com.lowagie.examples.fonts;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 
-import com.lowagie.text.RunAllExamplesTest;
+import org.junit.Test;
+
 import com.lowagie.text.pdf.BaseFont;
+import com.lowagie.text.pdf.PdfTestBase;
 
 /**
  * Retrieving the full font name
@@ -26,27 +28,27 @@ public class FullFontNames {
 
 	/**
 	 * Retrieving the full font name
-	 * @param args no arguments needed
 	 */
-	public static void main(String[] args) {
-		try
-		{
-			BufferedWriter out = new BufferedWriter(new FileWriter(RunAllExamplesTest.OUTPUT_DIR + "fullfontname_arialbi.txt"));
-	        BaseFont bf = BaseFont.createFont("c:\\windows\\fonts\\arialbi.ttf", "winansi", BaseFont.NOT_EMBEDDED);
-			out.write("postscriptname: " + bf.getPostscriptFontName());
-			out.write("\r\n\r\n");
-	        String names[][] = bf.getFullFontName();
-	        out.write("\n\nListing the full font name:\n\n");
-	        for (int k = 0; k < names.length; ++k) {
-	            if (names[k][0].equals("3") && names[k][1].equals("1")) // Microsoft encoding
-	                out.write(names[k][3] + "\r\n");
-	        }
-	        out.flush();
-	        out.close();
+	@Test
+	public void main() throws Exception {
+		if (!PdfTestBase.isWindows()){
+			return;
 		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
+		BufferedWriter out = new BufferedWriter(new FileWriter(PdfTestBase.OUTPUT_DIR
+				+ "fullfontname_arialbi.txt"));
+		BaseFont bf = BaseFont.createFont("c:\\windows\\fonts\\arialbi.ttf", "winansi", BaseFont.NOT_EMBEDDED);
+		out.write("postscriptname: " + bf.getPostscriptFontName());
+		out.write("\r\n\r\n");
+		String names[][] = bf.getFullFontName();
+		out.write("\n\nListing the full font name:\n\n");
+		for (int k = 0; k < names.length; ++k) {
+			if (names[k][0].equals("3") && names[k][1].equals("1")) {
+				 // Microsoftencoding
+				out.write(names[k][3] + "\r\n");
+			}
 		}
+		out.flush();
+		out.close();
+
 	}
 }

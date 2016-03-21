@@ -14,16 +14,14 @@
 
 package com.lowagie.examples.fonts.styles;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
+import org.junit.Test;
 
 import com.lowagie.text.Chunk;
 import com.lowagie.text.Document;
-import com.lowagie.text.DocumentException;
 import com.lowagie.text.Font;
 import com.lowagie.text.FontFactory;
-import com.lowagie.text.RunAllExamplesTest;
 import com.lowagie.text.html.HtmlWriter;
+import com.lowagie.text.pdf.PdfTestBase;
 import com.lowagie.text.pdf.PdfWriter;
 import com.lowagie.text.rtf.RtfWriter2;
 
@@ -38,44 +36,32 @@ public class ExtraStyles {
 	/**
 	 * Underline or strike through text.
 	 * 
-	 * @param args no arguments needed here
 	 */
-	public static void main(String[] args) {
-
-		System.out.println("Underline and Strike through.");
+	@Test
+	public void main() throws Exception {
 
 		// step 1: creation of a document-object
 		Document document = new Document();
-		try {
-			// step 2:
-			// we create a writer that listens to the document
-			PdfWriter.getInstance(document,
-					new FileOutputStream(RunAllExamplesTest.OUTPUT_DIR + "ExtraStyles.pdf"));
-			HtmlWriter.getInstance(document,
-					new FileOutputStream(RunAllExamplesTest.OUTPUT_DIR + "ExtraStyles.html"));
-			RtfWriter2.getInstance(document,
-					new FileOutputStream(RunAllExamplesTest.OUTPUT_DIR + "ExtraStyles.rtf"));
+		// step 2:
+		// we create a writer that listens to the document
+		PdfWriter.getInstance(document, PdfTestBase.getOutputStream("ExtraStyles.pdf"));
+		HtmlWriter.getInstance(document, PdfTestBase.getOutputStream("ExtraStyles.html"));
+		RtfWriter2.getInstance(document, PdfTestBase.getOutputStream("ExtraStyles.rtf"));
 
-			// step 3: we open the document
-			document.open();
-			// step 4:
-			Font font;
-			Chunk chunk;
-			font = FontFactory.getFont(FontFactory.HELVETICA, Font.DEFAULTSIZE, Font.UNDERLINE);
-			chunk = new Chunk("underline", font);
-			document.add(chunk);
-			font = FontFactory.getFont(FontFactory.HELVETICA, Font.DEFAULTSIZE, Font.NORMAL);
-			chunk = new Chunk(" and ", font);
-			document.add(chunk);
-			font = FontFactory.getFont(FontFactory.HELVETICA, Font.DEFAULTSIZE, Font.STRIKETHRU);
-			chunk = new Chunk("strike through", font);
-			document.add(chunk);
-			
-		} catch (DocumentException de) {
-			System.err.println(de.getMessage());
-		} catch (IOException ioe) {
-			System.err.println(ioe.getMessage());
-		}
+		// step 3: we open the document
+		document.open();
+		// step 4:
+		Font font;
+		Chunk chunk;
+		font = FontFactory.getFont(FontFactory.HELVETICA, Font.DEFAULTSIZE, Font.UNDERLINE);
+		chunk = new Chunk("underline", font);
+		document.add(chunk);
+		font = FontFactory.getFont(FontFactory.HELVETICA, Font.DEFAULTSIZE, Font.NORMAL);
+		chunk = new Chunk(" and ", font);
+		document.add(chunk);
+		font = FontFactory.getFont(FontFactory.HELVETICA, Font.DEFAULTSIZE, Font.STRIKETHRU);
+		chunk = new Chunk("strike through", font);
+		document.add(chunk);
 
 		// step 5: we close the document
 		document.close();

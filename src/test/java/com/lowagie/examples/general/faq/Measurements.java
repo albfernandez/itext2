@@ -15,14 +15,12 @@
 package com.lowagie.examples.general.faq;
 
 
-import java.io.FileOutputStream;
-import java.io.IOException;
+import org.junit.Test;
 
 import com.lowagie.text.Document;
-import com.lowagie.text.DocumentException;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.Rectangle;
-import com.lowagie.text.RunAllExamplesTest;
+import com.lowagie.text.pdf.PdfTestBase;
 import com.lowagie.text.pdf.PdfWriter;
 
 /**
@@ -32,22 +30,22 @@ import com.lowagie.text.pdf.PdfWriter;
 public class Measurements {
     /**
      * Creates a PDF document explaining the measurement system.
-     * @param args no arguments needed here
      */
-    public static void main(String[] args) {
+    @Test
+    public  void main() throws Exception {
         
-        System.out.println("Measurements");        
+     
         // step 1: creation of a document-object
         Rectangle pageSize = new Rectangle(288, 720);
         Document document = new Document(pageSize, 36, 18, 72, 72);
         
-        try {
+
             
             // step 2:
             // we create a writer that listens to the document
             // and directs a PDF-stream to a file
             
-            PdfWriter.getInstance(document, new FileOutputStream(RunAllExamplesTest.OUTPUT_DIR + "Measurements.pdf"));
+            PdfWriter.getInstance(document, PdfTestBase.getOutputStream("Measurements.pdf"));
             
             // step 3: we open the document
             document.open();
@@ -63,13 +61,7 @@ public class Measurements {
             document.add(new Paragraph("The left border is 36pt or 0.5 inch or 1.27 cm"));
             document.add(new Paragraph("The right border is 18pt or 0.25 inch or 0.63 cm."));
             document.add(new Paragraph("The top and bottom border are 72pt or 1 inch or 2.54 cm."));
-        }
-        catch(DocumentException de) {
-            System.err.println(de.getMessage());
-        }
-        catch(IOException ioe) {
-            System.err.println(ioe.getMessage());
-        }
+
         
         // step 5: we close the document
         document.close();

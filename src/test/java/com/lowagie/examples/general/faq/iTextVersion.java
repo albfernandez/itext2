@@ -14,52 +14,40 @@
 
 package com.lowagie.examples.general.faq;
 
-
-import java.io.FileOutputStream;
-import java.io.IOException;
+import org.junit.Test;
 
 import com.lowagie.text.Document;
-import com.lowagie.text.DocumentException;
 import com.lowagie.text.Paragraph;
-import com.lowagie.text.RunAllExamplesTest;
+import com.lowagie.text.pdf.PdfTestBase;
 import com.lowagie.text.pdf.PdfWriter;
 
 /**
  * Demonstrates the use of getVersion.
+ * 
  * @author blowagie
  */
 public class iTextVersion {
-    /**
-     * Creates a PDF document and shows the iText version.
-     * @param args no arguments needed here
-     */
-    public static void main(String[] args) {
-        
-        System.out.println("iText version " + Document.getVersion());        
-        // step 1: creation of a document-object
-        Document document = new Document();
-        
-        try {
-            
-            // step 2:
-            // we create a writer that listens to the document
-            // and directs a PDF-stream to a file
-            PdfWriter.getInstance(document, new FileOutputStream(RunAllExamplesTest.OUTPUT_DIR + "version.pdf"));
-            
-            // step 3: we open the document
-            document.open();
-            
-            // step 4:
-            document.add(new Paragraph("This page was made using " + Document.getVersion()));
-        }
-        catch(DocumentException de) {
-            System.err.println(de.getMessage());
-        }
-        catch(IOException ioe) {
-            System.err.println(ioe.getMessage());
-        }
-        
-        // step 5: we close the document
-        document.close();
-    }
+	/**
+	 * Creates a PDF document and shows the iText version.
+	 */
+	@Test
+	public void main() throws Exception {
+
+		// step 1: creation of a document-object
+		Document document = new Document();
+
+		// step 2:
+		// we create a writer that listens to the document
+		// and directs a PDF-stream to a file
+		PdfWriter.getInstance(document, PdfTestBase.getOutputStream("version.pdf"));
+
+		// step 3: we open the document
+		document.open();
+
+		// step 4:
+		document.add(new Paragraph("This page was made using " + Document.getVersion()));
+
+		// step 5: we close the document
+		document.close();
+	}
 }

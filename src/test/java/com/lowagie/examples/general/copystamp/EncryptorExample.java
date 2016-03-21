@@ -13,11 +13,11 @@
  */
 package com.lowagie.examples.general.copystamp;
 
-import java.io.FileOutputStream;
+import org.junit.Test;
 
-import com.lowagie.text.RunAllExamplesTest;
 import com.lowagie.text.pdf.PdfEncryptor;
 import com.lowagie.text.pdf.PdfReader;
+import com.lowagie.text.pdf.PdfTestBase;
 import com.lowagie.text.pdf.PdfWriter;
 
 /**
@@ -26,22 +26,12 @@ import com.lowagie.text.pdf.PdfWriter;
 public class EncryptorExample {
 
 	/**
-     * Reads and encrypts an existing PDF file.
-     * @param args no arguments needed
-     */
-	public static void main(String[] args) {
-		System.out.println("Encryptor example");
-		try {
-			PdfReader reader = new PdfReader(RunAllExamplesTest.RESOURCES_DIR +"ChapterSection.pdf");
-			PdfEncryptor.encrypt(reader,
-					new FileOutputStream(RunAllExamplesTest.OUTPUT_DIR + "encrypted.pdf"),
-					"Hello".getBytes(),
-					"World".getBytes(),
-					PdfWriter.ALLOW_PRINTING | PdfWriter.ALLOW_COPY,
-					false);
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
+	 * Reads and encrypts an existing PDF file.
+	 */
+	@Test
+	public void main() throws Exception {
+		PdfReader reader = new PdfReader(PdfTestBase.RESOURCES_DIR + "ChapterSection.pdf");
+		PdfEncryptor.encrypt(reader, PdfTestBase.getOutputStream("encrypted.pdf"), "Hello".getBytes(),
+				"World".getBytes(), PdfWriter.ALLOW_PRINTING | PdfWriter.ALLOW_COPY, false);
 	}
 }

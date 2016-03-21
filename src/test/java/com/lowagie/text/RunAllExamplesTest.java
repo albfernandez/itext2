@@ -17,19 +17,12 @@ public class RunAllExamplesTest {
         RunAllExamplesTest r = new RunAllExamplesTest();
         r.testImageExamples();
 
-        r.testFormExamples();
-        r.testGeneralExamples();
-        r.testHtmlExamples();
         r.testBookmarkExamples();
         r.testMiscExamples();
         r.testTableExamples();
         r.testAnchorExamples();
         r.testColumnExamples();
         r.testChunkExamples();
-        r.testDirectContentExamples();
-        r.testFontExamples();
-        
-        r.testWindowsFonts();
     }
 
     public void runSingleTest(Class<?> c, String... args) {
@@ -53,68 +46,8 @@ public class RunAllExamplesTest {
     	}
 	}
 
-    @Test
-    public void testFormExamples() {
-        runSingleTest(com.lowagie.examples.forms.TextFields.class);
-        runSingleTest(com.lowagie.examples.forms.FormTextField.class);
-        runSingleTest(com.lowagie.examples.forms.FormCheckbox.class);
-        runSingleTest(com.lowagie.examples.forms.SimpleRegistrationForm.class);
-        runSingleTest(com.lowagie.examples.forms.FormSignature.class);
-        runSingleTest(com.lowagie.examples.forms.create.StudentCard.class);
-        runSingleTest(com.lowagie.examples.forms.create.StudentCardForm.class);
-        runSingleTest(com.lowagie.examples.forms.FormCombo.class);
-        runSingleTest(com.lowagie.examples.forms.fill.FdfExample.class);
-        runSingleTest(com.lowagie.examples.forms.fill.Register.class);
-        runSingleTest(com.lowagie.examples.forms.fill.XfdfExample.class);
-        runSingleTest(com.lowagie.examples.forms.FormPushButton.class);
-        runSingleTest(com.lowagie.examples.forms.FormList.class);
-        runSingleTest(com.lowagie.examples.forms.FormRadioButton.class);
-        runSingleTest(com.lowagie.examples.forms.ListFields.class,
-                RESOURCES_DIR + "pushbutton.pdf",
-                RESOURCES_DIR + "radiobutton.pdf",
-                RESOURCES_DIR + "checkbox.pdf",
-                RESOURCES_DIR + "textfield.pdf",
-                RESOURCES_DIR + "SimpleRegistrationForm.pdf",
-                RESOURCES_DIR + "combo.pdf",
-                // TODO
-//                RESOURCES_DIR + "list.pdf",
-                RESOURCES_DIR + "TextFields.pdf",
-                RESOURCES_DIR + "signature.pdf"
-                ); // FIXME: test output
-    }
 
-    @Test
-    public void testGeneralExamples() {
-        runSingleTest(com.lowagie.examples.general.HelloWorld.class);
-        runSingleTest(com.lowagie.examples.general.faq.NewPage.class);
-        runSingleTest(com.lowagie.examples.general.faq.Measurements.class);
-        runSingleTest(com.lowagie.examples.general.faq.PdfVersion.class);
-        runSingleTest(com.lowagie.examples.general.faq.iTextVersion.class);
-        runSingleTest(com.lowagie.examples.general.HelloEncrypted.class);
-        runSingleTest(com.lowagie.examples.general.HelloWorldMeta.class);
-        runSingleTest(com.lowagie.examples.general.DefaultPageSize.class);
-        runSingleTest(com.lowagie.examples.general.copystamp.AddWatermarkPageNumbers.class);
-        runSingleTest(com.lowagie.examples.general.copystamp.Register.class);
-        runSingleTest(com.lowagie.examples.general.copystamp.EncryptorExample.class);
-        runSingleTest(com.lowagie.examples.general.copystamp.Concatenate.class, RESOURCES_DIR + "HelloWorldMeta.pdf", RESOURCES_DIR + "ChapterSection.pdf", OUTPUT_DIR + "Concatenate.pdf");
-        runSingleTest(com.lowagie.examples.general.copystamp.ConcatenateForms.class);
-        runSingleTest(com.lowagie.examples.general.copystamp.TwoOnOne.class);
-        runSingleTest(com.lowagie.examples.general.Margins.class);
-        runSingleTest(com.lowagie.examples.general.read.Info.class, RESOURCES_DIR + "HelloWorldMeta.pdf", RESOURCES_DIR + "ChapterSection.pdf", RESOURCES_DIR + "Concatenate.pdf");
-        runSingleTest(com.lowagie.examples.general.read.ReadEncrypted.class);
-        runSingleTest(com.lowagie.examples.general.LandscapePortrait.class);
-        runSingleTest(com.lowagie.examples.general.CustomPageSize.class);
-        runSingleTest(com.lowagie.examples.general.HelloSystemOut.class);
-    }
 
-    @Test
-    public void testHtmlExamples() {
-        runSingleTest(com.lowagie.examples.html.Images.class);
-        runSingleTest(com.lowagie.examples.html.HelloWorldMeta.class);
-        runSingleTest(com.lowagie.examples.html.JavaScriptAction.class);
-        runSingleTest(com.lowagie.examples.html.HelloHtml.class);
-        runSingleTest(com.lowagie.examples.html.ImagesURL.class);
-    }
 
     @Test
     public void testBookmarkExamples() {
@@ -251,80 +184,6 @@ public class RunAllExamplesTest {
         runSingleTest(com.lowagie.examples.objects.chunk.SplitChar.class);
     }
 
-    @Test
-    public void testDirectContentExamples() {
-        runSingleTest(com.lowagie.examples.directcontent.optionalcontent.OrderedLayers.class);
-        runSingleTest(com.lowagie.examples.directcontent.optionalcontent.Layers.class);
-        runSingleTest(com.lowagie.examples.directcontent.optionalcontent.Automatic.class);
-        runSingleTest(com.lowagie.examples.directcontent.optionalcontent.OptionalContent.class);
-        runSingleTest(com.lowagie.examples.directcontent.optionalcontent.ContentGroups.class);
-        runSingleTest(com.lowagie.examples.directcontent.optionalcontent.NestedLayers.class);
-        runSingleTest(com.lowagie.examples.directcontent.coordinates.XandYcoordinates.class);
-        runSingleTest(com.lowagie.examples.directcontent.coordinates.UpsideDown.class);
-        runSingleTest(com.lowagie.examples.directcontent.coordinates.AffineTransformation.class);
-        runSingleTest(com.lowagie.examples.directcontent.coordinates.TransformImage.class);
-        runSingleTest(com.lowagie.examples.directcontent.coordinates.Transformations.class);
-        runSingleTest(com.lowagie.examples.directcontent.pageevents.EndPage.class);
-        runSingleTest(com.lowagie.examples.directcontent.pageevents.PageNumbersWatermark.class);
-        runSingleTest(com.lowagie.examples.directcontent.pageevents.Events.class);
-        runSingleTest(com.lowagie.examples.directcontent.pageevents.Bookmarks.class);
-        runSingleTest(com.lowagie.examples.directcontent.graphics.GState.class);
-        runSingleTest(com.lowagie.examples.directcontent.graphics.Circles.class);
-        runSingleTest(com.lowagie.examples.directcontent.graphics.State.class);
-        runSingleTest(com.lowagie.examples.directcontent.graphics.Shapes.class);
-        runSingleTest(com.lowagie.examples.directcontent.graphics.Literal.class);
-        runSingleTest(com.lowagie.examples.directcontent.colors.Transparency.class);
-        runSingleTest(com.lowagie.examples.directcontent.colors.ShadingPattern.class);
-        runSingleTest(com.lowagie.examples.directcontent.colors.SoftMask.class);
-        runSingleTest(com.lowagie.examples.directcontent.colors.Groups.class);
-        runSingleTest(com.lowagie.examples.directcontent.colors.Pattern.class);
-        runSingleTest(com.lowagie.examples.directcontent.colors.Patterns.class);
-        runSingleTest(com.lowagie.examples.directcontent.colors.Shading.class);
-        runSingleTest(com.lowagie.examples.directcontent.colors.SpotColors.class);
-        runSingleTest(com.lowagie.examples.directcontent.TemplateImages.class);
-        runSingleTest(com.lowagie.examples.directcontent.Layers.class);
-        runSingleTest(com.lowagie.examples.directcontent.Templates.class);
-        runSingleTest(com.lowagie.examples.directcontent.text.Logo.class);
-        runSingleTest(com.lowagie.examples.directcontent.text.Text.class);
-        runSingleTest(com.lowagie.examples.directcontent.graphics2D.ArabicText.class);
-        runSingleTest(com.lowagie.examples.directcontent.graphics2D.G2D.class);
-        runSingleTest(com.lowagie.examples.directcontent.graphics2D.JFreeChartExample.class);
-    }
-
-    @Test
-    public void testFontExamples() {
-        runSingleTest(com.lowagie.examples.fonts.FontEncoding.class);
-        runSingleTest(com.lowagie.examples.fonts.EncodingFont.class);
-        runSingleTest(com.lowagie.examples.fonts.getting.UsingFontFactory.class);
-        // TODO
-//        runSingleTest(com.lowagie.examples.fonts.getting.ChineseJapaneseKorean.class);
-        runSingleTest(com.lowagie.examples.fonts.getting.OpenTypeFont.class);
-        // TODO
-//        runSingleTest(com.lowagie.examples.fonts.styles.Vertical.class);
-        runSingleTest(com.lowagie.examples.fonts.styles.FontStylePropagation.class);
-        runSingleTest(com.lowagie.examples.fonts.styles.FixedFontWidth.class);
-        runSingleTest(com.lowagie.examples.fonts.styles.FontColor.class);
-        runSingleTest(com.lowagie.examples.fonts.StandardType1Fonts.class);
-        runSingleTest(com.lowagie.examples.fonts.FontFactoryType1Fonts.class);
-    }
-
-    @Test
-    public void testWindowsFonts() {
-    	// TODO Only windows ??
-        if (System.getProperty("os.name").startsWith("Windows")) {
-            runSingleTest(com.lowagie.examples.fonts.TrueType.class);
-            runSingleTest(com.lowagie.examples.fonts.FullFontNames.class);
-            runSingleTest(com.lowagie.examples.fonts.getting.TrueType.class);
-            runSingleTest(com.lowagie.examples.fonts.getting.RegisterFont.class);
-            runSingleTest(com.lowagie.examples.fonts.getting.TrueTypeCollections.class);
-            runSingleTest(com.lowagie.examples.fonts.getting.FontFactoryStyles.class);
-            runSingleTest(com.lowagie.examples.fonts.styles.WidthHeight.class);
-            runSingleTest(com.lowagie.examples.fonts.styles.ComplexText.class);
-            runSingleTest(com.lowagie.examples.fonts.styles.RightToLeft.class);
-            runSingleTest(com.lowagie.examples.fonts.ListEncodings.class);
-            runSingleTest(com.lowagie.examples.fonts.UnicodeExample.class);
-        }
-    }
 
 }
 

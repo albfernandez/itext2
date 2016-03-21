@@ -13,15 +13,13 @@
  */
 package com.lowagie.examples.fonts;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
+import org.junit.Test;
 
 import com.lowagie.text.Chunk;
 import com.lowagie.text.Document;
-import com.lowagie.text.DocumentException;
 import com.lowagie.text.Font;
-import com.lowagie.text.RunAllExamplesTest;
 import com.lowagie.text.pdf.BaseFont;
+import com.lowagie.text.pdf.PdfTestBase;
 import com.lowagie.text.pdf.PdfWriter;
 
 /**
@@ -31,19 +29,17 @@ public class FontEncoding {
     
     /**
      * Specifying an encoding.
-     * @param args no arguments needed
      */
-    public static void main(String[] args) {
+	@Test
+    public void main() throws Exception {
         
-        System.out.println("Encodings");
         
         // step 1: creation of a document-object
         Document document = new Document();
         
-        try {
             
             // step 2: creation of the writer
-            PdfWriter.getInstance(document, new FileOutputStream(RunAllExamplesTest.OUTPUT_DIR + "fontencoding.pdf"));
+            PdfWriter.getInstance(document, PdfTestBase.getOutputStream("fontencoding.pdf"));
             
             // step 3: we open the document
             document.open();
@@ -53,13 +49,6 @@ public class FontEncoding {
             Font font = new Font(helvetica, 12, Font.NORMAL);
             Chunk chunk = new Chunk("Sponsor this example and send me 1\u20ac. These are some special characters: \u0152\u0153\u0160\u0161\u0178\u017D\u0192\u02DC\u2020\u2021\u2030", font);
             document.add(chunk);
-        }
-        catch(DocumentException de) {
-            System.err.println(de.getMessage());
-        }
-        catch(IOException ioe) {
-            System.err.println(ioe.getMessage());
-        }
         
         // step 5: we close the document
         document.close();

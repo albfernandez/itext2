@@ -16,8 +16,10 @@ package com.lowagie.examples.general.read;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 
-import com.lowagie.text.RunAllExamplesTest;
+import org.junit.Test;
+
 import com.lowagie.text.pdf.PdfReader;
+import com.lowagie.text.pdf.PdfTestBase;
 import com.lowagie.text.pdf.PdfWriter;
 
 /**
@@ -28,38 +30,31 @@ public class ReadEncrypted {
 	/**
 	 * Reads an encrypted PDF document.
 	 * 
-	 * @param args
-	 *            no arguments needed
 	 */
-	public static void main(String[] args) {
-		try {
-			BufferedWriter out = new BufferedWriter(new FileWriter(
-					RunAllExamplesTest.OUTPUT_DIR + "info_encrypted.txt"));
-			PdfReader r = new PdfReader(RunAllExamplesTest.RESOURCES_DIR +"HelloEncrypted.pdf", "Hello"
-						.getBytes());
-			out.write(r.getInfo().toString());
-			out.write("\r\n");
-			int permissions = r.getPermissions();
-			out.write("Printing allowed: " + ((PdfWriter.ALLOW_PRINTING & permissions) > 0) );
-			out.write("\r\n");
-			out.write("Modifying contents allowed: " + ((PdfWriter.ALLOW_MODIFY_CONTENTS & permissions) > 0) );
-			out.write("\r\n");
-			out.write("Copying allowed: " + ((PdfWriter.ALLOW_COPY & permissions) > 0) );
-			out.write("\r\n");
-			out.write("Modifying annotations allowed: " + ((PdfWriter.ALLOW_MODIFY_ANNOTATIONS & permissions) > 0) );
-			out.write("\r\n");
-			out.write("Fill in allowed: " + ((PdfWriter.ALLOW_FILL_IN & permissions) > 0) );
-			out.write("\r\n");
-			out.write("Screen Readers allowed: " + ((PdfWriter.ALLOW_SCREENREADERS & permissions) > 0) );
-			out.write("\r\n");
-			out.write("Assembly allowed: " + ((PdfWriter.ALLOW_ASSEMBLY & permissions) > 0) );
-			out.write("\r\n");
-			out.write("Degraded printing allowed: " + ((PdfWriter.ALLOW_DEGRADED_PRINTING & permissions) > 0) );
-			out.write("\r\n");
-			out.flush();
-			out.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	@Test
+	public void main() throws Exception {
+		BufferedWriter out = new BufferedWriter(new FileWriter(PdfTestBase.OUTPUT_DIR + "info_encrypted.txt"));
+		PdfReader r = new PdfReader(PdfTestBase.RESOURCES_DIR + "HelloEncrypted.pdf", "Hello".getBytes());
+		out.write(r.getInfo().toString());
+		out.write("\r\n");
+		int permissions = r.getPermissions();
+		out.write("Printing allowed: " + ((PdfWriter.ALLOW_PRINTING & permissions) > 0));
+		out.write("\r\n");
+		out.write("Modifying contents allowed: " + ((PdfWriter.ALLOW_MODIFY_CONTENTS & permissions) > 0));
+		out.write("\r\n");
+		out.write("Copying allowed: " + ((PdfWriter.ALLOW_COPY & permissions) > 0));
+		out.write("\r\n");
+		out.write("Modifying annotations allowed: " + ((PdfWriter.ALLOW_MODIFY_ANNOTATIONS & permissions) > 0));
+		out.write("\r\n");
+		out.write("Fill in allowed: " + ((PdfWriter.ALLOW_FILL_IN & permissions) > 0));
+		out.write("\r\n");
+		out.write("Screen Readers allowed: " + ((PdfWriter.ALLOW_SCREENREADERS & permissions) > 0));
+		out.write("\r\n");
+		out.write("Assembly allowed: " + ((PdfWriter.ALLOW_ASSEMBLY & permissions) > 0));
+		out.write("\r\n");
+		out.write("Degraded printing allowed: " + ((PdfWriter.ALLOW_DEGRADED_PRINTING & permissions) > 0));
+		out.write("\r\n");
+		out.flush();
+		out.close();
 	}
 }

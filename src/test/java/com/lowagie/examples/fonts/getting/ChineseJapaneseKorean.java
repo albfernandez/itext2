@@ -13,15 +13,14 @@
  */
 package com.lowagie.examples.fonts.getting;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
+import org.junit.Ignore;
+import org.junit.Test;
 
 import com.lowagie.text.Document;
-import com.lowagie.text.DocumentException;
 import com.lowagie.text.Font;
 import com.lowagie.text.Paragraph;
-import com.lowagie.text.RunAllExamplesTest;
 import com.lowagie.text.pdf.BaseFont;
+import com.lowagie.text.pdf.PdfTestBase;
 import com.lowagie.text.pdf.PdfWriter;
 
 
@@ -34,15 +33,15 @@ public class ChineseJapaneseKorean {
 	 * Using CJK fonts
 	 * @param args no arguments needed
 	 */
-	public static void main(String[] args) {
-        System.out.println("CJK Fonts");
+	@Test
+	@Ignore("fail on linux")
+	public void main() throws Exception {
         
         // step 1: creation of a document-object
         Document document = new Document();
-        try {
             
             // step 2: creation of the writer
-            PdfWriter.getInstance(document, new FileOutputStream(RunAllExamplesTest.OUTPUT_DIR + "cjk.pdf"));
+            PdfWriter.getInstance(document, PdfTestBase.getOutputStream("cjk.pdf"));
             
             // step 3: we open the document
             document.open();
@@ -86,13 +85,7 @@ public class ChineseJapaneseKorean {
             Font FontChinese = new Font(bfChinese, 12, Font.NORMAL);
             Paragraph p = new Paragraph(chinese, FontChinese);
             document.add(p);
-        }
-        catch(DocumentException de) {
-            System.err.println(de.getMessage());
-        }
-        catch(IOException ioe) {
-            System.err.println(ioe.getMessage());
-        }
+    
         
         // step 5: we close the document
         document.close();

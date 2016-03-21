@@ -14,14 +14,14 @@
 package com.lowagie.examples.directcontent.optionalcontent;
 
 import java.awt.Color;
-import java.io.FileOutputStream;
+
+import org.junit.Test;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.Element;
 import com.lowagie.text.Font;
 import com.lowagie.text.PageSize;
 import com.lowagie.text.Phrase;
-import com.lowagie.text.RunAllExamplesTest;
 import com.lowagie.text.pdf.ColumnText;
 import com.lowagie.text.pdf.PdfArray;
 import com.lowagie.text.pdf.PdfContentByte;
@@ -32,6 +32,7 @@ import com.lowagie.text.pdf.PdfName;
 import com.lowagie.text.pdf.PdfOCProperties;
 import com.lowagie.text.pdf.PdfObject;
 import com.lowagie.text.pdf.PdfString;
+import com.lowagie.text.pdf.PdfTestBase;
 import com.lowagie.text.pdf.PdfWriter;
 
 /**
@@ -41,15 +42,13 @@ public class ContentGroups {
 	   
     /**
      * Demonstrates how to group optional content.
-     * @param args no arguments needed
      */
-    public static void main(String[] args) {
-        System.out.println("Grouping optional content");
-        try {
+	@Test
+	public void main() throws Exception {
         	// step 1
             Document document = new Document(PageSize.A4, 50, 50, 50, 50);
             // step 2
-            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(RunAllExamplesTest.OUTPUT_DIR + "contentgroups.pdf"));
+            PdfWriter writer = PdfWriter.getInstance(document, PdfTestBase.getOutputStream( "contentgroups.pdf"));
             writer.setPdfVersion(PdfWriter.VERSION_1_5);
             writer.setViewerPreferences(PdfWriter.PageModeUseOC);
             // step 3
@@ -91,9 +90,5 @@ public class ContentGroups {
             p.put(PdfName.D, d);
             // step 5
             document.close();
-        }
-        catch(Exception de) {
-            de.printStackTrace();
-        }
     }
 }

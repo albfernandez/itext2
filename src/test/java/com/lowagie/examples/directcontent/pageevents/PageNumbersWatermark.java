@@ -14,7 +14,8 @@
 package com.lowagie.examples.directcontent.pageevents;
 
 import java.awt.Color;
-import java.io.FileOutputStream;
+
+import org.junit.Test;
 
 import com.lowagie.text.Chunk;
 import com.lowagie.text.Document;
@@ -33,6 +34,7 @@ import com.lowagie.text.pdf.PdfGState;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfPageEventHelper;
 import com.lowagie.text.pdf.PdfTemplate;
+import com.lowagie.text.pdf.PdfTestBase;
 import com.lowagie.text.pdf.PdfWriter;
 /**
  * Demonstrates the use of templates to add Watermarks and Pagenumbers.
@@ -51,30 +53,27 @@ public class PageNumbersWatermark extends PdfPageEventHelper {
     
     /**
      * Generates a document with a header containing Page x of y and with a Watermark on every page.
-     * @param args no arguments needed
      */
-    public static void main(String args[]) {
-        try {
+	@Test
+	public void main() throws Exception {
         	// step 1: creating the document
             Document doc = new Document(PageSize.A4, 50, 50, 100, 72);
             // step 2: creating the writer
-            PdfWriter writer = PdfWriter.getInstance(doc, new FileOutputStream(RunAllExamplesTest.OUTPUT_DIR + "pageNumbersWatermark.pdf"));
+            PdfWriter writer = PdfWriter.getInstance(doc, PdfTestBase.getOutputStream( "pageNumbersWatermark.pdf"));
             // step 3: initialisations + opening the document
             writer.setPageEvent(new PageNumbersWatermark());
             doc.open();
             // step 4: adding content
             String text = "some padding text ";
-            for (int k = 0; k < 10; ++k)
+            for (int k = 0; k < 10; ++k) {
                 text += text;
+            }
             Paragraph p = new Paragraph(text);
             p.setAlignment(Element.ALIGN_JUSTIFIED);
             doc.add(p);
             // step 5: closing the document
             doc.close();
-        }
-        catch ( Exception e ) {
-            e.printStackTrace();
-        }
+        
     }
     
     /**

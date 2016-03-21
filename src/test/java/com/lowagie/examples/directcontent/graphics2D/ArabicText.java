@@ -15,6 +15,8 @@ package com.lowagie.examples.directcontent.graphics2D;
 
 import java.io.FileOutputStream;
 
+import org.junit.Test;
+
 import com.lowagie.text.Document;
 import com.lowagie.text.PageSize;
 import com.lowagie.text.RunAllExamplesTest;
@@ -28,10 +30,9 @@ public class ArabicText {
 
 	/**
 	 * Draws arabic text using java.awt.Graphics2D.
-     * @param args no arguments needed
      */
-    public static void main(String[] args) {
-        System.out.println("Arabic Text.");
+	@Test
+	public void main() throws Exception {
     	// step 1
         Document document = new Document(PageSize.A4, 50, 50, 50, 50);
         try {

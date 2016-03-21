@@ -13,18 +13,17 @@
  */
 package com.lowagie.examples.forms;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
+import org.junit.Test;
 
 import com.lowagie.text.Document;
-import com.lowagie.text.DocumentException;
+import com.lowagie.text.ExceptionConverter;
 import com.lowagie.text.Rectangle;
-import com.lowagie.text.RunAllExamplesTest;
 import com.lowagie.text.pdf.PdfContentByte;
 import com.lowagie.text.pdf.PdfFormField;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPCellEvent;
 import com.lowagie.text.pdf.PdfPTable;
+import com.lowagie.text.pdf.PdfTestBase;
 import com.lowagie.text.pdf.PdfWriter;
 import com.lowagie.text.pdf.TextField;
 
@@ -32,7 +31,7 @@ import com.lowagie.text.pdf.TextField;
  * General example using TableEvents and CellEvents.
  */
 public class SimpleRegistrationForm implements PdfPCellEvent {
-	
+
 	/** the writer with the acroform */
 	private PdfWriter writer;
 
@@ -58,7 +57,7 @@ public class SimpleRegistrationForm implements PdfPCellEvent {
 	 *            fields.
 	 * @param fieldname
 	 *            the name of the TextField
-	 *  
+	 * 
 	 */
 	public SimpleRegistrationForm(PdfWriter writer, String fieldname) {
 		this.writer = writer;
@@ -69,17 +68,14 @@ public class SimpleRegistrationForm implements PdfPCellEvent {
 	 * @see com.lowagie.text.pdf.PdfPCellEvent#cellLayout(com.lowagie.text.pdf.PdfPCell,
 	 *      com.lowagie.text.Rectangle, com.lowagie.text.pdf.PdfContentByte[])
 	 */
-	public void cellLayout(PdfPCell cell, Rectangle position,
-			PdfContentByte[] canvases) {
+	public void cellLayout(PdfPCell cell, Rectangle position, PdfContentByte[] canvases) {
 		TextField tf = new TextField(writer, position, fieldname);
 		tf.setFontSize(12);
-		try {
+		try{
 			PdfFormField field = tf.getTextField();
 			writer.addAnnotation(field);
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (DocumentException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			throw new ExceptionConverter(e);
 		}
 	}
 
@@ -87,52 +83,44 @@ public class SimpleRegistrationForm implements PdfPCellEvent {
 	 * Example originally written by Wendy Smoak to generate a Table with
 	 * 'floating boxes'. Adapted by Bruno Lowagie.
 	 * 
-	 * @param args
 	 */
-	public static void main(String[] args) {
+	@Test
+	public void main() throws Exception {
 		// step 1
 		Document document = new Document();
-		try {
-			// step 2
 
-			PdfWriter writer = PdfWriter.getInstance(document,
-					new FileOutputStream(RunAllExamplesTest.OUTPUT_DIR + "SimpleRegistrationForm.pdf"));
-			// step 3
-			document.open();
-			// step 4
-			PdfPTable table = new PdfPTable(2);
-			PdfPCell cell;
-			table.getDefaultCell().setPadding(5f);
+		// step 2
 
-			table.addCell("Your name:");
-			cell = new PdfPCell();
-			cell.setCellEvent(new SimpleRegistrationForm(writer, "name"));
-			table.addCell(cell);
+		PdfWriter writer = PdfWriter.getInstance(document, PdfTestBase.getOutputStream("SimpleRegistrationForm.pdf"));
+		// step 3
+		document.open();
+		// step 4
+		PdfPTable table = new PdfPTable(2);
+		PdfPCell cell;
+		table.getDefaultCell().setPadding(5f);
 
-			table.addCell("Your home address:");
-			cell = new PdfPCell();
-			cell.setCellEvent(new SimpleRegistrationForm(writer, "address"));
-			table.addCell(cell);
+		table.addCell("Your name:");
+		cell = new PdfPCell();
+		cell.setCellEvent(new SimpleRegistrationForm(writer, "name"));
+		table.addCell(cell);
 
-			table.addCell("Postal code:");
-			cell = new PdfPCell();
-			cell
-					.setCellEvent(new SimpleRegistrationForm(writer,
-							"postal_code"));
-			table.addCell(cell);
+		table.addCell("Your home address:");
+		cell = new PdfPCell();
+		cell.setCellEvent(new SimpleRegistrationForm(writer, "address"));
+		table.addCell(cell);
 
-			table.addCell("Your email address:");
-			cell = new PdfPCell();
-			cell.setCellEvent(new SimpleRegistrationForm(writer, "email"));
-			table.addCell(cell);
+		table.addCell("Postal code:");
+		cell = new PdfPCell();
+		cell.setCellEvent(new SimpleRegistrationForm(writer, "postal_code"));
+		table.addCell(cell);
 
-			document.add(table);
+		table.addCell("Your email address:");
+		cell = new PdfPCell();
+		cell.setCellEvent(new SimpleRegistrationForm(writer, "email"));
+		table.addCell(cell);
 
-		} catch (DocumentException de) {
-			System.err.println(de.getMessage());
-		} catch (IOException ioe) {
-			System.err.println(ioe.getMessage());
-		}
+		document.add(table);
+
 		// step 5
 		document.close();
 	}

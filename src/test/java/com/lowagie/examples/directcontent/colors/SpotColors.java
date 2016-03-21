@@ -14,18 +14,19 @@
 package com.lowagie.examples.directcontent.colors;
 
 import java.awt.Color;
-import java.io.FileOutputStream;
+
+import org.junit.Test;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.Font;
 import com.lowagie.text.Paragraph;
-import com.lowagie.text.RunAllExamplesTest;
 import com.lowagie.text.pdf.BaseFont;
 import com.lowagie.text.pdf.CMYKColor;
 import com.lowagie.text.pdf.GrayColor;
 import com.lowagie.text.pdf.PdfContentByte;
 import com.lowagie.text.pdf.PdfSpotColor;
 import com.lowagie.text.pdf.PdfTemplate;
+import com.lowagie.text.pdf.PdfTestBase;
 import com.lowagie.text.pdf.PdfWriter;
 import com.lowagie.text.pdf.SpotColor;
 
@@ -36,20 +37,18 @@ public class SpotColors {
     
     /**
      * Demonstrates the use of spotcolors.
-     * @param args no arguments needed
      */
-    public static void main(String[] args) {
+	@Test
+    public void main() throws Exception {
         
-        System.out.println("Pantone example : Spot Color");
         
         // step 1: creation of a document-object
         Document document = new Document();
-        try {
             
             // step 2:
             // we create a writer that listens to the document
             // and directs a PDF-stream to a file
-            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(RunAllExamplesTest.OUTPUT_DIR + "spotcolor.pdf"));
+            PdfWriter writer = PdfWriter.getInstance(document, PdfTestBase.getOutputStream("spotcolor.pdf"));
             BaseFont bf = BaseFont.createFont("Helvetica", "winansi", BaseFont.NOT_EMBEDDED);
             
             // step 3: we open the document
@@ -132,10 +131,7 @@ public class SpotColors {
             cb.addTemplate(t, -1.0f, 0.00f, 0.00f, -1.0f, 550f, 550f);
             
             cb.sanityCheck();
-        }
-        catch(Exception de) {
-            de.printStackTrace();
-        }
+
         
         // step 5: we close the document
         document.close();

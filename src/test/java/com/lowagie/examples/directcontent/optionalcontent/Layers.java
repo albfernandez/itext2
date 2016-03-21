@@ -14,18 +14,19 @@
 package com.lowagie.examples.directcontent.optionalcontent;
 
 import java.awt.Color;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
+
+import org.junit.Test;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.Element;
 import com.lowagie.text.Font;
 import com.lowagie.text.PageSize;
 import com.lowagie.text.Phrase;
-import com.lowagie.text.RunAllExamplesTest;
 import com.lowagie.text.pdf.ColumnText;
 import com.lowagie.text.pdf.PdfContentByte;
 import com.lowagie.text.pdf.PdfLayer;
+import com.lowagie.text.pdf.PdfTestBase;
 import com.lowagie.text.pdf.PdfWriter;
 
 /**
@@ -35,15 +36,13 @@ public class Layers {
 	   
     /**
      * Layer radio group and zoom.
-     * @param args no arguments needed
      */
-    public static void main(String[] args) {
-    	System.out.println("layer radio group and zoom");
-        try {
+	@Test
+	public void main() throws Exception {
         	// step 1
             Document document = new Document(PageSize.A4, 50, 50, 50, 50);
             // step 2
-            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(RunAllExamplesTest.OUTPUT_DIR + "layers.pdf"));
+            PdfWriter writer = PdfWriter.getInstance(document, PdfTestBase.getOutputStream( "layers.pdf"));
             writer.setPdfVersion(PdfWriter.VERSION_1_5);
             writer.setViewerPreferences(PdfWriter.PageModeUseOC);
             // step 3
@@ -89,9 +88,6 @@ public class Layers {
             ColumnText.showTextAligned(cb, Element.ALIGN_LEFT, new Phrase("<< Zoom here!", new Font(Font.COURIER, 12, Font.NORMAL, Color.blue)), 150, 450, 0);
             // step 5
             document.close();
-        }
-        catch(Exception de) {
-            de.printStackTrace();
-        }
+
     }
 }

@@ -17,6 +17,8 @@ import java.awt.Color;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import org.junit.Test;
+
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.RunAllExamplesTest;
@@ -31,11 +33,9 @@ public class State {
 	/**
 	 * Changing the Graphics State with saveState() and restoreState().
 	 * 
-	 * @param args
-	 *            no arguments needed
 	 */
-	public static void main(String[] args) {
-		System.out.println("Changing the Graphics State with save and restore");
+	@Test
+	public void main() throws Exception {
 
 		// step 1: creation of a document-object
 		Document document = new Document();

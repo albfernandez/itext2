@@ -16,6 +16,8 @@ package com.lowagie.examples.directcontent.graphics;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import org.junit.Test;
+
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.RunAllExamplesTest;
@@ -29,11 +31,10 @@ public class Shapes {
     
     /**
      * Draws some shapes.
-     * @param args no arguments needed
      */
-    public static void main(String[] args) {
+	@Test
+	public void main() throws Exception {
         
-        System.out.println("Drawing some shapes");
         
         // step 1: creation of a document-object
         Document document = new Document();

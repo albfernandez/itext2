@@ -14,7 +14,6 @@
 package com.lowagie.examples.directcontent.pageevents;
 
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.EmptyStackException;
 import java.util.HashMap;
@@ -23,6 +22,8 @@ import java.util.TreeSet;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+
+import org.junit.Test;
 
 import com.lowagie.text.Chunk;
 import com.lowagie.text.Document;
@@ -38,6 +39,7 @@ import com.lowagie.text.pdf.BaseFont;
 import com.lowagie.text.pdf.PdfContentByte;
 import com.lowagie.text.pdf.PdfPageEventHelper;
 import com.lowagie.text.pdf.PdfTemplate;
+import com.lowagie.text.pdf.PdfTestBase;
 import com.lowagie.text.pdf.PdfWriter;
 import com.lowagie.text.xml.SAXmyHandler;
 import com.lowagie.text.xml.TagMap;
@@ -51,9 +53,9 @@ import com.lowagie.text.xml.XmlPeer;
 public class Events {
 
 	/**
-	 * This is an example of a PageEvents class you should write.
-	 * This is an inner class to keep all the code of the example in one file.
-	 * If you want to use a PageEvent, you may want to put the code in a separate class.
+	 * This is an example of a PageEvents class you should write. This is an
+	 * inner class to keep all the code of the example in one file. If you want
+	 * to use a PageEvent, you may want to put the code in a separate class.
 	 */
 
 	class MyPageEvents extends PdfPageEventHelper {
@@ -72,10 +74,14 @@ public class Events {
 
 		/** this is the current act of the play */
 		String act = "";
-		
+
 		/**
-		 * Every speaker will be tagged, so that he can be added to the list of speakers.
-		 * @see com.lowagie.text.pdf.PdfPageEventHelper#onGenericTag(com.lowagie.text.pdf.PdfWriter, com.lowagie.text.Document, com.lowagie.text.Rectangle, java.lang.String)
+		 * Every speaker will be tagged, so that he can be added to the list of
+		 * speakers.
+		 * 
+		 * @see com.lowagie.text.pdf.PdfPageEventHelper#onGenericTag(com.lowagie.text.pdf.PdfWriter,
+		 *      com.lowagie.text.Document, com.lowagie.text.Rectangle,
+		 *      java.lang.String)
 		 */
 		public void onGenericTag(PdfWriter writer, Document document,
 				Rectangle rect, String text) {
@@ -83,10 +89,12 @@ public class Events {
 		}
 
 		/**
-		 * The first thing to do when the document is opened, is to define the BaseFont,
-		 * get the Direct Content object and create the template that will hold the final
-		 * number of pages.
-		 * @see com.lowagie.text.pdf.PdfPageEventHelper#onOpenDocument(com.lowagie.text.pdf.PdfWriter, com.lowagie.text.Document)
+		 * The first thing to do when the document is opened, is to define the
+		 * BaseFont, get the Direct Content object and create the template that
+		 * will hold the final number of pages.
+		 * 
+		 * @see com.lowagie.text.pdf.PdfPageEventHelper#onOpenDocument(com.lowagie.text.pdf.PdfWriter,
+		 *      com.lowagie.text.Document)
 		 */
 		public void onOpenDocument(PdfWriter writer, Document document) {
 			try {
@@ -102,7 +110,9 @@ public class Events {
 		/**
 		 * Every ACT is seen as a Chapter. We get the title of the act, so that
 		 * we can display it in the header.
-		 * @see com.lowagie.text.pdf.PdfPageEventHelper#onChapter(com.lowagie.text.pdf.PdfWriter, com.lowagie.text.Document, float, com.lowagie.text.Paragraph)
+		 * 
+		 * @see com.lowagie.text.pdf.PdfPageEventHelper#onChapter(com.lowagie.text.pdf.PdfWriter,
+		 *      com.lowagie.text.Document, float, com.lowagie.text.Paragraph)
 		 */
 		public void onChapter(PdfWriter writer, Document document,
 				float paragraphPosition, Paragraph title) {
@@ -115,10 +125,12 @@ public class Events {
 		}
 
 		/**
-		 * After the content of the page is written, we put page X of Y
-		 * at the bottom of the page and we add either "Romeo and Juliet"
-		 * of the title of the current act as a header.
-		 * @see com.lowagie.text.pdf.PdfPageEventHelper#onEndPage(com.lowagie.text.pdf.PdfWriter, com.lowagie.text.Document)
+		 * After the content of the page is written, we put page X of Y at the
+		 * bottom of the page and we add either "Romeo and Juliet" of the title
+		 * of the current act as a header.
+		 * 
+		 * @see com.lowagie.text.pdf.PdfPageEventHelper#onEndPage(com.lowagie.text.pdf.PdfWriter,
+		 *      com.lowagie.text.Document)
 		 */
 		public void onEndPage(PdfWriter writer, Document document) {
 			int pageN = writer.getPageNumber();
@@ -142,9 +154,11 @@ public class Events {
 		}
 
 		/**
-		 * Just before the document is closed, we add the final number of pages to
-		 * the template.
-		 * @see com.lowagie.text.pdf.PdfPageEventHelper#onCloseDocument(com.lowagie.text.pdf.PdfWriter, com.lowagie.text.Document)
+		 * Just before the document is closed, we add the final number of pages
+		 * to the template.
+		 * 
+		 * @see com.lowagie.text.pdf.PdfPageEventHelper#onCloseDocument(com.lowagie.text.pdf.PdfWriter,
+		 *      com.lowagie.text.Document)
 		 */
 		public void onCloseDocument(PdfWriter writer, Document document) {
 			template.beginText();
@@ -155,7 +169,8 @@ public class Events {
 
 		/**
 		 * Getting the list of speakers.
-		 * @return	a list of speakers and the number of occurrences.
+		 * 
+		 * @return a list of speakers and the number of occurrences.
 		 */
 		public TreeSet getSpeakers() {
 			return speakers;
@@ -164,14 +179,18 @@ public class Events {
 
 	/**
 	 * Gets a PageEvents object.
+	 * 
 	 * @return a new PageEvents object
 	 */
 	public MyPageEvents getPageEvents() {
 		return new MyPageEvents();
 	}
+
 	/**
 	 * Gets a Handler object.
-	 * @param document  the document on which the handler operates
+	 * 
+	 * @param document
+	 *            the document on which the handler operates
 	 * @return a Handler object
 	 */
 	public MyHandler getXmlHandler(Document document) {
@@ -182,61 +201,58 @@ public class Events {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Converts a play in XML into PDF.
-	 * @param args no arguments needed
 	 */
-	public static void main(String[] args) {
-
-		System.out.println("Romeo and Juliet");
+	@Test
+	public void main() throws Exception {
 
 		// step 1: creation of a document-object
 		Document document = new Document(PageSize.A4, 80, 50, 30, 65);
 
-		try {
-			// step 2:
-			// we create a writer that listens to the document
-			// and directs a XML-stream to a file
-			PdfWriter writer = PdfWriter.getInstance(document,
-					new FileOutputStream(RunAllExamplesTest.OUTPUT_DIR + "RomeoJuliet.pdf"));
+		// step 2:
+		// we create a writer that listens to the document
+		// and directs a XML-stream to a file
+		PdfWriter writer = PdfWriter.getInstance(document,
+				PdfTestBase.getOutputStream("RomeoJuliet.pdf"));
 
-			// create add the event handler
-			MyPageEvents events = new Events().getPageEvents();
-			writer.setPageEvent(events);
+		// create add the event handler
+		MyPageEvents events = new Events().getPageEvents();
+		writer.setPageEvent(events);
 
-			// step 3: we create a parser and set the document handler
-			SAXParser parser = SAXParserFactory.newInstance().newSAXParser();
+		// step 3: we create a parser and set the document handler
+		SAXParser parser = SAXParserFactory.newInstance().newSAXParser();
 
-			// step 4: we parse the document
-			parser.parse(RunAllExamplesTest.RESOURCES_DIR + "playRomeoJuliet.xml", new Events().getXmlHandler(document));
+		// step 4: we parse the document
+		parser.parse(RunAllExamplesTest.RESOURCES_DIR + "playRomeoJuliet.xml",
+				new Events().getXmlHandler(document));
 
-			document.newPage();
-			Speaker speaker;
-			for (Iterator i = events.getSpeakers().iterator(); i.hasNext();) {
-				speaker = (Speaker) i.next();
-				document.add(new Paragraph(speaker.getName() + ": "
-						+ speaker.getOccurrence() + " speech blocks"));
-			}
-			document.close();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.err.println(e.getMessage());
+		document.newPage();
+		Speaker speaker;
+		for (Iterator i = events.getSpeakers().iterator(); i.hasNext();) {
+			speaker = (Speaker) i.next();
+			document.add(new Paragraph(speaker.getName() + ": "
+					+ speaker.getOccurrence() + " speech blocks"));
 		}
+		document.close();
+
 	}
 
 	/**
-	 * Special implementation of the XML handler.
-	 * It adds a paragraph after each SPEAKER block and
-	 * avoids closing the document after the final closing tag.
+	 * Special implementation of the XML handler. It adds a paragraph after each
+	 * SPEAKER block and avoids closing the document after the final closing
+	 * tag.
 	 */
 	class MyHandler extends SAXmyHandler {
 
 		/**
 		 * We have to override the constructor
-		 * @param document	the Document object
-		 * @param tagmap	the tagmap
+		 * 
+		 * @param document
+		 *            the Document object
+		 * @param tagmap
+		 *            the tagmap
 		 */
 		public MyHandler(Document document, HashMap tagmap) {
 			super(document, tagmap);
@@ -244,9 +260,13 @@ public class Events {
 
 		/**
 		 * We only alter the handling of some endtags.
-		 * @param uri	the uri of the namespace
-		 * @param lname	the local name of the tag
-		 * @param name	the name of the tag
+		 * 
+		 * @param uri
+		 *            the uri of the namespace
+		 * @param lname
+		 *            the local name of the tag
+		 * @param name
+		 *            the name of the tag
 		 */
 		public void endElement(String uri, String lname, String name) {
 			if (myTags.containsKey(name)) {
@@ -274,11 +294,11 @@ public class Events {
 	}
 
 	/**
-	 * Normally you either choose to use a HashMap with XmlPeer objects,
-	 * or a TagMap object that reads a TagMap in XML.
-	 * Here we used a hybrid solution (for educational purposes only!)
-	 * with on one side the tags in the XML tagmap, on the other side
-	 * an XmlPeer object that overrides the properties of one of the tags.
+	 * Normally you either choose to use a HashMap with XmlPeer objects, or a
+	 * TagMap object that reads a TagMap in XML. Here we used a hybrid solution
+	 * (for educational purposes only!) with on one side the tags in the XML
+	 * tagmap, on the other side an XmlPeer object that overrides the properties
+	 * of one of the tags.
 	 */
 
 	class RomeoJulietMap extends TagMap {
@@ -286,12 +306,14 @@ public class Events {
 		private static final long serialVersionUID = 1024517625414654121L;
 
 		/**
-		 * Constructs a TagMap based on an XML file
-		 * and/or on XmlPeer objects that are added.
+		 * Constructs a TagMap based on an XML file and/or on XmlPeer objects
+		 * that are added.
+		 * 
 		 * @throws IOException
 		 */
 		public RomeoJulietMap() throws IOException {
-			super(new FileInputStream(RunAllExamplesTest.RESOURCES_DIR + "tagmapRomeoJuliet.xml"));
+			super(new FileInputStream(RunAllExamplesTest.RESOURCES_DIR
+					+ "tagmapRomeoJuliet.xml"));
 			XmlPeer peer = new XmlPeer(ElementTags.CHUNK, "SPEAKER");
 			peer.addValue(Markup.CSS_KEY_FONTSIZE, "10");
 			peer.addValue(Markup.CSS_KEY_FONTWEIGHT, Markup.CSS_VALUE_BOLD);
@@ -314,6 +336,7 @@ public class Events {
 
 		/**
 		 * One of the speakers in the play.
+		 * 
 		 * @param name
 		 */
 		public Speaker(String name) {
@@ -322,6 +345,7 @@ public class Events {
 
 		/**
 		 * Gets the name of the speaker.
+		 * 
 		 * @return a name
 		 */
 		public String getName() {
@@ -330,6 +354,7 @@ public class Events {
 
 		/**
 		 * Gets the number of occurrences of the speaker.
+		 * 
 		 * @return a number of textblocks
 		 */
 		public int getOccurrence() {
@@ -337,9 +362,10 @@ public class Events {
 		}
 
 		/**
-		 * There is something odd going on in this compareTo.
-		 * Do you see it?
-		 * @param o an other speaker object
+		 * There is something odd going on in this compareTo. Do you see it?
+		 * 
+		 * @param o
+		 *            an other speaker object
 		 * @see java.lang.Comparable#compareTo(java.lang.Object)
 		 */
 		public int compareTo(Object o) {

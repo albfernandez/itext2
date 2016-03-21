@@ -16,6 +16,8 @@ package com.lowagie.examples.directcontent.coordinates;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import org.junit.Test;
+
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.PageSize;
@@ -33,9 +35,9 @@ public class UpsideDown {
     /**
      * Changes the default coordinate system so that the origin is in the upper left corner
      * instead of the lower left corner.
-     * @param args no arguments needed here
      */
-    public static void main(String[] args) {
+	@Test
+	public void main() throws Exception {
         
         System.out.println("UpsideDown");        
         // step 1: creation of a document-object

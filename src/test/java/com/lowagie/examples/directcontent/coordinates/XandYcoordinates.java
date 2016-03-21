@@ -18,6 +18,8 @@ package com.lowagie.examples.directcontent.coordinates;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import org.junit.Test;
+
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.RunAllExamplesTest;
@@ -33,9 +35,9 @@ import com.lowagie.text.pdf.PdfWriter;
 public class XandYcoordinates {
     /**
      * Creates a PDF document with shapes, lines and text at specific X and Y coordinates.
-     * @param args no arguments needed here
      */
-    public static void main(String[] args) {
+	@Test
+	public void main() throws Exception {
         
         System.out.println("X and Y coordinate system");        
         // step 1: creation of a document-object

@@ -18,16 +18,16 @@ import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.geom.Area;
 import java.awt.geom.Ellipse2D;
-import java.io.FileOutputStream;
-import java.io.IOException;
+
+
+import org.junit.Test;
 
 import com.lowagie.text.Document;
-import com.lowagie.text.DocumentException;
 import com.lowagie.text.FontFactory;
-import com.lowagie.text.RunAllExamplesTest;
 import com.lowagie.text.pdf.DefaultFontMapper;
 import com.lowagie.text.pdf.PdfContentByte;
 import com.lowagie.text.pdf.PdfTemplate;
+import com.lowagie.text.pdf.PdfTestBase;
 import com.lowagie.text.pdf.PdfWriter;
 
 /**
@@ -37,19 +37,18 @@ public class G2D {
 
     /**
      * A simple Graphics2D example
-     * @param args no arguments needed
      */
-    public static void main(String[] args) {
+	@Test
+	public void main() throws Exception {
         
-        System.out.println("Using the java.awt.Graphics2D-object");
         
         // step 1: creation of a document-object
         Document document = new Document();
         
-        try {
+
             
             // step 2: creation of the writer
-            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(RunAllExamplesTest.OUTPUT_DIR + "graphics2D.pdf"));
+            PdfWriter writer = PdfWriter.getInstance(document, PdfTestBase.getOutputStream( "graphics2D.pdf"));
             
             // step 3: we open the document
             document.open();
@@ -129,13 +128,7 @@ public class G2D {
             tp.sanityCheck(); // all the g2 content is written to tp, not cb
             cb.addTemplate(tp, 50, 400);
             cb.sanityCheck();
-        }
-        catch(DocumentException de) {
-            System.err.println(de.getMessage());
-        }
-        catch(IOException ioe) {
-            System.err.println(ioe.getMessage());
-        }
+
         
         // step 5: we close the document
         document.close();

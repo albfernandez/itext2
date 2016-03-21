@@ -16,20 +16,32 @@ package com.lowagie.examples.general.read;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 
-import com.lowagie.text.RunAllExamplesTest;
+import org.junit.Test;
+
 import com.lowagie.text.pdf.PdfReader;
+import com.lowagie.text.pdf.PdfTestBase;
 
 /**
  * Getting information from a PDF file.
  */
 public class Info {
+	
+	@Test
+	public void test () throws Exception {
+		main(
+				PdfTestBase.RESOURCES_DIR + "HelloWorldMeta.pdf", 
+				PdfTestBase.RESOURCES_DIR + "ChapterSection.pdf", 
+				PdfTestBase.RESOURCES_DIR + "Concatenate.pdf"	
+		);
+
+	}
+	
 	/**
 	 * Getting information from a PDF file
 	 * @param args 	the names of paths to PDF files.
 	 */
-	public static void main(String[] args) {
-		try {
-		BufferedWriter out = new BufferedWriter(new FileWriter(RunAllExamplesTest.OUTPUT_DIR + "info.txt"));
+	public void main(String... args) throws Exception {
+		BufferedWriter out = new BufferedWriter(new FileWriter(PdfTestBase.getOutputFile("info.txt")));
         for (int i = 0; i < args.length; i++) { 
         	PdfReader r = new PdfReader(args[i]);
             out.write(args[i]);
@@ -39,10 +51,6 @@ public class Info {
         }
         out.flush();
         out.close();
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
 	}
 
 }

@@ -13,17 +13,18 @@
  */
 package com.lowagie.examples.general.copystamp;
 
-import java.io.FileOutputStream;
 import java.util.HashMap;
+
+import org.junit.Test;
 
 import com.lowagie.text.Element;
 import com.lowagie.text.Image;
 import com.lowagie.text.PageSize;
-import com.lowagie.text.RunAllExamplesTest;
 import com.lowagie.text.pdf.BaseFont;
 import com.lowagie.text.pdf.PdfContentByte;
 import com.lowagie.text.pdf.PdfReader;
 import com.lowagie.text.pdf.PdfStamper;
+import com.lowagie.text.pdf.PdfTestBase;
 
 /**
  * Reads the pages of an existing PDF file, adds pagenumbers and a watermark.
@@ -31,16 +32,15 @@ import com.lowagie.text.pdf.PdfStamper;
 public class AddWatermarkPageNumbers {
     /**
      * Reads the pages of an existing PDF file, adds pagenumbers and a watermark.
-     * @param args no arguments needed
+
      */
-    public static void main(String[] args) {
-        System.out.println("Add watermarks and pagenumbers");
-        try {
+	@Test
+    public  void main() throws Exception {
             // we create a reader for a certain document
-            PdfReader reader = new PdfReader(RunAllExamplesTest.RESOURCES_DIR +"ChapterSection.pdf");
+            PdfReader reader = new PdfReader(PdfTestBase.RESOURCES_DIR +"ChapterSection.pdf");
             int n = reader.getNumberOfPages();
             // we create a stamper that will copy the document to a new file
-            PdfStamper stamp = new PdfStamper(reader, new FileOutputStream(RunAllExamplesTest.OUTPUT_DIR + "watermark_pagenumbers.pdf"));
+            PdfStamper stamp = new PdfStamper(reader,PdfTestBase.getOutputStream("watermark_pagenumbers.pdf"));
             // adding some metadata
             HashMap moreInfo = new HashMap();
             moreInfo.put("Author", "Bruno Lowagie");
@@ -49,7 +49,7 @@ public class AddWatermarkPageNumbers {
             int i = 0;
             PdfContentByte under;
             PdfContentByte over;
-            Image img = Image.getInstance(RunAllExamplesTest.RESOURCES_DIR +"watermark.jpg");
+            Image img = Image.getInstance(PdfTestBase.RESOURCES_DIR +"watermark.jpg");
             BaseFont bf = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.WINANSI, BaseFont.EMBEDDED);
             img.setAbsolutePosition(200, 400);
             while (i < n) {
@@ -75,14 +75,10 @@ public class AddWatermarkPageNumbers {
             over.showTextAligned(Element.ALIGN_LEFT, "DUPLICATE OF AN EXISTING PDF DOCUMENT", 30, 600, 0);
             over.endText();
             // adding a page from another document
-            PdfReader reader2 = new PdfReader(RunAllExamplesTest.RESOURCES_DIR +"SimpleAnnotations1.pdf");
+            PdfReader reader2 = new PdfReader(PdfTestBase.RESOURCES_DIR +"SimpleAnnotations1.pdf");
             under = stamp.getUnderContent(1);
             under.addTemplate(stamp.getImportedPage(reader2, 3), 1, 0, 0, 1, 0, 0);
             // closing PdfStamper will generate the new PDF file
             stamp.close();
-        }
-        catch (Exception de) {
-            de.printStackTrace();
-        }
     }
 }

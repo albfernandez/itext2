@@ -12,11 +12,11 @@
  */
 package com.lowagie.examples.general.copystamp;
 
-import java.io.FileOutputStream;
+import org.junit.Test;
 
-import com.lowagie.text.RunAllExamplesTest;
 import com.lowagie.text.pdf.PdfCopyFields;
 import com.lowagie.text.pdf.PdfReader;
+import com.lowagie.text.pdf.PdfTestBase;
 
 /**
  * Concatenates 2 PDF files with forms. The resulting PDF has 1 merged AcroForm.
@@ -25,18 +25,14 @@ public class ConcatenateForms {
 
 	/**
 	 * Concatenates 2 PDF files with forms. The resulting PDF has 1 merged AcroForm.
-	 * @param args  no arguments needed
 	 */
-	public static void main(String[] args) {
-		try {
-			PdfReader reader1 = new PdfReader(RunAllExamplesTest.RESOURCES_DIR + "SimpleRegistrationForm.pdf");
-			PdfReader reader2 = new PdfReader(RunAllExamplesTest.RESOURCES_DIR + "TextFields.pdf");
-			PdfCopyFields copy = new PdfCopyFields(new FileOutputStream(RunAllExamplesTest.OUTPUT_DIR + "concatenatedforms.pdf"));
+	@Test
+	public void main() throws Exception{
+			PdfReader reader1 = new PdfReader(PdfTestBase.RESOURCES_DIR + "SimpleRegistrationForm.pdf");
+			PdfReader reader2 = new PdfReader(PdfTestBase.RESOURCES_DIR + "TextFields.pdf");
+			PdfCopyFields copy = new PdfCopyFields(PdfTestBase.getOutputStream("concatenatedforms.pdf"));
 			copy.addDocument(reader1);
 			copy.addDocument(reader2);
 			copy.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 }

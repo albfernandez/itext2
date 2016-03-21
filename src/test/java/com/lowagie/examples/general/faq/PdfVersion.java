@@ -14,52 +14,41 @@
 
 package com.lowagie.examples.general.faq;
 
-
-import java.io.FileOutputStream;
-import java.io.IOException;
+import org.junit.Test;
 
 import com.lowagie.text.Document;
-import com.lowagie.text.DocumentException;
 import com.lowagie.text.Paragraph;
-import com.lowagie.text.RunAllExamplesTest;
+import com.lowagie.text.pdf.PdfTestBase;
 import com.lowagie.text.pdf.PdfWriter;
 
 /**
  * Demonstrates the use of setPdfVersion.
+ * 
  * @author blowagie
  */
 public class PdfVersion {
-    /**
-     * Creates a PDF document and shows the PDF version.
-     * @param args no arguments needed here
-     */
-    public static void main(String[] args) {
-        
-        System.out.println("PDF version");        
-        // step 1: creation of a document-object
-        Document document = new Document();
-        
-        try {
-            
-            // step 2:
-            // we create a writer that listens to the document
-            // and directs a PDF-stream to a file
-            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(RunAllExamplesTest.OUTPUT_DIR + "pdfversion.pdf"));
-            writer.setPdfVersion(PdfWriter.VERSION_1_2);
-            // step 3: we open the document
-            document.open();
-            
-            // step 4:
-            document.add(new Paragraph("This is a PDF-1.2 document"));
-        }
-        catch(DocumentException de) {
-            System.err.println(de.getMessage());
-        }
-        catch(IOException ioe) {
-            System.err.println(ioe.getMessage());
-        }
-        
-        // step 5: we close the document
-        document.close();
-    }
+	/**
+	 * Creates a PDF document and shows the PDF version.
+	 */
+	@Test
+	public void main() throws Exception {
+
+		System.out.println("PDF version");
+		// step 1: creation of a document-object
+		Document document = new Document();
+
+		// step 2:
+		// we create a writer that listens to the document
+		// and directs a PDF-stream to a file
+		PdfWriter writer = PdfWriter.getInstance(document, PdfTestBase.getOutputStream("pdfversion.pdf"));
+		writer.setPdfVersion(PdfWriter.VERSION_1_2);
+		// step 3: we open the document
+		document.open();
+
+		// step 4:
+		document.add(new Paragraph("This is a PDF-1.2 document"));
+
+		// step 5: we close the document
+		document.close();
+	}
 }

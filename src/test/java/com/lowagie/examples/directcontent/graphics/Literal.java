@@ -16,6 +16,8 @@ package com.lowagie.examples.directcontent.graphics;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import org.junit.Test;
+
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.RunAllExamplesTest;
@@ -28,12 +30,9 @@ import com.lowagie.text.pdf.PdfWriter;
 public class Literal {
 
     
-    /**
-     * @param args
-     */
-    public static void main(String[] args) {
+	@Test
+	public void main() throws Exception {
         
-        System.out.println("Literal PDF Syntax");
         Document.compress = false;
         
         // step 1: creation of a document-object

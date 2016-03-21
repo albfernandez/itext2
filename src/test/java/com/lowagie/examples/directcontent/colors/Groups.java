@@ -14,14 +14,15 @@
 package com.lowagie.examples.directcontent.colors;
 
 import java.awt.Color;
-import java.io.FileOutputStream;
+
+import org.junit.Test;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.PageSize;
-import com.lowagie.text.RunAllExamplesTest;
 import com.lowagie.text.pdf.PdfContentByte;
 import com.lowagie.text.pdf.PdfGState;
 import com.lowagie.text.pdf.PdfTemplate;
+import com.lowagie.text.pdf.PdfTestBase;
 import com.lowagie.text.pdf.PdfTransparencyGroup;
 import com.lowagie.text.pdf.PdfWriter;
 
@@ -70,15 +71,14 @@ public class Groups {
 
     /**
      * Demonstrates the Transparency functionality.
-     * @param args no arguments needed
      */
-    public static void main(String[] args) {
-		System.out.println("Transparency Groups");
+    @Test
+    public void main() {
         // step 1: creation of a document-object
         Document document = new Document(PageSize.A4, 50, 50, 50, 50);
         try {
             // step 2: creation of a writer 
-            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(RunAllExamplesTest.OUTPUT_DIR + "groups.pdf"));
+            PdfWriter writer = PdfWriter.getInstance(document, PdfTestBase.getOutputStream("groups.pdf"));
             // step 3: we open the document
             document.open();
             // step 4: content

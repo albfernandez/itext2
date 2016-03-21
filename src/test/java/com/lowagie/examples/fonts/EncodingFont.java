@@ -13,7 +13,7 @@
  */
 package com.lowagie.examples.fonts;
 
-import java.io.FileOutputStream;
+import org.junit.Test;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.Element;
@@ -21,9 +21,9 @@ import com.lowagie.text.Font;
 import com.lowagie.text.PageSize;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.Phrase;
-import com.lowagie.text.RunAllExamplesTest;
 import com.lowagie.text.pdf.BaseFont;
 import com.lowagie.text.pdf.PdfPTable;
+import com.lowagie.text.pdf.PdfTestBase;
 import com.lowagie.text.pdf.PdfWriter;
 
 /**
@@ -35,13 +35,12 @@ public class EncodingFont {
 	 * Fonts and encoding.
 	 * @param args no arguments needed
 	 */
-	public static void main(String[] args) {
-        System.out.println("Encodings");
-        try {
+	@Test
+	public void main() throws Exception {
         	// step 1
             Document document = new Document(PageSize.A4, 50, 50, 50, 50);
             // step 2
-            PdfWriter.getInstance(document, new FileOutputStream(RunAllExamplesTest.OUTPUT_DIR + "encodingfont.pdf"));
+            PdfWriter.getInstance(document, PdfTestBase.getOutputStream("encodingfont.pdf"));
             // step 3
             document.open();
             // step 4
@@ -84,10 +83,7 @@ public class EncodingFont {
             }
             // step 5
             document.close();
-        }
-        catch (Exception de) {
-            de.printStackTrace();
-        }
+
 	}
     
 	static String cst(char c) {
