@@ -19,14 +19,13 @@
 package com.lowagie.examples.rtf.features.toc;
 
 import java.awt.Color;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+
+import org.junit.Test;
 
 import com.lowagie.text.Document;
-import com.lowagie.text.DocumentException;
 import com.lowagie.text.Font;
 import com.lowagie.text.Paragraph;
-import com.lowagie.text.RunAllExamplesTest;
+import com.lowagie.text.pdf.PdfTestBase;
 import com.lowagie.text.rtf.RtfWriter2;
 import com.lowagie.text.rtf.field.RtfTableOfContents;
 import com.lowagie.text.rtf.style.RtfParagraphStyle;
@@ -40,17 +39,16 @@ import com.lowagie.text.rtf.style.RtfParagraphStyle;
  * @version $Revision: 3373 $
  * @author Mark Hall (Mark.Hall@mail.room3b.eu)
  */
-public class TableOfContents {
+public class TableOfContentsTest {
     /**
      * Demonstrates creating and styling a table of contents
      * 
-     * @param args Unused
+     * 
      */
-    public static void main(String[] args) {
-        System.out.println("Demonstrates using the RTF table of contents.");
-        try {
+	@Test
+    public void main() throws Exception {
             Document document = new Document();
-            RtfWriter2 rtfWriter2 = RtfWriter2.getInstance(document, new FileOutputStream(RunAllExamplesTest.OUTPUT_DIR + "TableOfContents.rtf"));
+            RtfWriter2 rtfWriter2 = RtfWriter2.getInstance(document, PdfTestBase.getOutputStream("TableOfContents.rtf"));
 
             // Create paragraph stylesheets for each heading level. They must be named
             // "toc N" for each heading level you are using
@@ -85,11 +83,7 @@ public class TableOfContents {
             }
             
             document.close();
-        } catch (FileNotFoundException fnfe) {
-            fnfe.printStackTrace();
-        } catch (DocumentException de) {
-            de.printStackTrace();
-        }
+      
     }
 
 }

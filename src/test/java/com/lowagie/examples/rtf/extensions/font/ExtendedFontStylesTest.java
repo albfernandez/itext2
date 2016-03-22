@@ -18,15 +18,13 @@
  */
 package com.lowagie.examples.rtf.extensions.font;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import org.junit.Test;
 
 import com.lowagie.text.Chunk;
 import com.lowagie.text.Document;
-import com.lowagie.text.DocumentException;
 import com.lowagie.text.Font;
 import com.lowagie.text.Paragraph;
-import com.lowagie.text.RunAllExamplesTest;
+import com.lowagie.text.pdf.PdfTestBase;
 import com.lowagie.text.rtf.RtfWriter2;
 import com.lowagie.text.rtf.style.RtfFont;
 
@@ -39,17 +37,16 @@ import com.lowagie.text.rtf.style.RtfFont;
  * @author Mark Hall (Mark.Hall@mail.room3b.eu)
  * @see com.lowagie.text.rtf.style.RtfFont
  */
-public class ExtendedFontStyles {
+public class ExtendedFontStylesTest {
     /**
      * Extended font styles example.
      * 
-     * @param args Unused
+     * 
      */
-    public static void main(String[] args) {
-        System.out.println("Demonstrates the extended font styles");
-        try {
+	@Test
+    public void main() throws Exception {
             Document document = new Document();
-            RtfWriter2.getInstance(document, new FileOutputStream(RunAllExamplesTest.OUTPUT_DIR + "ExtendedFontStyles.rtf"));
+            RtfWriter2.getInstance(document, PdfTestBase.getOutputStream("ExtendedFontStyles.rtf"));
             document.open();
             
             // Use the RtfFont.STYLE_* instead of the Font styles.
@@ -78,10 +75,5 @@ public class ExtendedFontStyles {
             
             document.add(paragraph);
             document.close();
-        } catch (FileNotFoundException fnfe) {
-            fnfe.printStackTrace();
-        } catch (DocumentException de) {
-            de.printStackTrace();
-        }
     }
 }

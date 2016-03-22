@@ -19,13 +19,12 @@
 package com.lowagie.examples.rtf.features.shape;
 
 import java.awt.Color;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+
+import org.junit.Test;
 
 import com.lowagie.text.Document;
-import com.lowagie.text.DocumentException;
 import com.lowagie.text.Paragraph;
-import com.lowagie.text.RunAllExamplesTest;
+import com.lowagie.text.pdf.PdfTestBase;
 import com.lowagie.text.rtf.RtfWriter2;
 import com.lowagie.text.rtf.graphic.RtfShape;
 import com.lowagie.text.rtf.graphic.RtfShapePosition;
@@ -40,17 +39,16 @@ import com.lowagie.text.rtf.graphic.RtfShapeProperty;
  * @version $Revision: 3373 $
  * @author Mark Hall (Mark.Hall@mail.room3b.eu)
  */
-public class DrawingObjects {
+public class DrawingObjectsTest {
     /**
      * Demonstrates basic use of RTF drawing objects
      * 
-     * @param args Unused
+     * 
      */
-    public static void main(String[] args) {
-        System.out.println("Demonstrates basic use of RTF drawing objects");
-        try {
+	@Test
+    public void main() throws Exception {
             Document document = new Document();
-            RtfWriter2.getInstance(document, new FileOutputStream(RunAllExamplesTest.OUTPUT_DIR + "DrawingObjects.rtf"));
+            RtfWriter2.getInstance(document, PdfTestBase.getOutputStream("DrawingObjects.rtf"));
 
             document.open();
 
@@ -78,11 +76,7 @@ public class DrawingObjects {
             document.add(shape);
             
             document.close();
-        } catch (FileNotFoundException fnfe) {
-            fnfe.printStackTrace();
-        } catch (DocumentException de) {
-            de.printStackTrace();
-        }
+
     }
 
 }

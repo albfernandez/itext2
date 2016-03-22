@@ -19,13 +19,12 @@
 package com.lowagie.examples.rtf.features.styles;
 
 import java.awt.Color;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+
+import org.junit.Test;
 
 import com.lowagie.text.Document;
-import com.lowagie.text.DocumentException;
 import com.lowagie.text.Paragraph;
-import com.lowagie.text.RunAllExamplesTest;
+import com.lowagie.text.pdf.PdfTestBase;
 import com.lowagie.text.rtf.RtfWriter2;
 import com.lowagie.text.rtf.style.RtfParagraphStyle;
 
@@ -37,17 +36,16 @@ import com.lowagie.text.rtf.style.RtfParagraphStyle;
  * @version $Revision: 3373 $
  * @author Mark Hall (Mark.Hall@mail.room3b.eu)
  */
-public class ChangingStylesheets {
+public class ChangingStylesheetsTest {
     /**
      * Changing paragraph stylesheets properties.
      * 
-     * @param args Unused
+     * 
      */
-    public static void main(String[] args) {
-        System.out.println("Demonstrates using changing the properties of paragraph stylesheets");
-        try {
+	@Test
+    public void main() throws Exception {
             Document document = new Document();
-            RtfWriter2.getInstance(document, new FileOutputStream(RunAllExamplesTest.OUTPUT_DIR + "ChangingStylesheets.rtf"));
+            RtfWriter2.getInstance(document, PdfTestBase.getOutputStream("ChangingStylesheets.rtf"));
 
             // Set the default style font name. This is inherited
             // by all other styles.
@@ -74,11 +72,7 @@ public class ChangingStylesheets {
                     "in the default style.", RtfParagraphStyle.STYLE_NORMAL));
 
             document.close();
-        } catch (FileNotFoundException fnfe) {
-            fnfe.printStackTrace();
-        } catch (DocumentException de) {
-            de.printStackTrace();
-        }
+
     }
 
 }

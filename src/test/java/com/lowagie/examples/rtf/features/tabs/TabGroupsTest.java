@@ -18,15 +18,14 @@
  */
 package com.lowagie.examples.rtf.features.tabs;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.text.DecimalFormat;
 
+import org.junit.Test;
+
 import com.lowagie.text.Document;
-import com.lowagie.text.DocumentException;
 import com.lowagie.text.Font;
 import com.lowagie.text.Paragraph;
-import com.lowagie.text.RunAllExamplesTest;
+import com.lowagie.text.pdf.PdfTestBase;
 import com.lowagie.text.rtf.RtfWriter2;
 import com.lowagie.text.rtf.text.RtfTab;
 import com.lowagie.text.rtf.text.RtfTabGroup;
@@ -38,17 +37,16 @@ import com.lowagie.text.rtf.text.RtfTabGroup;
  * @version $Revision: 3373 $
  * @author Mark Hall (Mark.Hall@mail.room3b.eu)
  */
-public class TabGroups {
+public class TabGroupsTest {
     /**
      * Using the RtfTabGroup to simplify adding a set of tab stops.
      * 
-     * @param args Unused
+     * 
      */
-    public static void main(String[] args) {
-        System.out.println("Demonstrates how to use the RtfTabGroup to repeatedly add a set of tab stops");
-        try {
+	@Test
+    public void main() throws Exception {
             Document document = new Document();
-            RtfWriter2.getInstance(document, new FileOutputStream(RunAllExamplesTest.OUTPUT_DIR + "TabGroups.rtf"));
+            RtfWriter2.getInstance(document, PdfTestBase.getOutputStream("TabGroups.rtf"));
 
             document.open();
             
@@ -86,10 +84,6 @@ public class TabGroups {
             document.add(par);
             
             document.close();
-        } catch (FileNotFoundException fnfe) {
-            fnfe.printStackTrace();
-        } catch (DocumentException de) {
-            de.printStackTrace();
-        }
+
     }
 }
