@@ -19,7 +19,6 @@ import com.lowagie.text.Document;
 import com.lowagie.text.Image;
 import com.lowagie.text.PageSize;
 import com.lowagie.text.Paragraph;
-import com.lowagie.text.RunAllExamplesTest;
 import com.lowagie.text.pdf.PdfContentByte;
 import com.lowagie.text.pdf.PdfTestBase;
 import com.lowagie.text.pdf.PdfWriter;
@@ -52,7 +51,7 @@ public class SoftMaskTest {
 		text += text;
 		text += text;
 		document.add(new Paragraph(text));
-		Image img = Image.getInstance(RunAllExamplesTest.RESOURCES_DIR	+ "otsoe.jpg");
+		Image img = Image.getInstance(PdfTestBase.RESOURCES_DIR	+ "otsoe.jpg");
 		img.setAbsolutePosition(100, 550);
 		byte gradient[] = new byte[256];
 		for (int k = 0; k < 256; ++k) {

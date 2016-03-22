@@ -14,16 +14,15 @@
 package com.lowagie.examples.directcontent.graphics;
 
 import java.awt.Color;
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 import org.junit.Test;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
-import com.lowagie.text.RunAllExamplesTest;
 import com.lowagie.text.pdf.PdfContentByte;
 import com.lowagie.text.pdf.PdfGState;
+import com.lowagie.text.pdf.PdfTestBase;
 import com.lowagie.text.pdf.PdfWriter;
 
 /**
@@ -47,7 +46,7 @@ public class GStateTest {
 			// we create a writer that listens to the document
 			// and directs a PDF-stream to a file
 			PdfWriter writer = PdfWriter.getInstance(document,
-					new FileOutputStream(RunAllExamplesTest.OUTPUT_DIR + "gstate.pdf"));
+					PdfTestBase.getOutputStream( "gstate.pdf"));
 
 			// step 3: we open the document
 			document.open();

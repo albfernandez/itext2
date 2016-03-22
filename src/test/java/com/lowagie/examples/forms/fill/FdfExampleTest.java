@@ -13,11 +13,8 @@
  */
 package com.lowagie.examples.forms.fill;
 
-import java.io.FileOutputStream;
-
 import org.junit.Test;
 
-import com.lowagie.text.RunAllExamplesTest;
 import com.lowagie.text.pdf.AcroFields;
 import com.lowagie.text.pdf.FdfReader;
 import com.lowagie.text.pdf.FdfWriter;
@@ -41,14 +38,13 @@ public class FdfExampleTest {
 		fdf.setFieldAsString("address", "Baeyensstraat 121, Sint-Amandsberg");
 		fdf.setFieldAsString("postal_code", "BE-9040");
 		fdf.setFieldAsString("email", "bruno@lowagie.com");
-		fdf.setFile(RunAllExamplesTest.RESOURCES_DIR + "SimpleRegistrationForm.pdf");
+		fdf.setFile(PdfTestBase.RESOURCES_DIR + "SimpleRegistrationForm.pdf");
 		fdf.writeTo(PdfTestBase.getOutputStream("SimpleRegistrationForm.fdf"));
 
 		// merging the FDF file
-		PdfReader pdfreader = new PdfReader(RunAllExamplesTest.RESOURCES_DIR + "SimpleRegistrationForm.pdf");
-		PdfStamper stamp = new PdfStamper(pdfreader, new FileOutputStream(RunAllExamplesTest.OUTPUT_DIR
-				+ "registered_fdf.pdf"));
-		FdfReader fdfreader = new FdfReader(RunAllExamplesTest.OUTPUT_DIR + "SimpleRegistrationForm.fdf");
+		PdfReader pdfreader = new PdfReader(PdfTestBase.RESOURCES_DIR + "SimpleRegistrationForm.pdf");
+		PdfStamper stamp = new PdfStamper(pdfreader, PdfTestBase.getOutputStream("registered_fdf.pdf"));
+		FdfReader fdfreader = new FdfReader(PdfTestBase.OUTPUT_DIR + "SimpleRegistrationForm.fdf");
 		AcroFields form = stamp.getAcroFields();
 		form.setFields(fdfreader);
 		stamp.close();

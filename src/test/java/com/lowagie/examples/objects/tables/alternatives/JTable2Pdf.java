@@ -20,7 +20,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.FileOutputStream;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -30,8 +29,8 @@ import javax.swing.JToolBar;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.PageSize;
-import com.lowagie.text.RunAllExamplesTest;
 import com.lowagie.text.pdf.PdfContentByte;
+import com.lowagie.text.pdf.PdfTestBase;
 import com.lowagie.text.pdf.PdfWriter;
 
 /**
@@ -118,7 +117,7 @@ public class JTable2Pdf extends JFrame {
         Document document = new Document(PageSize.A4.rotate());
         try {
             PdfWriter writer =
-            PdfWriter.getInstance(document, new FileOutputStream(RunAllExamplesTest.OUTPUT_DIR + "jTable.pdf"));
+            PdfWriter.getInstance(document, PdfTestBase.getOutputStream( "jTable.pdf"));
             
             document.open();
             PdfContentByte cb = writer.getDirectContent();

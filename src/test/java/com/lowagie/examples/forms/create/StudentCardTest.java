@@ -25,7 +25,6 @@ import com.lowagie.text.FontFactory;
 import com.lowagie.text.Image;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.Rectangle;
-import com.lowagie.text.RunAllExamplesTest;
 import com.lowagie.text.pdf.Barcode;
 import com.lowagie.text.pdf.BarcodeEAN;
 import com.lowagie.text.pdf.PdfContentByte;
@@ -81,7 +80,7 @@ public class StudentCardTest {
 		innertable.addCell(new Paragraph("architecture", f));
 		outertable.addCell(innertable);
 		outertable.getDefaultCell().setBackgroundColor(new Color(0xFF, 0xDE, 0xAD));
-		outertable.addCell(Image.getInstance(RunAllExamplesTest.RESOURCES_DIR + "bruno.jpg"));
+		outertable.addCell(Image.getInstance(PdfTestBase.RESOURCES_DIR + "bruno.jpg"));
 		BarcodeEAN codeEAN = new BarcodeEAN();
 		codeEAN.setCodeType(Barcode.EAN13);
 		codeEAN.setCode("8010012529736");

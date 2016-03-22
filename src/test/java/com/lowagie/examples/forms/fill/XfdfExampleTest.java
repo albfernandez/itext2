@@ -15,7 +15,6 @@ package com.lowagie.examples.forms.fill;
 
 import org.junit.Test;
 
-import com.lowagie.text.RunAllExamplesTest;
 import com.lowagie.text.pdf.AcroFields;
 import com.lowagie.text.pdf.PdfReader;
 import com.lowagie.text.pdf.PdfStamper;
@@ -33,9 +32,9 @@ public class XfdfExampleTest {
 	public void main() throws Exception {
 
 		// merging the FDF file
-		PdfReader pdfreader = new PdfReader(RunAllExamplesTest.RESOURCES_DIR + "SimpleRegistrationForm.pdf");
+		PdfReader pdfreader = new PdfReader(PdfTestBase.RESOURCES_DIR + "SimpleRegistrationForm.pdf");
 		PdfStamper stamp = new PdfStamper(pdfreader, PdfTestBase.getOutputStream("registered_xfdf.pdf"));
-		XfdfReader fdfreader = new XfdfReader(RunAllExamplesTest.RESOURCES_DIR + "register.xfdf");
+		XfdfReader fdfreader = new XfdfReader(PdfTestBase.RESOURCES_DIR + "register.xfdf");
 		AcroFields form = stamp.getAcroFields();
 		form.setFields(fdfreader);
 		stamp.close();

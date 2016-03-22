@@ -15,17 +15,16 @@
 package com.lowagie.examples.directcontent.coordinates;
 
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 import org.junit.Test;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
-import com.lowagie.text.RunAllExamplesTest;
 import com.lowagie.text.pdf.BaseFont;
 import com.lowagie.text.pdf.PdfContentByte;
 import com.lowagie.text.pdf.PdfTemplate;
+import com.lowagie.text.pdf.PdfTestBase;
 import com.lowagie.text.pdf.PdfWriter;
 
 /**
@@ -44,7 +43,7 @@ public class XandYcoordinatesTest {
         
         try {      
             // step 2: creation of the writer
-            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(RunAllExamplesTest.OUTPUT_DIR + "XandY.pdf"));
+            PdfWriter writer = PdfWriter.getInstance(document, PdfTestBase.getOutputStream( "XandY.pdf"));
             
             // step 3: we open the document
             document.open();

@@ -19,7 +19,6 @@ import com.lowagie.text.Chunk;
 import com.lowagie.text.Document;
 import com.lowagie.text.Image;
 import com.lowagie.text.Paragraph;
-import com.lowagie.text.RunAllExamplesTest;
 import com.lowagie.text.pdf.PdfContentByte;
 import com.lowagie.text.pdf.PdfTestBase;
 import com.lowagie.text.pdf.PdfWriter;
@@ -53,7 +52,7 @@ public class LayersTest {
 		for (int i = 0; i < 100; i++)
 			p.add(new Chunk("Blah blah blah blah blah. "));
 		document.add(p);
-		Image img = Image.getInstance(RunAllExamplesTest.RESOURCES_DIR
+		Image img = Image.getInstance(PdfTestBase.RESOURCES_DIR
 				+ "hitchcock.png");
 		img.setAbsolutePosition(100, 500);
 		document.add(img);

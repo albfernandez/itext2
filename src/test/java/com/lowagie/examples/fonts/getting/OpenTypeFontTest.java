@@ -19,7 +19,6 @@ import com.lowagie.text.Document;
 import com.lowagie.text.Font;
 import com.lowagie.text.PageSize;
 import com.lowagie.text.Paragraph;
-import com.lowagie.text.RunAllExamplesTest;
 import com.lowagie.text.pdf.BaseFont;
 import com.lowagie.text.pdf.PdfTestBase;
 import com.lowagie.text.pdf.PdfWriter;
@@ -41,7 +40,7 @@ public class OpenTypeFontTest {
 		// step 3
 		document.open();
 		// step 4
-		BaseFont bf = BaseFont.createFont(RunAllExamplesTest.RESOURCES_DIR
+		BaseFont bf = BaseFont.createFont(PdfTestBase.RESOURCES_DIR
 				+ "liz.otf", BaseFont.CP1252, true);
 		String text = "Some text with the otf font LIZ.";
 		document.add(new Paragraph(text, new Font(bf, 14)));

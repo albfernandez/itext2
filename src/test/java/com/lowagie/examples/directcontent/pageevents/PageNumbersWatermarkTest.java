@@ -27,7 +27,6 @@ import com.lowagie.text.PageSize;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.Phrase;
 import com.lowagie.text.Rectangle;
-import com.lowagie.text.RunAllExamplesTest;
 import com.lowagie.text.pdf.BaseFont;
 import com.lowagie.text.pdf.PdfContentByte;
 import com.lowagie.text.pdf.PdfGState;
@@ -82,7 +81,7 @@ public class PageNumbersWatermarkTest extends PdfPageEventHelper {
     public void onOpenDocument(PdfWriter writer, Document document) {
         try {
         	// initialization of the header table
-            headerImage = Image.getInstance(RunAllExamplesTest.RESOURCES_DIR + "logo.gif");
+            headerImage = Image.getInstance(PdfTestBase.RESOURCES_DIR + "logo.gif");
             table = new PdfPTable(2);
             Phrase p = new Phrase();
             Chunk ck = new Chunk("lowagie.com\n", new Font(Font.TIMES_ROMAN, 16, Font.BOLDITALIC, Color.blue));

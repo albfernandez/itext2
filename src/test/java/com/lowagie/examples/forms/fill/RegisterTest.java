@@ -15,7 +15,6 @@ package com.lowagie.examples.forms.fill;
 
 import org.junit.Test;
 
-import com.lowagie.text.RunAllExamplesTest;
 import com.lowagie.text.pdf.AcroFields;
 import com.lowagie.text.pdf.PdfReader;
 import com.lowagie.text.pdf.PdfStamper;
@@ -32,7 +31,7 @@ public class RegisterTest {
 	public void main() throws Exception {
 
 		// we create a reader for a certain document
-		PdfReader reader = new PdfReader(RunAllExamplesTest.RESOURCES_DIR + "SimpleRegistrationForm.pdf");
+		PdfReader reader = new PdfReader(PdfTestBase.RESOURCES_DIR + "SimpleRegistrationForm.pdf");
 		// filling in the form
 		PdfStamper stamp1 = new PdfStamper(reader, PdfTestBase.getOutputStream("registered.pdf"));
 		AcroFields form1 = stamp1.getAcroFields();
@@ -42,7 +41,7 @@ public class RegisterTest {
 		form1.setField("email", "bruno@lowagie.com");
 		stamp1.close();
 		// filling in the form and flatten
-		reader = new PdfReader(RunAllExamplesTest.RESOURCES_DIR + "SimpleRegistrationForm.pdf");
+		reader = new PdfReader(PdfTestBase.RESOURCES_DIR + "SimpleRegistrationForm.pdf");
 		PdfStamper stamp2 = new PdfStamper(reader, PdfTestBase.getOutputStream("registered_flat.pdf"));
 		AcroFields form2 = stamp2.getAcroFields();
 		form2.setField("name", "Bruno Lowagie");

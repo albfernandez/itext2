@@ -37,7 +37,6 @@ import com.lowagie.text.ListItem;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.Phrase;
 import com.lowagie.text.Rectangle;
-import com.lowagie.text.RunAllExamplesTest;
 import com.lowagie.text.Section;
 import com.lowagie.text.Table;
 import com.lowagie.text.pdf.PdfTestBase;
@@ -104,7 +103,7 @@ public class RtfTest {
 		a.setReference("http://www.uni-klu.ac.at");
 		doc.add(a);
 
-		Image img = Image.getInstance(RunAllExamplesTest.RESOURCES_DIR + "pngnow.png");
+		Image img = Image.getInstance(PdfTestBase.RESOURCES_DIR + "pngnow.png");
 		doc.add(new Chunk(img, 0, 0));
 		doc.add(new Annotation("Mark", "This works!"));
 

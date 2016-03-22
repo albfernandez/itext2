@@ -13,7 +13,6 @@
  */
 package com.lowagie.examples.directcontent.coordinates;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 import org.junit.Test;
@@ -22,8 +21,8 @@ import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Image;
 import com.lowagie.text.PageSize;
-import com.lowagie.text.RunAllExamplesTest;
 import com.lowagie.text.pdf.PdfContentByte;
+import com.lowagie.text.pdf.PdfTestBase;
 import com.lowagie.text.pdf.PdfWriter;
 
 /**
@@ -42,14 +41,14 @@ public class TransformImageTest {
         
         try {
             // step 2: creation of the writer
-            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(RunAllExamplesTest.OUTPUT_DIR + "transformimage.pdf"));
+            PdfWriter writer = PdfWriter.getInstance(document, PdfTestBase.getOutputStream( "transformimage.pdf"));
             
             // step 3: we open the document
             document.open();
             
             // step 4:
             PdfContentByte cb = writer.getDirectContent();
-            Image img = Image.getInstance(RunAllExamplesTest.RESOURCES_DIR + "hitchcock.png");
+            Image img = Image.getInstance(PdfTestBase.RESOURCES_DIR + "hitchcock.png");
             cb.addImage(img, 271, -50, -30, 550, 100, 100);
             cb.sanityCheck();
    

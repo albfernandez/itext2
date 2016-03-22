@@ -12,7 +12,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ListIterator;
 
-import com.lowagie.text.RunAllExamplesTest;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
 import com.lowagie.text.pdf.PRIndirectReference;
 import com.lowagie.text.pdf.PRStream;
 import com.lowagie.text.pdf.PdfArray;
@@ -20,13 +24,7 @@ import com.lowagie.text.pdf.PdfDictionary;
 import com.lowagie.text.pdf.PdfName;
 import com.lowagie.text.pdf.PdfObject;
 import com.lowagie.text.pdf.PdfReader;
-import com.lowagie.text.pdf.parser.Matrix;
-import com.lowagie.text.pdf.parser.PdfContentStreamProcessor;
-
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import com.lowagie.text.pdf.PdfTestBase;
 
 public class PdfContentStreamProcessorTest
 {
@@ -36,7 +34,7 @@ public class PdfContentStreamProcessorTest
   
   @BeforeClass
   public static void setUpClass() throws Exception {
-      resourceRoot = new File(RunAllExamplesTest.RESOURCES_DIR);
+      resourceRoot = new File(PdfTestBase.RESOURCES_DIR);
   }
 
   @Before
@@ -138,7 +136,7 @@ public class PdfContentStreamProcessorTest
     {
       final float x = nextTextMatrix.get(Matrix.I31);
       final float y = nextTextMatrix.get(Matrix.I32);
-      System.out.println("Display text: '" + text + "' (" + x + "," + y + ")");
+//      System.out.println("Display text: '" + text + "' (" + x + "," + y + ")");
       if (y > _lastY){
         Assert.fail("Text has jumped back up the page");
       }

@@ -19,7 +19,6 @@ import org.junit.Test;
 
 import com.lowagie.text.Chunk;
 import com.lowagie.text.Document;
-import com.lowagie.text.RunAllExamplesTest;
 
 /**
  * @author kevin day, Trumpet, Inc.
@@ -79,7 +78,7 @@ public class TestPdfCopyAndStamp {
         
         stamp = new File(base, "Stamp.PDF");
         multiPageStamp = new File(base, "MultiStamp.PDF");
-        out = new File(base, RunAllExamplesTest.OUTPUT_DIR + "test.pdf");
+        out = new File(base, PdfTestBase.OUTPUT_DIR + "test.pdf");
 
         cleanTempFiles();
         

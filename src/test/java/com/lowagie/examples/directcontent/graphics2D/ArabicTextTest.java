@@ -13,14 +13,12 @@
  */
 package com.lowagie.examples.directcontent.graphics2D;
 
-import java.io.FileOutputStream;
-
 import org.junit.Test;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.PageSize;
-import com.lowagie.text.RunAllExamplesTest;
 import com.lowagie.text.pdf.PdfContentByte;
+import com.lowagie.text.pdf.PdfTestBase;
 import com.lowagie.text.pdf.PdfWriter;
 
 /**
@@ -37,7 +35,7 @@ public class ArabicTextTest {
         Document document = new Document(PageSize.A4, 50, 50, 50, 50);
         try {
         	// step 2
-            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(RunAllExamplesTest.OUTPUT_DIR + "arabictext.pdf"));
+            PdfWriter writer = PdfWriter.getInstance(document, PdfTestBase.getOutputStream( "arabictext.pdf"));
             // step 3
             document.open();
             // step 4

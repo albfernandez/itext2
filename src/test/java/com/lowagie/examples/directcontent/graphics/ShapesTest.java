@@ -13,15 +13,14 @@
  */
 package com.lowagie.examples.directcontent.graphics;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 import org.junit.Test;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
-import com.lowagie.text.RunAllExamplesTest;
 import com.lowagie.text.pdf.PdfContentByte;
+import com.lowagie.text.pdf.PdfTestBase;
 import com.lowagie.text.pdf.PdfWriter;
 
 /**
@@ -44,7 +43,7 @@ public class ShapesTest {
             // step 2:
             // we create a writer that listens to the document
             // and directs a PDF-stream to a file
-            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(RunAllExamplesTest.OUTPUT_DIR + "shapes.pdf"));
+            PdfWriter writer = PdfWriter.getInstance(document, PdfTestBase.getOutputStream( "shapes.pdf"));
             
             // step 3: we open the document
             document.open();

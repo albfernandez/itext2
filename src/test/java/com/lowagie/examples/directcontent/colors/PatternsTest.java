@@ -20,7 +20,6 @@ import com.lowagie.text.Font;
 import com.lowagie.text.FontFactory;
 import com.lowagie.text.Image;
 import com.lowagie.text.Paragraph;
-import com.lowagie.text.RunAllExamplesTest;
 import com.lowagie.text.pdf.BaseFont;
 import com.lowagie.text.pdf.GrayColor;
 import com.lowagie.text.pdf.PatternColor;
@@ -61,7 +60,7 @@ public class PatternsTest {
 
 		// Image instance to be placed in PdfPatternPainter canvas. Any nice
 		// one?
-		Image img = Image.getInstance(RunAllExamplesTest.RESOURCES_DIR
+		Image img = Image.getInstance(PdfTestBase.RESOURCES_DIR
 				+ "pngnow.png");
 
 		PdfPatternPainter p = cb.createPattern(60f, 60f, 60f, 60f);

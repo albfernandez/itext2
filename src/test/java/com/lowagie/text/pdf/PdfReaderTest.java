@@ -11,13 +11,12 @@ import org.junit.Test;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.PageSize;
-import com.lowagie.text.RunAllExamplesTest;
 
 public class PdfReaderTest {
 	
 	@Before
 	public void createOutputDir() {
-		RunAllExamplesTest.createOutputDir();
+		PdfTestBase.createOutputDir();
 	}
 
     @Test
@@ -25,7 +24,7 @@ public class PdfReaderTest {
 	/* commit 3265 incorrectly closed the input stream, make sure
 	 * the constructor contract is kept, i.e. file is still open
 	 */
-        RandomAccessFileOrArray f = new RandomAccessFileOrArray(RunAllExamplesTest.RESOURCES_DIR +"RomeoJuliet.pdf");
+        RandomAccessFileOrArray f = new RandomAccessFileOrArray(PdfTestBase.RESOURCES_DIR +"RomeoJuliet.pdf");
         new PdfReader(f, null);
 
         assertTrue("kept open", f.isOpen());
@@ -34,7 +33,7 @@ public class PdfReaderTest {
     @Ignore("validity of test needs to be resolved")
     @Test
     public void testGetLink() throws Exception {
-	PdfReader currentReader = new PdfReader(RunAllExamplesTest.RESOURCES_DIR +"getLinkTest1.pdf");
+	PdfReader currentReader = new PdfReader(PdfTestBase.RESOURCES_DIR +"getLinkTest1.pdf");
 	Document document = new Document(PageSize.A4, 0, 0, 0, 0);
 	PdfWriter writer = PdfWriter.getInstance(document, new
 		ByteArrayOutputStream());
@@ -49,7 +48,7 @@ public class PdfReaderTest {
 
     @Test
     public void testGetLink2() throws Exception {
-        String filename = RunAllExamplesTest.RESOURCES_DIR + "getLinkTest2.pdf";
+        String filename = PdfTestBase.RESOURCES_DIR + "getLinkTest2.pdf";
 	PdfReader rdr = new PdfReader(new
 		RandomAccessFileOrArray(filename), new byte[0]);
 	// this one works: PdfReader rdr = new PdfReader(filename);

@@ -32,7 +32,6 @@ import com.lowagie.text.ElementTags;
 import com.lowagie.text.PageSize;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.Rectangle;
-import com.lowagie.text.RunAllExamplesTest;
 import com.lowagie.text.TextElementArray;
 import com.lowagie.text.html.Markup;
 import com.lowagie.text.pdf.BaseFont;
@@ -225,7 +224,7 @@ public class EventsTest {
 		SAXParser parser = SAXParserFactory.newInstance().newSAXParser();
 
 		// step 4: we parse the document
-		parser.parse(RunAllExamplesTest.RESOURCES_DIR + "playRomeoJuliet.xml",
+		parser.parse(PdfTestBase.RESOURCES_DIR + "playRomeoJuliet.xml",
 				new EventsTest().getXmlHandler(document));
 
 		document.newPage();
@@ -312,7 +311,7 @@ public class EventsTest {
 		 * @throws IOException
 		 */
 		public RomeoJulietMap() throws IOException {
-			super(new FileInputStream(RunAllExamplesTest.RESOURCES_DIR
+			super(new FileInputStream(PdfTestBase.RESOURCES_DIR
 					+ "tagmapRomeoJuliet.xml"));
 			XmlPeer peer = new XmlPeer(ElementTags.CHUNK, "SPEAKER");
 			peer.addValue(Markup.CSS_KEY_FONTSIZE, "10");

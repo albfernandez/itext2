@@ -26,7 +26,6 @@ import com.lowagie.text.Image;
 import com.lowagie.text.PageSize;
 import com.lowagie.text.Phrase;
 import com.lowagie.text.Rectangle;
-import com.lowagie.text.RunAllExamplesTest;
 import com.lowagie.text.pdf.ColumnText;
 import com.lowagie.text.pdf.PdfAction;
 import com.lowagie.text.pdf.PdfBorderDictionary;
@@ -95,7 +94,7 @@ public class OptionalContentTest {
 		PdfFormField form = ff.getTextField();
 		form.setLayer(l4);
 		writer.addAnnotation(form);
-		Image img = Image.getInstance(RunAllExamplesTest.RESOURCES_DIR
+		Image img = Image.getInstance(PdfTestBase.RESOURCES_DIR
 				+ "pngnow.png");
 		img.setLayer(l4);
 		img.setAbsolutePosition(200, 550);
