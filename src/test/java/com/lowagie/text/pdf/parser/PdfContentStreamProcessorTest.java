@@ -134,12 +134,8 @@ public class PdfContentStreamProcessorTest
         final String text,
         final Matrix nextTextMatrix)
     {
-      final float x = nextTextMatrix.get(Matrix.I31);
       final float y = nextTextMatrix.get(Matrix.I32);
-//      System.out.println("Display text: '" + text + "' (" + x + "," + y + ")");
-      if (y > _lastY){
-        Assert.fail("Text has jumped back up the page");
-      }
+      Assert.assertTrue("Test has jumpled back up the page", y <= _lastY);
       _lastY = y;
     }
   }
