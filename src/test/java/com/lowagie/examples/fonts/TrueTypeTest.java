@@ -33,9 +33,7 @@ public class TrueTypeTest {
 	@Test
 	public void main() throws Exception {
 
-		if (!PdfTestBase.isWindows()) {
-			return;
-		}
+
 		// step 1: creation of a document-object
 		Document document = new Document();
 

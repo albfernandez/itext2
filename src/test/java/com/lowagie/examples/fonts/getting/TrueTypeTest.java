@@ -33,9 +33,7 @@ public class TrueTypeTest {
 	@Test
 	public void main() throws Exception {
 
-		if (!PdfTestBase.isWindows()) {
-			return;
-		}
+
 
 		// step 1: creation of a document-object
 		Document document = new Document();
@@ -49,9 +47,9 @@ public class TrueTypeTest {
 		document.open();
 
 		// step 4: we add content to the document
-		BaseFont bfComic = BaseFont.createFont("c:\\windows\\fonts\\comic.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+		BaseFont bfComic = BaseFont.createFont(PdfTestBase.RESOURCES_DIR + "/liberation-fonts-ttf/LiberationSans-Regular.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
 		Font font = new Font(bfComic, 12);
-		String text1 = "This is the quite popular True Type font 'Comic'.";
+		String text1 = "This is the quite popular True Type font 'LiberationSans'.";
 		String text2 = "Some greek characters: \u0393\u0394\u03b6";
 		String text3 = "Some cyrillic characters: \u0418\u044f";
 		document.add(new Paragraph(text1, font));

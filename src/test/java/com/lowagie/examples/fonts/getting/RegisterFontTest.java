@@ -15,6 +15,7 @@ package com.lowagie.examples.fonts.getting;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.io.OutputStreamWriter;
 import java.util.Iterator;
 
 import org.junit.Test;
@@ -38,13 +39,14 @@ public class RegisterFontTest {
 	@Test
 	public void main() throws Exception {
 
-		if (!PdfTestBase.isWindows()) {
-			return;
-		}
-
-		FontFactory.register("c:\\windows\\fonts\\comicbd.ttf");
-		FontFactory.register("c:\\windows\\fonts\\comic.ttf");
-		FontFactory.register("c:\\windows\\fonts\\msgothic.ttc");
+//		if (!PdfTestBase.isWindows()) {
+//			return;
+//		}
+//
+		String liberationPath = "src/test/resources/liberation-fonts-ttf/";
+		FontFactory.register(liberationPath + "LiberationMono-Regular.ttf");
+		FontFactory.register(liberationPath + "LiberationSans-Regular.ttf");
+		FontFactory.register(liberationPath + "LiberationSerif-Regular.ttf");
 
 		// step 1: creation of a document-object
 		Document document = new Document();
@@ -59,16 +61,16 @@ public class RegisterFontTest {
 		Font font0 = FontFactory.getFont(BaseFont.HELVETICA, BaseFont.WINANSI, 12);
 		String text0 = "This is the quite popular built in font '" + BaseFont.HELVETICA + "'.";
 		document.add(new Paragraph(text0, font0));
-		Font font1 = FontFactory.getFont("ComicSansMS", BaseFont.WINANSI, 12);
-		String text1 = "This is the quite popular True Type font 'ComicSansMS'.";
+		Font font1 = FontFactory.getFont("LiberationMono", BaseFont.WINANSI, 12);
+		String text1 = "This is the quite popular True Type font 'LiberationMono'.";
 		document.add(new Paragraph(text1, font1));
-		Font font2 = FontFactory.getFont("ComicSansMS-Bold", BaseFont.WINANSI, 12);
-		String text2 = "This is the quite popular True Type font 'ComicSansMS-Bold'.";
+		Font font2 = FontFactory.getFont("LiberationSans-Bold", BaseFont.WINANSI, 12);
+		String text2 = "This is the quite popular True Type font 'LiberationSans-Bold'.";
 		document.add(new Paragraph(text2, font2));
-		Font font3 = FontFactory.getFont("MS-PGothic", BaseFont.IDENTITY_H, BaseFont.EMBEDDED, 12);
+		Font font3 = FontFactory.getFont("LiberationSerif", BaseFont.IDENTITY_H, BaseFont.EMBEDDED, 12);
 		String text3 = "\u5951\u7d04\u8005\u4f4f\u6240\u30e9\u30a4\u30f3\uff11";
 		document.add(new Paragraph(text3, font3));
-		BufferedWriter out = new BufferedWriter(new FileWriter("registered.txt"));
+		BufferedWriter out = new BufferedWriter(new OutputStreamWriter(PdfTestBase.getOutputStream("registered.txt")));
 		out.write("These fonts were registered at the FontFactory:\r\n");
 		for (Iterator i = FontFactory.getRegisteredFonts().iterator(); i.hasNext();) {
 			out.write((String) i.next());
@@ -80,6 +82,7 @@ public class RegisterFontTest {
 			out.write("\r\n");
 		}
 		out.flush();
+		out.close();
 
 		// step 5: we close the document
 		document.close();
