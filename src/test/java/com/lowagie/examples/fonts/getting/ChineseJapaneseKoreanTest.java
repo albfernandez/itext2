@@ -13,7 +13,6 @@
  */
 package com.lowagie.examples.fonts.getting;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.lowagie.text.Document;
@@ -34,7 +33,7 @@ public class ChineseJapaneseKoreanTest {
 	 * @param args no arguments needed
 	 */
 	@Test
-	@Ignore("fail on linux")
+
 	public void main() throws Exception {
         
         // step 1: creation of a document-object
