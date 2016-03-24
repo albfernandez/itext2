@@ -191,4 +191,12 @@
 		</plugins>
 	</build>
 
+	<description>Itext is a java library to create and manipulate PDFs.
+This is a fork of version 2.1.7 the last MPL/LGPL version.
+It's focused basically on mantain compatibility  with newer bouncycastle releases and small bugfixes.</description>
+	<name>itext2</name>
+	<ciManagement>
+		<url>https://travis-ci.org/albfernandez/itext2</url>
+		<system>Travis</system>
+	</ciManagement>
 </project>
