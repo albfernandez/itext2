@@ -26,6 +26,37 @@ public class MetaDataTest {
         Assert.assertNull(r.getInfo().get("Producer"));
     }
     
+    @Test
+    public void testAddedMetadata() throws Exception {
+    	String AUTHOR_NAME = "Mr Bean";
+    	String TITLE = "The title";
+    	
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        Document document = new Document();
+
+        PdfWriter.getInstance(document, baos);
+        
+        document.open();
+        document.addProducer();
+        document.addAuthor(AUTHOR_NAME);
+        document.addTitle(TITLE);
+        document.add(new Paragraph("Hello World"));
+        document.close();
+        
+        PdfReader r = new PdfReader(baos.toByteArray());
+
+        // Metadata generated only on demand
+        Assert.assertEquals(Document.getVersion(), r.getInfo().get("Producer"));
+        
+        
+        Assert.assertEquals(AUTHOR_NAME, r.getInfo().get("Author"));
+        Assert.assertEquals(TITLE, r.getInfo().get("Title"));
+        
+        
+        r.close();
+    }
+    
+    
 
 
 }
