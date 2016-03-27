@@ -13,6 +13,8 @@
  */
 package com.lowagie.examples.fonts.styles;
 
+import java.io.File;
+
 import org.junit.Test;
 
 import com.lowagie.text.Document;
@@ -35,9 +37,6 @@ public class WidthHeightTest {
 	@Test
 	public void main() throws Exception {
 
-		if (!PdfTestBase.isWindows()) {
-			return;
-		}
 
 		// step 1: creation of a document-object
 		Document document = new Document();
@@ -47,9 +46,9 @@ public class WidthHeightTest {
 
 		// step 3: we open the document
 		document.open();
-
+		File fontPath = new File (PdfTestBase.RESOURCES_DIR + "/liberation-fonts-ttf/LiberationSans-Regular.ttf");
 		// step 4: we add content to the document
-		BaseFont bfComic = BaseFont.createFont("c:\\windows\\fonts\\comic.ttf", BaseFont.WINANSI, BaseFont.EMBEDDED);
+		BaseFont bfComic = BaseFont.createFont(fontPath.getAbsolutePath(), BaseFont.WINANSI, BaseFont.EMBEDDED);
 		Font font = new Font(bfComic, 12);
 		String text1 = "quick brown fox jumps";
 		String text2 = " over ";

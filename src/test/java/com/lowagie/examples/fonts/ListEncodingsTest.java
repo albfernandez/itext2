@@ -14,6 +14,7 @@
 package com.lowagie.examples.fonts;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 
 import org.junit.Test;
@@ -34,11 +35,10 @@ public class ListEncodingsTest {
 	 */
 	@Test
 	public void main() throws Exception {
-		if (!PdfTestBase.isWindows()) {
-			return;
-		}
+
+		File font = new File(PdfTestBase.RESOURCES_DIR + "liberation-fonts-ttf/LiberationMono-Regular.ttf");
 		BufferedWriter out = new BufferedWriter(new FileWriter(PdfTestBase.OUTPUT_DIR + "encodings.txt"));
-		BaseFont bfComic = BaseFont.createFont("c:\\windows\\fonts\\comicbd.ttf", BaseFont.CP1252,
+		BaseFont bfComic = BaseFont.createFont(font.getAbsolutePath(), BaseFont.CP1252,
 				BaseFont.NOT_EMBEDDED);
 		out.write("postscriptname: " + bfComic.getPostscriptFontName());
 		out.write("\r\n\r\n");

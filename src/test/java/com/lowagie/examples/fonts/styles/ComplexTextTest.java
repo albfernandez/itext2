@@ -13,6 +13,8 @@
  */
 package com.lowagie.examples.fonts.styles;
 
+import java.io.File;
+
 import org.junit.Test;
 
 import com.lowagie.text.Document;
@@ -37,9 +39,7 @@ public class ComplexTextTest {
 	@Test
 	public void main() throws Exception {
 
-		if (!PdfTestBase.isWindows()){
-			return;
-		}
+
 		// step 1: creation of a document-object
 		Document document = new Document();
 
@@ -65,8 +65,9 @@ public class ComplexTextTest {
 		cb.lineTo(400, 600);
 		cb.stroke();
 
+		File font = new File (PdfTestBase.RESOURCES_DIR + "/liberation-fonts-ttf/LiberationSans-Regular.ttf");
 		// we construct a font
-		BaseFont bf = BaseFont.createFont("c:\\windows\\fonts\\arialuni.ttf", BaseFont.IDENTITY_H, true);
+		BaseFont bf = BaseFont.createFont(font.getAbsolutePath(), BaseFont.IDENTITY_H, true);
 		Font ft = new Font(bf, 12);
 		// This is the text:
 		String text = "\u0623\u0648\u0631\u0648\u0628\u0627, \u0628\u0631\u0645\u062c\u064a\u0627\u062a \u0627\u0644\u062d\u0627\u0633\u0648\u0628 + \u0627\u0646\u062a\u0631\u0646\u064a\u062a :";

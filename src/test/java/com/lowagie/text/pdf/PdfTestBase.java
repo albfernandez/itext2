@@ -52,8 +52,5 @@ public class PdfTestBase {
 		PdfWriter.getInstance(document, out);
 		return document;
 	}
-	public static boolean isWindows() {
-		return System.getProperty("os.name").startsWith("Windows");
-	}
 
 }

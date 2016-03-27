@@ -13,6 +13,8 @@
  */
 package com.lowagie.examples.fonts.getting;
 
+import java.io.File;
+
 import org.junit.Test;
 
 import com.lowagie.text.Document;
@@ -36,9 +38,7 @@ public class FontFactoryStylesTest {
 	@Test
 	public void main() throws Exception {
 
-		if (!PdfTestBase.isWindows()){
-			return;
-		}
+
 		// step 1: creation of a document-object
 		Document document = new Document();
 
@@ -48,12 +48,15 @@ public class FontFactoryStylesTest {
 		// step 3: we open the document
 		document.open();
 
+		String fontPathBase = new File(PdfTestBase.RESOURCES_DIR + "liberation-fonts-ttf").getAbsolutePath();
 		// step 4: we add some content
-		FontFactory.register("c:\\windows\\fonts\\arial.ttf");
-		FontFactory.register("c:\\windows\\fonts\\arialbd.ttf");
-		FontFactory.register("c:\\windows\\fonts\\ariali.ttf");
-		FontFactory.register("c:\\windows\\fonts\\arialbi.ttf");
-		Phrase myPhrase = new Phrase("This is font family Arial ", FontFactory.getFont("Arial", 8));
+		FontFactory.register(fontPathBase + "/LiberationSans-Regular.ttf");
+		FontFactory.register(fontPathBase + "/LiberationSans-Italic.ttf");
+		FontFactory.register(fontPathBase + "/LiberationSans-Bold.ttf");
+		FontFactory.register(fontPathBase + "/LiberationSans-BoldItalic.ttf");
+		
+		
+		Phrase myPhrase = new Phrase("This is font family Liberation Sans ", FontFactory.getFont("LiberationSans", 8));
 		myPhrase.add(new Phrase("italic ", FontFactory.getFont("Arial", 8, Font.ITALIC)));
 		myPhrase.add(new Phrase("bold ", FontFactory.getFont("Arial", 8, Font.BOLD)));
 		myPhrase.add(new Phrase("bolditalic", FontFactory.getFont("Arial", 8, Font.BOLDITALIC)));

@@ -14,6 +14,7 @@
 package com.lowagie.examples.fonts;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 
 import org.junit.Test;
@@ -31,12 +32,12 @@ public class FullFontNamesTest {
 	 */
 	@Test
 	public void main() throws Exception {
-		if (!PdfTestBase.isWindows()){
-			return;
-		}
+
+		
+		File font = new File(PdfTestBase.RESOURCES_DIR + "liberation-fonts-ttf/LiberationMono-Regular.ttf");
 		BufferedWriter out = new BufferedWriter(new FileWriter(PdfTestBase.OUTPUT_DIR
-				+ "fullfontname_arialbi.txt"));
-		BaseFont bf = BaseFont.createFont("c:\\windows\\fonts\\arialbi.ttf", "winansi", BaseFont.NOT_EMBEDDED);
+				+ "fullfontname_liberationmono.txt"));
+		BaseFont bf = BaseFont.createFont(font.getAbsolutePath(), "winansi", BaseFont.NOT_EMBEDDED);
 		out.write("postscriptname: " + bf.getPostscriptFontName());
 		out.write("\r\n\r\n");
 		String names[][] = bf.getFullFontName();

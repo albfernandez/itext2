@@ -36,15 +36,14 @@ public class OpenApplicationTest {
 
 	@Test
 	public void test() throws Exception {
-		// TODO Only windows
-		main(System.getenv("WINDIR") + File.separatorChar);
+		// In linux (evince) can open files but not executables by default
+		main(new File("LICENSE").getAbsolutePath());
 	}
 
 	/**
 	 * Creates a document with Named Actions.
 	 * 
-	 * @param args
-	 *            the system root (for instance "C:\windows\")
+	 * @param args The file to open
 	 */
 	public void main(String... args) throws Exception {
 
@@ -56,9 +55,9 @@ public class OpenApplicationTest {
 		// step 3: we open the document
 		document.open();
 		// step 4: we add some content
-		String application = args[0] + "notepad.exe";
-		Paragraph p = new Paragraph(new Chunk("Click to open " + application).setAction(new PdfAction(application,
-				null, null, null)));
+		String application = args[0];
+		Paragraph p = new Paragraph(new Chunk("Click to open " + application).setAction(
+				new PdfAction(application, null, null, null)));
 		document.add(p);
 
 		// step 5: we close the document

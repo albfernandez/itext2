@@ -14,6 +14,7 @@
 
 package com.lowagie.examples.objects.anchors;
 
+import java.io.File;
 import java.net.URL;
 
 import org.junit.Test;
@@ -88,17 +89,20 @@ public class SimpleAnnotationsTest {
 		}
 		document1.newPage();
 		document1.add(new Chunk("marked chunk").setLocalDestination("mark"));
+		
+		File videoFile = new File(PdfTestBase.RESOURCES_DIR + "cards.mpg");
+		File license = new File("LICENSE");
 
 		// document2
 		document2.add(new Paragraph("Each square on this page represents an annotation."));
 		PdfContentByte cb2 = writer2.getDirectContent();
-		Annotation a5 = new Annotation(100f, 700f, 200f, 800f, "cards.mpg", "video/mpeg", true);
+		Annotation a5 = new Annotation(100f, 700f, 200f, 800f, videoFile.getAbsolutePath(), "video/mpeg", true);
 		document2.add(a5);
 		Annotation a6 = new Annotation(100f, 550f, 200f, 650f, "SimpleAnnotations1.pdf", "mark");
 		document2.add(a6);
 		Annotation a7 = new Annotation(100f, 400f, 200f, 500f, "SimpleAnnotations1.pdf", 2);
 		document2.add(a7);
-		Annotation a8 = new Annotation(100f, 250f, 200f, 350f, "C://windows/notepad.exe", null, null, null);
+		Annotation a8 = new Annotation(100f, 250f, 200f, 350f, license.getAbsolutePath(), null, null, null);
 		document2.add(a8);
 		// draw rectangles to show where the annotations were added
 		cb2.rectangle(100, 700, 100, 100);

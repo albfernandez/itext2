@@ -13,6 +13,8 @@
  */
 package com.lowagie.examples.fonts;
 
+import java.io.File;
+
 import org.junit.Test;
 
 import com.lowagie.text.Document;
@@ -34,9 +36,7 @@ public class UnicodeExampleTest {
 	@Test
 	public void main() throws Exception {
 
-		if (!PdfTestBase.isWindows()) {
-			return;
-		}
+
 		// step 1: creation of a document-object
 		Document document = new Document();
 
@@ -45,11 +45,11 @@ public class UnicodeExampleTest {
 
 		// step 3: we open the document
 		document.open();
-
+		File fontPath = new File(PdfTestBase.RESOURCES_DIR + "liberation-fonts-ttf/LiberationMono-Regular.ttf");
 		// step 4: we add content to the document
-		BaseFont bfComic = BaseFont.createFont("c:\\windows\\fonts\\comic.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+		BaseFont bfComic = BaseFont.createFont(fontPath.getAbsolutePath(), BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
 		Font font = new Font(bfComic, 12);
-		String text1 = "This is the quite popular True Type font 'Comic'.";
+		String text1 = "This is the quite popular True Type font 'Liberation Mono'.";
 		String text2 = "Some greek characters: \u0393\u0394\u03b6";
 		String text3 = "Some cyrillic characters: \u0418\u044f";
 		document.add(new Paragraph(text1, font));

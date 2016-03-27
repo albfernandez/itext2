@@ -13,6 +13,8 @@
  */
 package com.lowagie.examples.fonts;
 
+import java.io.File;
+
 import org.junit.Test;
 
 import com.lowagie.text.Document;
@@ -33,9 +35,7 @@ public class TrueTypeTest {
 	@Test
 	public void main() throws Exception {
 
-		if (!PdfTestBase.isWindows()) {
-			return;
-		}
+
 		// step 1: creation of a document-object
 		Document document = new Document();
 
@@ -47,11 +47,11 @@ public class TrueTypeTest {
 		// step 3: we open the document
 		document.open();
 
+		String f = new File(PdfTestBase.RESOURCES_DIR + "liberation-fonts-ttf/LiberationMono-Regular.ttf").getAbsolutePath();
 		// step 4: we add content to the document
-		BaseFont bfComic = BaseFont.createFont("c:\\windows\\fonts\\comicbd.ttf", BaseFont.CP1252,
-				BaseFont.NOT_EMBEDDED);
+		BaseFont bfComic = BaseFont.createFont(f, BaseFont.CP1252,	BaseFont.NOT_EMBEDDED);
 		Font font = new Font(bfComic, 12);
-		String text1 = "This is the quite popular True Type font 'Comic'.";
+		String text1 = "This is the quite popular Liberation Mono.";
 		document.add(new Paragraph(text1, font));
 
 		// step 5: we close the document

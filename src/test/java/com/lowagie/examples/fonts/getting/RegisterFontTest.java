@@ -14,7 +14,6 @@
 package com.lowagie.examples.fonts.getting;
 
 import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.OutputStreamWriter;
 import java.util.Iterator;
 
@@ -39,10 +38,7 @@ public class RegisterFontTest {
 	@Test
 	public void main() throws Exception {
 
-//		if (!PdfTestBase.isWindows()) {
-//			return;
-//		}
-//
+
 		String liberationPath = "src/test/resources/liberation-fonts-ttf/";
 		FontFactory.register(liberationPath + "LiberationMono-Regular.ttf");
 		FontFactory.register(liberationPath + "LiberationSans-Regular.ttf");

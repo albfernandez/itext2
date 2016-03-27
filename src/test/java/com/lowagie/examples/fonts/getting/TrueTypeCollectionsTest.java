@@ -24,6 +24,7 @@ import com.lowagie.text.Paragraph;
 import com.lowagie.text.pdf.BaseFont;
 import com.lowagie.text.pdf.PdfTestBase;
 import com.lowagie.text.pdf.PdfWriter;
+import com.lowagie.tools.Executable;
 
 /**
  * Using True Type Collections.
@@ -38,7 +39,9 @@ public class TrueTypeCollectionsTest {
 	 */
 	@Test
 	public void main() throws Exception {
-		if (!PdfTestBase.isWindows()){
+		
+		// TODO multiplatform test
+		if (!Executable.isWindows()){
 			return;
 		}
 		// step 1: creation of a document-object
@@ -60,7 +63,7 @@ public class TrueTypeCollectionsTest {
 
 		// step 4: we add content to the document
 		BaseFont bf = BaseFont.createFont("c:\\windows\\fonts\\msgothic.ttc,1", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
-		System.out.println("postscriptname: " + bf.getPostscriptFontName());
+
 		Font font = new Font(bf, 16);
 		String text1 = "\u5951\u7d04\u8005\u4f4f\u6240\u30e9\u30a4\u30f3\uff11";
 		String text2 = "\u5951\u7d04\u8005\u96fb\u8a71\u756a\u53f7";

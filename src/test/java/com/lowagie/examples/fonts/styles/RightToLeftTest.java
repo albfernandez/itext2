@@ -30,6 +30,7 @@ import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfTestBase;
 import com.lowagie.text.pdf.PdfWriter;
+import com.lowagie.tools.Executable;
 
 /**
  * Writing RTL text such as Arabic or Hebrew.
@@ -41,7 +42,8 @@ public class RightToLeftTest {
      */
 	@Test
     public  void main() throws Exception {
-		if (!PdfTestBase.isWindows()) {
+		// TODO Multiplatform test
+		if (!Executable.isWindows()) {
 			return;
 		}
     	// step 1
