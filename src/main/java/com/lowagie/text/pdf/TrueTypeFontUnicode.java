@@ -50,9 +50,13 @@
 package com.lowagie.text.pdf;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Utilities;
@@ -69,6 +73,8 @@ class TrueTypeFontUnicode extends TrueTypeFont implements Comparator{
      * <CODE>true</CODE> if the encoding is vertical.
      */    
     boolean vertical = false;
+    
+    HashMap<Integer, Integer> inverseCmap;
     
     /**
      * Creates a new TrueType font addressed by Unicode characters. The font
@@ -115,6 +121,31 @@ class TrueTypeFontUnicode extends TrueTypeFont implements Comparator{
             throw new DocumentException(fileName + " " + style + " is not a TTF font file.");
         vertical = enc.endsWith("V");
     }
+    
+    	void readCMaps() throws DocumentException, IOException {
+    		super.readCMaps();
+    
+    		HashMap cmap = null;
+    		if (cmapExt != null) {
+    			cmap = cmapExt;
+    		} else if (cmap31 != null) {
+    			cmap = cmap31;
+    		}
+    
+    		if (cmap != null) {
+    			inverseCmap = new HashMap<Integer, Integer>();
+    			for (Iterator iterator = cmap.entrySet().iterator(); iterator.hasNext();) {
+    				Map.Entry entry = (Map.Entry) iterator.next();
+    				Integer code = (Integer) entry.getKey();
+    				int[] metrics = (int[]) entry.getValue();
+    				inverseCmap.put(new Integer(metrics[0]), code);
+    			}
+    		}
+    	}
+        
+    	protected Integer getCharacterCode(int code) {
+    		return inverseCmap == null ? null : (Integer) inverseCmap.get(new Integer(code));
+        }
     
     /**
      * Gets the width of a <CODE>char</CODE> in normalized 1000 units.
@@ -173,6 +204,7 @@ class TrueTypeFontUnicode extends TrueTypeFont implements Comparator{
      * @return the stream representing this CMap or <CODE>null</CODE>
      */    
     private PdfStream getToUnicode(Object metrics[]) {
+    	metrics = filterCmapMetrics(metrics);
         if (metrics.length == 0)
             return null;
         StringBuffer buf = new StringBuffer(
@@ -213,6 +245,30 @@ class TrueTypeFontUnicode extends TrueTypeFont implements Comparator{
         stream.flateCompress(compressionLevel);
         return stream;
     }
+    
+	private Object[] filterCmapMetrics(Object[] metrics) {
+		if (metrics.length == 0) {
+			return metrics;
+		}
+
+		List<int[]> cmapMetrics = new ArrayList<int[]>(metrics.length);
+		for (int i = 0; i < metrics.length; i++) {
+			int metric[] = (int[]) metrics[i];
+			// PdfContentByte.showText(GlyphVector) uses glyphs that might not
+			// map to a character.
+			// the glyphs are included in the metrics array, but we need to
+			// exclude them from the cmap.
+			if (metric.length >= 3) {
+				cmapMetrics.add(metric);
+			}
+		}
+
+		if (cmapMetrics.size() == metrics.length) {
+			return metrics;
+		}
+
+		return cmapMetrics.toArray();
+	}
     
     private static String toHex4(int n) {
         String s = "0000" + Integer.toHexString(n);

@@ -49,8 +49,10 @@
 
 package com.lowagie.text.pdf;
 import java.awt.Color;
+import java.awt.font.GlyphVector;
 import java.awt.geom.AffineTransform;
 import java.awt.print.PrinterJob;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -1433,6 +1435,12 @@ public class PdfContentByte {
         showText2(text);
         content.append("Tj").append_i(separator);
     }
+    
+	public void showText(GlyphVector glyphVector) {
+		byte[] b = state.fontDetails.convertToBytes(glyphVector);
+		escapeString(b, content);
+		content.append("Tj").append_i(separator);
+	}
 
     /**
      * Constructs a kern array for a text in a certain font
@@ -3014,7 +3022,12 @@ public class PdfContentByte {
      * but is in a different location, like the same paragraph crossing to another page, for example.
      * @param struc the tagging structure
      */
-    public void beginMarkedContentSequence(PdfStructureElement struc) {
+	public void beginMarkedContentSequence(PdfStructureElement struc) {
+		PdfDictionary dict = new PdfDictionary();
+		beginMarkedContentSequence(struc, dict);
+	}
+
+     public void beginMarkedContentSequence(PdfStructureElement struc, PdfDictionary dict) {
         PdfObject obj = struc.get(PdfName.K);
         int mark = pdf.getMarkPoint();
         if (obj != null) {
@@ -3043,7 +3056,15 @@ public class PdfContentByte {
         }
         pdf.incMarkPoint();
         mcDepth++;
-        content.append(struc.get(PdfName.S).getBytes()).append(" <</MCID ").append(mark).append(">> BDC").append_i(separator);
+        dict.put(PdfName.MCID, new PdfNumber(mark));
+        content.append(struc.get(PdfName.S).getBytes()).append(" ");
+        try {
+        	dict.toPdf(writer, content);
+        }
+        catch (IOException e) {
+        	throw new ExceptionConverter(e);
+        }
+        content.append(" BDC").append_i(separator);
     }
 
     /**

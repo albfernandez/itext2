@@ -189,7 +189,7 @@ public class PdfGraphics2D extends Graphics2D {
      * Constructor for PDFGraphics2D.
      *
      */
-    PdfGraphics2D(PdfContentByte cb, float width, float height, FontMapper fontMapper, boolean onlyShapes, boolean convertImagesToJPEG, float quality) {
+    protected PdfGraphics2D(PdfContentByte cb, float width, float height, FontMapper fontMapper, boolean onlyShapes, boolean convertImagesToJPEG, float quality) {
         super();
         dg2.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
         setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
@@ -907,6 +907,7 @@ public class PdfGraphics2D extends Graphics2D {
         g2.paint = this.paint;
         g2.fillGState = this.fillGState;
         g2.currentFillGState = this.currentFillGState;
+        g2.currentStrokeGState = this.currentStrokeGState;
         g2.strokeGState = this.strokeGState;
         g2.background = this.background;
         g2.mediaTracker = this.mediaTracker;
