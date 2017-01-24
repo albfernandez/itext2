@@ -122,7 +122,7 @@ public class TiffImage {
             TIFFDirectory dir = new TIFFDirectory(s, page - 1);
             if (dir.isTagPresent(TIFFConstants.TIFFTAG_TILEWIDTH))
                 throw new IllegalArgumentException("Tiles are not supported.");
-            int compression = (int)dir.getFieldAsLong(TIFFConstants.TIFFTAG_COMPRESSION);
+            int compression = getTiffCompression(dir);
             switch (compression) {
                 case TIFFConstants.COMPRESSION_CCITTRLEW:
                 case TIFFConstants.COMPRESSION_CCITTRLE:
@@ -284,7 +284,7 @@ public class TiffImage {
     
     protected static Image getTiffImageColor(TIFFDirectory dir, RandomAccessFileOrArray s) {
         try {
-            int compression = (int)dir.getFieldAsLong(TIFFConstants.TIFFTAG_COMPRESSION);
+            int compression = getTiffCompression(dir);
             int predictor = 1;
             TIFFLZWDecoder lzwDecoder = null;
             switch (compression) {
@@ -516,7 +516,14 @@ public class TiffImage {
         }
     }
     
-    static long[] getArrayLongShort(TIFFDirectory dir, int tag) {
+    private static int getTiffCompression(TIFFDirectory dir) {
+    	if (dir.isTagPresent(TIFFConstants.TIFFTAG_COMPRESSION)) {
+    		return (int)dir.getFieldAsLong(TIFFConstants.TIFFTAG_COMPRESSION);
+    	}
+    	return TIFFConstants.COMPRESSION_NONE;
+	}
+
+	static long[] getArrayLongShort(TIFFDirectory dir, int tag) {
         TIFFField field = dir.getField(tag);
         if (field == null)
             return null;
