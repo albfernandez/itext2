@@ -64,6 +64,8 @@ public class SimpleTextExtractingPdfContentStreamProcessor extends PdfContentStr
      * Creates a new text extraction processor.
      */
     public SimpleTextExtractingPdfContentStreamProcessor() {
+    	super();
+    	result = new StringBuffer();
     }
 
     public void reset() {
@@ -90,18 +92,14 @@ public class SimpleTextExtractingPdfContentStreamProcessor extends PdfContentStr
     public void displayText(String text, Matrix endingTextMatrix){
         boolean hardReturn = false;
         if (lastTextLineMatrix != null && lastTextLineMatrix.get(Matrix.I32) != getCurrentTextLineMatrix().get(Matrix.I32)){
-        //if (!textLineMatrix.equals(lastTextLineMatrix)){
             hardReturn = true;
         }
 
         float currentX = getCurrentTextMatrix().get(Matrix.I31);
         if (hardReturn){
-            //System.out.println("<Hard Return>");
             result.append('\n');
         } else if (lastEndingTextMatrix != null){
             float lastEndX = lastEndingTextMatrix.get(Matrix.I31);
-            
-            //System.out.println("Displaying '" + text + "' :: lastX + lastWidth = " + lastEndX + " =?= currentX = " + currentX + " :: Delta is " + (currentX - lastEndX));
             
             float spaceGlyphWidth = gs().font.getWidth(' ')/1000f;
             float spaceWidth = (spaceGlyphWidth * gs().fontSize + gs().characterSpacing + gs().wordSpacing) * gs().horizontalScaling; // this is unscaled!!
@@ -109,16 +107,13 @@ public class SimpleTextExtractingPdfContentStreamProcessor extends PdfContentStr
             float scaledSpaceWidth = scaled.get(Matrix.I31) - getCurrentTextMatrix().get(Matrix.I31);
             
             if (currentX - lastEndX > scaledSpaceWidth/2f ){
-                //System.out.println("<Implied space on text '" + text + "'> lastEndX=" + lastEndX + ", currentX=" + currentX + ", spaceWidth=" + spaceWidth);
                 result.append(' ');
             }
-        } else {
-            //System.out.println("Displaying first string of content '" + text + "' :: currentX = " + currentX);
         }
         
-        //System.out.println("After displaying '" + text + "' :: Start at " + currentX + " end at " + endingTextMatrix.get(Matrix.I31));
-        
-        result.append(text);
+        if (text != null && result != null) {
+        	result.append(text);
+        }
 
         lastTextLineMatrix = getCurrentTextLineMatrix();
         lastEndingTextMatrix = endingTextMatrix;
