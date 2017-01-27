@@ -71,7 +71,6 @@ import com.lowagie.text.pdf.PdfString;
  */
 public abstract class PdfContentStreamProcessor {
 
-	private static final String IGNORE_OPERATOR = "Ignore";
 	/** A map with all supported operators operators (PDF syntax). */
     private Map operators;
     /** Resources for the content stream. */
@@ -81,7 +80,7 @@ public abstract class PdfContentStreamProcessor {
     /** Text matrix. */
     private Matrix textMatrix;
     /** Text line matrix. */
-    private Matrix textLineMatrix;    
+    private Matrix textLineMatrix;
     
     /**
      * Creates a new PDF Content Stream Processor.
@@ -96,8 +95,6 @@ public abstract class PdfContentStreamProcessor {
      */
     private void populateOperators(){
         operators = new HashMap();
-        
-        registerContentOperator(IGNORE_OPERATOR, new IgnoreOperator());
         
         registerContentOperator("q", new PushGraphicsState());
         registerContentOperator("Q", new PopGraphicsState());
@@ -185,7 +182,8 @@ public abstract class PdfContentStreamProcessor {
     public void invokeOperator(PdfLiteral operator, ArrayList operands){
         ContentOperator op = (ContentOperator)operators.get(operator.toString());
         if (op == null){
-        	 op = (ContentOperator) operators.get(IGNORE_OPERATOR);
+            //System.out.println("Skipping operator " + operator);
+            return;
         }
         
         op.invoke(this, operator, operands);
@@ -552,11 +550,4 @@ public abstract class PdfContentStreamProcessor {
         }
     }
     
-    
-    private static class IgnoreOperator implements ContentOperator{
-    	public void invoke(PdfContentStreamProcessor processor, PdfLiteral operator, ArrayList operands){
-    		// Do nothing / Ignore
-    	}
-    	
-    }
 }
