@@ -242,7 +242,8 @@ public class CFFFontSubset extends CFFFont {
      */
     int CountRange(int NumofGlyphs,int Type){
     	int num=0;
-    	char Sid;
+    	@SuppressWarnings("unused")
+		char Sid;
     	int i=1,nLeft;
     	while (i<NumofGlyphs){
     		num++;
@@ -1223,10 +1224,13 @@ public class CFFFontSubset extends CFFFont {
 	protected void CopyHeader()
 	{
 		seek(0);
-        int major = getCard8();
-        int minor = getCard8();
+        @SuppressWarnings("unused")
+		int major = getCard8();
+        @SuppressWarnings("unused")
+		int minor = getCard8();
         int hdrSize = getCard8();
-        int offSize = getCard8();
+        @SuppressWarnings("unused")
+		int offSize = getCard8();
         nextIndexOffset = hdrSize;
         OutputList.addLast(new RangeItem(buf,0,hdrSize));
 	}

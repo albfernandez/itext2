@@ -53,9 +53,6 @@ public class TableEvents1Test implements PdfPTableEvent {
 
 		// border for the header rows
 		if (headerRows > 0) {
-			float headerHeight = heights[0];
-			for (int k = 0; k < headerRows; ++k)
-				headerHeight += heights[k];
 			cb.setRGBColorStroke(0, 0, 255);
 			cb.rectangle(widths[0], heights[headerRows], widths[widths.length - 1] - widths[0], heights[0]
 					- heights[headerRows]);

@@ -699,10 +699,13 @@ public class CFFFont {
         
         seek(0);
         
-        int major = getCard8();
-        int minor = getCard8();
+        @SuppressWarnings("unused")
+		int major = getCard8();
+        @SuppressWarnings("unused")
+		int minor = getCard8();
         int hdrSize = getCard8();
-        int offSize = getCard8();
+        @SuppressWarnings("unused")
+		int offSize = getCard8();
         nextIndexOffset = hdrSize;
         
         l.addLast(new RangeItem(buf,0,hdrSize));
@@ -970,7 +973,8 @@ public class CFFFont {
      * A random Access File or an array
      */
     protected RandomAccessFileOrArray buf;
-    private int offSize;
+    @SuppressWarnings("unused")
+	private int offSize;
     
     protected int nameIndexOffset;
     protected int topdictIndexOffset;
@@ -1026,9 +1030,10 @@ public class CFFFont {
         buf = inputbuffer;
         seek(0);
         
-        int major, minor;
-        major = getCard8();
-        minor = getCard8();
+        @SuppressWarnings("unused")
+		int major = getCard8();
+        @SuppressWarnings("unused")
+		int minor = getCard8();
         
         //System.err.println("CFF Major-Minor = "+major+"-"+minor);
         
@@ -1169,8 +1174,8 @@ public class CFFFont {
     // ADDED BY Oren & Ygal
     
     void ReadEncoding(int nextIndexOffset){
-    	int format;
     	seek(nextIndexOffset);
-    	format = getCard8();
+    	@SuppressWarnings("unused")
+		int format = getCard8();
     }    
 }

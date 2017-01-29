@@ -73,6 +73,7 @@ public class RtfDestinationShppict extends RtfDestination {
 	private StringBuffer buffer = new StringBuffer();
 
 	/* picttype */
+	@SuppressWarnings("unused")
 	private int pictureType = Image.ORIGINAL_NONE;
 
 	//	public static final int ORIGINAL_NONE = 0;
@@ -96,6 +97,7 @@ public class RtfDestinationShppict extends RtfDestination {
 	// 0x0014 PU_LOENGLISH
 	// 0x0018 PU_HIENGLISH
 	// 0x001C PU_TWIPS
+	@SuppressWarnings("unused")
 	private int pmmetafile = 0;
 
 	// wmetafileN Image.RIGINAL_WMF = 6;
@@ -113,12 +115,15 @@ public class RtfDestinationShppict extends RtfDestination {
 
 	/* bitapinfo */
 	// wbmbitspixelN - number of bits per pixel - 1 monochrome, 4 16 color, 8 256 color, 24 RGB - Default 1
+	@SuppressWarnings("unused")
 	private Integer bitsPerPixel = new Integer(1);
 
 	// wbmplanesN - number of color planes - must be 1
+	@SuppressWarnings("unused")
 	private Integer planes = new Integer(1);
 
 	// wbmwidthbytesN - number of bytes in each raster line
+	@SuppressWarnings("unused")
 	private Integer widthBytes = null;
 
 	/* pictsize */
@@ -142,31 +147,40 @@ public class RtfDestinationShppict extends RtfDestination {
 	private Integer scaleY = new Integer(100);
 
 	// picscaled - macpict setting
+	@SuppressWarnings("unused")
 	private Boolean scaled = null;
 
 	// picprop
+	@SuppressWarnings("unused")
 	private Boolean inlinePicture = Boolean.FALSE;
 
 	// defshp
+	@SuppressWarnings("unused")
 	private Boolean wordArt = Boolean.FALSE;
 
 	// piccroptN
+	@SuppressWarnings("unused")
 	private Integer cropTop = new Integer(0);
 
 	// piccropbN
+	@SuppressWarnings("unused")
 	private Integer cropBottom = new Integer(0);
 
 	// piccroplN
+	@SuppressWarnings("unused")
 	private Integer cropLeft = new Integer(0);
 
 	// piccroprN
+	@SuppressWarnings("unused")
 	private Integer cropRight = new Integer(0);
 
 	/* metafileinfo */
 	// picbmp
+	@SuppressWarnings("unused")
 	private boolean bitmap = false;
 
 	//picbppN - Valid 1,4,8,24
+	@SuppressWarnings("unused")
 	private int bbp = 1;
 
 	/* data */
@@ -181,15 +195,19 @@ public class RtfDestinationShppict extends RtfDestination {
 	private long binaryLength = 0;
 
 	// blipupiN
+	@SuppressWarnings("unused")
 	private Integer unitsPerInch = null;
 
 	// bliptagN
+	@SuppressWarnings("unused")
 	private String tag = "";
 
 	private static final int NORMAL = 0;
 
+	@SuppressWarnings("unused")
 	private static final int BLIPUID = 1;
 
+	@SuppressWarnings("unused")
 	private int state = NORMAL;
 
 	/**

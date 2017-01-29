@@ -66,8 +66,6 @@ public final class RtfCtrlWordMgr {
 	public static final boolean debug = false;
 	public static final boolean debugFound = false;
 	public static final boolean debugNotFound = true;
-	private PushbackInputStream reader = null;
-	private RtfParser rtfParser = null;
 	private RtfCtrlWordMap ctrlWordMap = null;
 	
 	/** The <code>RtfCtrlWordListener</code>. */
@@ -88,8 +86,6 @@ public final class RtfCtrlWordMgr {
 	 * @param reader the PushbackReader from the tokeniser.
 	 */
 	public RtfCtrlWordMgr(RtfParser rtfParser, PushbackInputStream reader) {
-		this.rtfParser = rtfParser;	// set the parser
-		this.reader = reader;	// set the reader value
 		ctrlWordMap = new RtfCtrlWordMap(rtfParser);
 		
 //		// TIMING DEBUG INFO

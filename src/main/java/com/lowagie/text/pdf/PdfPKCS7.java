@@ -99,9 +99,12 @@ import org.bouncycastle.asn1.ocsp.BasicOCSPResponse;
 import org.bouncycastle.asn1.ocsp.OCSPObjectIdentifiers;
 import org.bouncycastle.jce.provider.X509CRLParser;
 import org.bouncycastle.jce.provider.X509CertParser;
+
 import com.lowagie.text.ExceptionConverter;
+
 import java.security.cert.CertificateParsingException;
 import java.util.Date;
+
 import org.bouncycastle.asn1.ASN1OctetString;
 import org.bouncycastle.asn1.cms.ContentInfo;
 import org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers;
@@ -135,7 +138,8 @@ public class PdfPKCS7 {
     private MessageDigest messageDigest;
     private String digestAlgorithm, digestEncryptionAlgorithm;
     private Signature sig;
-    private transient PrivateKey privKey;
+    @SuppressWarnings("unused")
+	private transient PrivateKey privKey;
     private byte RSAdata[];
     private boolean verified;
     private boolean verifyResult;

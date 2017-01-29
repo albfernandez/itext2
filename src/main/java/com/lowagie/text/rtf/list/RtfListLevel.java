@@ -148,7 +148,8 @@ public class RtfListLevel extends RtfElement implements RtfExtendedElement {
      * (1) if this level does/does not restart its count each time a super ordinate level is incremented
      * (0) if this level does not restart its count each time a super ordinate level is incremented.
      */
-    private static final byte[] LIST_LEVEL_NO_RESTART = DocWriter.getISOBytes("\\levelnorestart");
+    @SuppressWarnings("unused")
+	private static final byte[] LIST_LEVEL_NO_RESTART = DocWriter.getISOBytes("\\levelnorestart");
     /**
      * Constant for the list level numbers
      */
@@ -250,7 +251,8 @@ public class RtfListLevel extends RtfElement implements RtfExtendedElement {
     /**
      * @since 2.1.4
      */
-    private Chunk bulletChunk = null;
+    @SuppressWarnings("unused")
+	private Chunk bulletChunk = null;
     /**
      * The number to start counting at
      */

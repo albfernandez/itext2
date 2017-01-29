@@ -115,7 +115,8 @@ public class RtfDocumentSettings {
      * Author: Howard Shank (hgshank@yahoo.com)
      * @since 2.1.1
      */
-    private String writereservhash = null; //\*\writereservhash - not implemented
+    @SuppressWarnings("unused")
+	private String writereservhash = null; //\*\writereservhash - not implemented
     /**
      * Document recommended to be opened in read only mode.
      * Author: Howard Shank (hgshank@yahoo.com)

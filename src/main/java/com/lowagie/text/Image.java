@@ -413,6 +413,7 @@ public abstract class Image extends Rectangle {
 				int c8 = is.read();
 				if ( c5 == '\r' && c6 == '\n' && c7 == 0x1a && c8 == '\n' ) {
 					int file_header_flags = is.read();
+					@SuppressWarnings("unused")
 					int number_of_pages = -1;
 					if ( (file_header_flags & 0x2) == 0x2 ) {
 						number_of_pages = (is.read() << 24) | (is.read() << 16) | (is.read() << 8) | is.read();

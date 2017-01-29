@@ -510,8 +510,10 @@ class TrueTypeFont extends BaseFont {
         int startOfStorage = rf.readUnsignedShort();
         for (int k = 0; k < numRecords; ++k) {
             int platformID = rf.readUnsignedShort();
-            int platformEncodingID = rf.readUnsignedShort();
-            int languageID = rf.readUnsignedShort();
+            @SuppressWarnings("unused")
+			int platformEncodingID = rf.readUnsignedShort();
+            @SuppressWarnings("unused")
+			int languageID = rf.readUnsignedShort();
             int nameID = rf.readUnsignedShort();
             int length = rf.readUnsignedShort();
             int offset = rf.readUnsignedShort();
@@ -874,7 +876,8 @@ class TrueTypeFont extends BaseFont {
     HashMap readFormat12() throws IOException {
         HashMap h = new HashMap();
         rf.skipBytes(2);
-        int table_lenght = rf.readInt();
+        @SuppressWarnings("unused")
+		int table_lenght = rf.readInt();
         rf.skipBytes(4);
         int nGroups = rf.readInt();
         for (int k = 0; k < nGroups; k++) {

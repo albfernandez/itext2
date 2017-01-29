@@ -197,7 +197,7 @@ public class RtfCtrlWordHandler implements Cloneable {
 		boolean result = false;
 		this.ctrlWordData = ctrlWordDataIn;
 		RtfDestination dest = null;
-		boolean handled = false;
+
 		
 		this.ctrlWordData.prefix  = this.ctrlWordPrefix;
 		this.ctrlWordData.suffix  = this.ctrlWordSuffix;
@@ -228,7 +228,7 @@ public class RtfCtrlWordHandler implements Cloneable {
 		case RtfCtrlWordType.VALUE:
 			dest = this.rtfParser.getCurrentDestination();
 			if(dest != null) {
-				handled = dest.handleControlWord(this.ctrlWordData);
+				dest.handleControlWord(this.ctrlWordData);
 			}
 			break;
 		
@@ -248,10 +248,10 @@ public class RtfCtrlWordHandler implements Cloneable {
 				// If no substitute character, then provide special handling in the destination for the ctrl word. 
 				if(data != null) {
 					for(int idx=0; idx< data.length(); idx++) {
-						handled = dest.handleCharacter(data.charAt(idx));
+						dest.handleCharacter(data.charAt(idx));
 					}
 				} else {
-					handled = dest.handleControlWord(this.ctrlWordData);
+					dest.handleControlWord(this.ctrlWordData);
 				}
 			}
 			break;
@@ -259,16 +259,12 @@ public class RtfCtrlWordHandler implements Cloneable {
 		case RtfCtrlWordType.DESTINATION_EX:
 		case RtfCtrlWordType.DESTINATION:
 			// set the destination
-			int x=0;
-			if("shppict".equals(this.ctrlWord) || "nonshppict".equals(this.ctrlWord)) {
-				x++;
-			}
-			handled = this.rtfParser.setCurrentDestination(this.ctrlWord);
+			this.rtfParser.setCurrentDestination(this.ctrlWord);
 			// let destination handle the ctrl word now.
 			dest = this.rtfParser.getCurrentDestination();
 			if(dest != null) {
 				if(dest.getNewTokeniserState() == RtfParser.TOKENISER_IGNORE_RESULT) {
-					handled = dest.handleControlWord(this.ctrlWordData);
+					dest.handleControlWord(this.ctrlWordData);
 				}
 				else {
 					this.rtfParser.setTokeniserState(dest.getNewTokeniserState());
@@ -298,7 +294,9 @@ public class RtfCtrlWordHandler implements Cloneable {
 	 */
 	//Primary purpose is for \* control word and event handling.
 	protected boolean beforeControlWord() {
-		if(debug) printDebug("beforeControlWord");
+		if(debug) {
+			printDebug("beforeControlWord");
+		}
 		// TODO: This is where events would be triggered
 		return true;
 	}
@@ -309,7 +307,9 @@ public class RtfCtrlWordHandler implements Cloneable {
 	 * @since 2.0.8
 	 */
 	protected boolean onControlWord() {
-		if(debug) printDebug("onCtrlWord");
+		if(debug) {
+			printDebug("onCtrlWord");
+		}
 		// TODO: This is where events would be triggered
 		return false;
 	}
@@ -320,7 +320,9 @@ public class RtfCtrlWordHandler implements Cloneable {
 	 * @since 2.0.8
 	 */
 	protected boolean afterControlWord() {
-		if(debug) printDebug("afterControlWord");
+		if(debug) {
+			printDebug("afterControlWord");
+		}
 		// TODO: This is where events would be triggered
 		return true;
 	}

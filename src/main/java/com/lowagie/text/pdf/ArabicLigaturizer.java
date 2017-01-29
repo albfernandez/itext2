@@ -599,8 +599,10 @@ public class ArabicLigaturizer {
     private static final char ALEFHAMZABELOW = 0x0625;
     private static final char ALEFMADDA = 0x0622;
     private static final char LAM = 0x0644;
-    private static final char HAMZA = 0x0621;
-    private static final char TATWEEL = 0x0640;
+    @SuppressWarnings("unused")
+	private static final char HAMZA = 0x0621;
+    @SuppressWarnings("unused")
+	private static final char TATWEEL = 0x0640;
     private static final char ZWJ = 0x200D;
 
     private static final char HAMZAABOVE = 0x0654;
@@ -740,7 +742,8 @@ public class ArabicLigaturizer {
         public static final int DIGITS_EN2AN_INIT_AL = 0x80;
         
         /** Not a valid option value. */
-        private static final int DIGITS_RESERVED = 0xa0;
+        @SuppressWarnings("unused")
+		private static final int DIGITS_RESERVED = 0xa0;
         
         /**
          * Bit mask for digit shaping options.

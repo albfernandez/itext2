@@ -355,8 +355,10 @@ public class CCITTG4Encoder {
     /* status values returned instead of a run length */
     private static final int G3CODE_EOL	= -1;     /* NB: ACT_EOL - ACT_WRUNT */
     private static final int G3CODE_INVALID = -2; /* NB: ACT_INVALID - ACT_WRUNT */
-    private static final int G3CODE_EOF = -3;     /* end of input data */
-    private static final int G3CODE_INCOMP = -4;  /* incomplete run code */
+    @SuppressWarnings("unused")
+	private static final int G3CODE_EOF = -3;     /* end of input data */
+    @SuppressWarnings("unused")
+	private static final int G3CODE_INCOMP = -4;  /* incomplete run code */
 
     private int[][] TIFFFaxWhiteCodes = {
         { 8, 0x35, 0 },	/* 0011 0101 */

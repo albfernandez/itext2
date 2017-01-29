@@ -329,10 +329,8 @@ public class PushbuttonField extends BaseField {
             return app;
         BaseFont ufont = getRealFont();
         boolean borderExtra = borderStyle == PdfBorderDictionary.STYLE_BEVELED || borderStyle == PdfBorderDictionary.STYLE_INSET;
-        float h = box.getHeight() - borderWidth * 2;
         float bw2 = borderWidth;
         if (borderExtra) {
-            h -= borderWidth * 2;
             bw2 *= 2;
         }
         float offsetX = (borderExtra ? 2 * borderWidth : borderWidth);

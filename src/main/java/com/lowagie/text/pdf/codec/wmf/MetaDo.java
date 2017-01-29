@@ -537,7 +537,8 @@ public class MetaDo {
                 }
                 case META_DIBSTRETCHBLT:
                 case META_STRETCHDIB: {
-                    int rop = in.readInt();
+                    @SuppressWarnings("unused")
+					int rop = in.readInt();
                     if (function == META_STRETCHDIB) {
                         /*int usage = */ in.readWord();
                     }

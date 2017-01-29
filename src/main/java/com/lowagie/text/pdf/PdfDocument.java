@@ -85,6 +85,7 @@ import com.lowagie.text.pdf.collection.PdfCollection;
 import com.lowagie.text.pdf.draw.DrawInterface;
 import com.lowagie.text.pdf.internal.PdfAnnotationsImp;
 import com.lowagie.text.pdf.internal.PdfViewerPreferencesImp;
+
 import java.text.DecimalFormat;
 
 /**
@@ -1538,7 +1539,8 @@ public class PdfDocument extends Document {
                         localGoto((String)chunk.getAttribute(Chunk.LOCALGOTO), xMarker, yMarker, xMarker + width - subtract, yMarker + chunk.font().size());
                     }
                     if (chunk.isAttribute(Chunk.LOCALDESTINATION)) {
-                        float subtract = lastBaseFactor;
+                        @SuppressWarnings("unused")
+						float subtract = lastBaseFactor;
                         if (nextChunk != null && nextChunk.isAttribute(Chunk.LOCALDESTINATION))
                             subtract = 0;
                         if (nextChunk == null)

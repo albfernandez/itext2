@@ -171,9 +171,8 @@ public class TSAClientBouncyCastle implements TSAClient {
             if (tsToken == null) {
                 throw new Exception("TSA '" + tsaURL + "' failed to return time stamp token: " + response.getStatusString());
             }
-            TimeStampTokenInfo info = tsToken.getTimeStampInfo(); // to view details
+
             byte[] encoded = tsToken.getEncoded();
-            long stop = System.currentTimeMillis();
             
             // Update our token size estimate for the next call (padded to be safe)
             this.tokSzEstimate = encoded.length + 32;

@@ -101,6 +101,7 @@ public class RtfDestinationColorTable extends RtfDestination  {
 	 * @see com.lowagie.text.rtf.parser.destinations.RtfDestinationColorTable#cshade
 	 * @see com.lowagie.text.rtf.parser.destinations.RtfDestinationColorTable#themeColor
 	 */
+	@SuppressWarnings("unused")
 	private int ctint = 255;
 	/**
 	 * Specifies the shade when specifying a theme color.
@@ -115,6 +116,7 @@ public class RtfDestinationColorTable extends RtfDestination  {
 	 * @see com.lowagie.text.rtf.parser.destinations.RtfDestinationColorTable#ctint
 	 * @see com.lowagie.text.rtf.parser.destinations.RtfDestinationColorTable#themeColor
 	 */
+	@SuppressWarnings("unused")
 	private int cshade = 255;
 	/**
 	 * Specifies the use of a theme color.
@@ -123,6 +125,7 @@ public class RtfDestinationColorTable extends RtfDestination  {
 	 * @see com.lowagie.text.rtf.parser.destinations.RtfDestinationColorTable#ctint
 	 * @see com.lowagie.text.rtf.parser.destinations.RtfDestinationColorTable#cshade
 	 */
+	@SuppressWarnings("unused")
 	private int themeColor = RtfColorThemes.THEME_UNDEFINED;
 	/**
 	 * Color map object for conversions

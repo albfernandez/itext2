@@ -55,7 +55,6 @@ import java.io.InputStream;
 import java.io.PushbackInputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.EventListener;
 import java.util.Iterator;
 import java.util.Stack;
@@ -96,6 +95,7 @@ public class RtfParser {
 	 * The iText element to add the RTF document to.
 	 * @since 2.1.3
 	 */
+	@SuppressWarnings("unused")
 	private Element elem = null;
 	/**
 	 * The iText document to add the RTF document to.
@@ -116,6 +116,7 @@ public class RtfParser {
 	/**
 	 * The RtfDestinationMgr object to manage destinations.
 	 */
+	@SuppressWarnings("unused")
 	private RtfDestinationMgr destinationMgr = null;
 	/**
 	 * Stack for saving states for groups
@@ -367,6 +368,7 @@ public class RtfParser {
 	/**
 	 * The current document group nesting level. Used for fragments.
 	 */
+	@SuppressWarnings("unused")
 	private int docGroupLevel = 0;
 	/**
 	 * When the tokeniser is Binary.
@@ -398,6 +400,7 @@ public class RtfParser {
 	/**
 	 * Total bytes read.
 	 */
+	@SuppressWarnings("unused")
 	private long byteCount = 0;
 	/**
 	 * Total control words processed.
@@ -407,51 +410,45 @@ public class RtfParser {
 	 * <code>ctrlWordCount</code> should equal 
 	 * <code>ctrlWrodHandlecCount</code> + <code>ctrlWordNotHandledCount</code + <code>ctrlWordSkippedCount</code>
 	 */
+	@SuppressWarnings("unused")
 	private long ctrlWordCount = 0;
 	/**
 	 * Total { encountered as an open group token.
 	 */
+	@SuppressWarnings("unused")
 	private long openGroupCount = 0;
 	/**
 	 * Total } encountered as a close group token.
 	 */
+	@SuppressWarnings("unused")
 	private long closeGroupCount = 0;
 	/**
 	 * Total clear text characters processed.
 	 */
+	@SuppressWarnings("unused")
 	private long characterCount = 0;
 	/**
 	 * Total control words recognized.
 	 */
+	@SuppressWarnings("unused")
 	private long ctrlWordHandledCount = 0;
 	/**
 	 * Total control words not handled.
 	 */
+	@SuppressWarnings("unused")
 	private long ctrlWordNotHandledCount = 0;
 	/**
 	 * Total control words skipped.
 	 */
+	@SuppressWarnings("unused")
 	private long ctrlWordSkippedCount = 0;
 	/**
 	 * Total groups skipped. Includes { and } as a group.
 	 */
+	@SuppressWarnings("unused")
 	private long groupSkippedCount = 0;
-	/**
-	 * Start time as a long.
-	 */
-	private long startTime = 0;
-	/**
-	 * Stop time as a long.
-	 */
-	private long endTime = 0;
-	/**
-	 * Start date as a date.
-	 */
-	private Date startDate = null;
-	/**
-	 * End date as a date.
-	 */
-	private Date endDate = null;
+
+
 	//////////////////////////////////// STATS VARIABLES ///////////////////
 	/**
 	 * Last control word and parameter processed.
@@ -486,8 +483,6 @@ public class RtfParser {
 		if(readerIn == null || rtfDoc == null) return;
 		this.init(TYPE_IMPORT_FULL, rtfDoc, readerIn, this.document, null);
 		this.setCurrentDestination(RtfDestinationMgr.DESTINATION_NULL);
-		startDate = new Date();
-		startTime = System.currentTimeMillis();
 		this.groupLevel = 0;
 		try {
 			this.tokenise();
@@ -499,8 +494,6 @@ public class RtfParser {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		endTime = System.currentTimeMillis();
-		endDate = new Date();
 	}
 	/**
 	 * Imports a complete RTF document into an Element, i.e. Chapter, section, Table Cell, etc.
@@ -517,8 +510,6 @@ public class RtfParser {
 		if(readerIn == null || rtfDoc == null || elem == null) return;
 		this.init(TYPE_IMPORT_INTO_ELEMENT, rtfDoc, readerIn, this.document, elem);
 		this.setCurrentDestination(RtfDestinationMgr.DESTINATION_NULL);
-		startDate = new Date();
-		startTime = System.currentTimeMillis();
 		this.groupLevel = 0;
 		try {
 			this.tokenise();
@@ -530,8 +521,6 @@ public class RtfParser {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		endTime = System.currentTimeMillis();
-		endDate = new Date();
 	}
 	/**
 	 * Converts an RTF document to an iText document.
@@ -550,12 +539,8 @@ public class RtfParser {
 		if(readerIn == null || doc == null) return;
 		this.init(TYPE_CONVERT, null, readerIn, doc, null);
 		this.setCurrentDestination(RtfDestinationMgr.DESTINATION_DOCUMENT);
-		startDate = new Date();
-		startTime = System.currentTimeMillis();
 		this.groupLevel = 0;
 		this.tokenise();
-		endTime = System.currentTimeMillis();
-		endDate = new Date();
 	}
 
 	/**
@@ -579,11 +564,7 @@ public class RtfParser {
 		this.setCurrentDestination(RtfDestinationMgr.DESTINATION_DOCUMENT);
 		this.groupLevel = 1;
 		setParserState(RtfParser.PARSER_IN_DOCUMENT);
-		startDate = new Date();
-		startTime = System.currentTimeMillis();
 		this.tokenise();
-		endTime = System.currentTimeMillis();
-		endDate = new Date();
 	}
 	
     // listener methods
@@ -764,10 +745,6 @@ public class RtfParser {
 		ctrlWordNotHandledCount = 0;
 		ctrlWordSkippedCount = 0;
 		groupSkippedCount = 0;
-		startTime = 0;
-		endTime = 0;
-		startDate = null;
-		endDate = null;
 	}
 	
 	/**
@@ -1032,11 +1009,10 @@ public class RtfParser {
 			return errOK;
 		}
 
-		boolean handled = false;
 
 		RtfDestination dest = this.getCurrentDestination();
 		if(dest != null) {
-			handled = dest.handleCharacter(nextChar);
+			dest.handleCharacter(nextChar);
 		}
 
 		return errOK;
@@ -1188,7 +1164,6 @@ public class RtfParser {
 	 * @since 2.1.3
 	 */	
 	public void tokenise() throws IOException {
-		int errorCode = errOK;	// error code
 		int nextChar = 0;
 //		char[] nextChar = new char[1]; // input variable
 //		nextChar[0]=0;	// set to 0
@@ -1201,7 +1176,7 @@ public class RtfParser {
 			
 	        if (this.getTokeniserState() == TOKENISER_BINARY)                      // if we're parsing binary data, handle it directly
 	        {
-	            if ((errorCode = parseChar(nextChar)) != errOK)
+	            if (parseChar(nextChar) != errOK)
 	                return; 
 	        }  else {
 //				switch(nextChar[0]) {
@@ -1245,9 +1220,9 @@ public class RtfParser {
 							}
 		                    this.setTokeniserState(TOKENISER_NORMAL);
 						}
-						if ((errorCode = parseChar(nextChar)) != errOK) {
-                        	return; // some error occurred. we should send a
-									// real error
+						if (parseChar(nextChar) != errOK) {
+							// some error occurred. we should send a real error
+							return; 							
 						}
 						break;
 				}	// switch(nextChar[0])

@@ -91,7 +91,8 @@ class Type1Font extends BaseFont
     private boolean IsFixedPitch = false;
 /** The character set of the font.
  */
-    private String CharacterSet;
+    @SuppressWarnings("unused")
+	private String CharacterSet;
 /** The llx of the FontBox.
  */
     private int llx = -50;
@@ -121,7 +122,8 @@ class Type1Font extends BaseFont
     private int CapHeight = 700;
 /** A variable.
  */
-    private int XHeight = 480;
+    @SuppressWarnings("unused")
+	private int XHeight = 480;
 /** A variable.
  */
     private int Ascender = 800;
@@ -130,7 +132,8 @@ class Type1Font extends BaseFont
     private int Descender = -200;
 /** A variable.
  */
-    private int StdHW;
+    @SuppressWarnings("unused")
+	private int StdHW;
 /** A variable.
  */
     private int StdVW = 80;

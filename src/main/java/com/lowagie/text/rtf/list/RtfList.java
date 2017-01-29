@@ -116,19 +116,23 @@ public class RtfList extends RtfElement implements RtfExtendedElement {
     /**
      * Constant to indicate if the list restarts at each section. Word 7 compatiblity
      */
-    private static final byte[] LIST_RESTARTHDN = DocWriter.getISOBytes("\\listrestarthdn");
+    @SuppressWarnings("unused")
+	private static final byte[] LIST_RESTARTHDN = DocWriter.getISOBytes("\\listrestarthdn");
     /**
      * Constant for the name of this list
      */
-    private static final byte[] LIST_NAME = DocWriter.getISOBytes("\\listname");
+    @SuppressWarnings("unused")
+	private static final byte[] LIST_NAME = DocWriter.getISOBytes("\\listname");
     /**
      * Constant for the identifier of the style of this list. Mutually exclusive with \\liststylename
      */
-    private static final byte[] LIST_STYLEID = DocWriter.getISOBytes("\\liststyleid");
+    @SuppressWarnings("unused")
+	private static final byte[] LIST_STYLEID = DocWriter.getISOBytes("\\liststyleid");
     /**
      * Constant for the identifier of the style of this list. Mutually exclusive with \\liststyleid
      */
-    private static final byte[] LIST_STYLENAME = DocWriter.getISOBytes("\\liststylename");
+    @SuppressWarnings("unused")
+	private static final byte[] LIST_STYLENAME = DocWriter.getISOBytes("\\liststylename");
 
     // character properties
     /**

@@ -99,7 +99,8 @@ public class RtfImportMgr {
      * The Document.
      * Used for conversions, but not imports.
      */
-    private Document doc = null;
+    @SuppressWarnings("unused")
+	private Document doc = null;
 
 
     /**

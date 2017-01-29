@@ -49,7 +49,9 @@ public class TIFFFaxDecoder {
     
     private int bitPointer, bytePointer;
     private byte[] data;
-    private int w, h;
+    private int w;
+    @SuppressWarnings("unused")
+	private int h;
     private int fillOrder;
     
     // Data structures needed to store changing elements for the previous
@@ -64,7 +66,8 @@ public class TIFFFaxDecoder {
     private int compression = 2;
     
     // Variables set by T4Options
-    private int uncompressedMode = 0;
+    @SuppressWarnings("unused")
+	private int uncompressedMode = 0;
     private int fillBits = 0;
     private int oneD;
     

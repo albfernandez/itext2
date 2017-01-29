@@ -122,7 +122,8 @@ public class BmpImage {
     private long imageSize;
     private byte palette[];
     private int imageType;
-    private int numBands;
+    @SuppressWarnings("unused")
+	private int numBands;
     private boolean isBottomUp;
     private int bitsPerPixel;
     private int redMask, greenMask, blueMask, alphaMask;
@@ -1258,7 +1259,8 @@ public class BmpImage {
     }
     
     // Signed 16 bits
-    private int readShort(InputStream stream) throws IOException {
+    @SuppressWarnings("unused")
+	private int readShort(InputStream stream) throws IOException {
         int b1 = readUnsignedByte(stream);
         int b2 = readUnsignedByte(stream);
         return (b2 << 8) | b1;

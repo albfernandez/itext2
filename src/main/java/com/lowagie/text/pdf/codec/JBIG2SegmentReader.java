@@ -104,6 +104,7 @@ public class JBIG2SegmentReader {
 	private RandomAccessFileOrArray ra;
 	private boolean sequential;
 	private boolean number_of_pages_known;
+	@SuppressWarnings("unused")
 	private int number_of_pages = -1;
 	private boolean read = false;
 	
@@ -146,13 +147,11 @@ public class JBIG2SegmentReader {
 	 */
 	public static class JBIG2Page {
 		public final int page;
-		private final JBIG2SegmentReader sr;
 		private final SortedMap segs = new TreeMap();
 		public int pageBitmapWidth = -1;
 		public int pageBitmapHeight = -1;
 		public JBIG2Page(int page, JBIG2SegmentReader sr) {
 			this.page = page;
-			this.sr = sr;
 		}
 		/**
 		 * return as a single byte array the header-data for each segment in segment number

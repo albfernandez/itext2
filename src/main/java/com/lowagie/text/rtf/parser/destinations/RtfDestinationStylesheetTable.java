@@ -65,13 +65,16 @@ import com.lowagie.text.rtf.style.RtfStyleTypes;
  * @since 2.1.0
  */
 public class RtfDestinationStylesheetTable extends RtfDestination {
+	@SuppressWarnings("unused")
 	private String styleName = "";
 	/**
 	 * <code>RtfParagraphStyle</code> object for setting styleshee values
 	 * as they are parsed from the input.
 	 */
+	@SuppressWarnings("unused")
 	private RtfParagraphStyle rtfParagraphStyle = null;
 	
+	@SuppressWarnings("unused")
 	private String elementName = "";
 	
 	/**
@@ -152,7 +155,9 @@ public class RtfDestinationStylesheetTable extends RtfDestination {
 	/**
 	 * The RtfImportHeader to add color mappings to.
 	 */
+	@SuppressWarnings("unused")
 	private RtfImportMgr importHeader = null;
+	@SuppressWarnings("unused")
 	private String type = "";
 	
 	public RtfDestinationStylesheetTable() {

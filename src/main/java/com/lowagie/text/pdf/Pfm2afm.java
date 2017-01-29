@@ -448,42 +448,60 @@ public final class Pfm2afm {
     private void  puttrailer() {
         out.print("EndFontMetrics\n");
     }
-
+    @SuppressWarnings("unused")
     private short  vers;
     private int   h_len;             /* Total length of .pfm file */
     private String   copyright;   /* Copyright string [60]*/
+    @SuppressWarnings("unused")
     private short  type;
+    @SuppressWarnings("unused")
     private short  points;
+    @SuppressWarnings("unused")
     private short  verres;
+    @SuppressWarnings("unused")
     private short  horres;
     private short  ascent;
+    @SuppressWarnings("unused")
     private short  intleading;
+    @SuppressWarnings("unused")
     private short  extleading;
     private byte   italic;
+    @SuppressWarnings("unused")
     private byte   uline;
+    @SuppressWarnings("unused")
     private byte   overs;
     private short  weight;
     private byte   charset;         /* 0=windows, otherwise nomap */
+    @SuppressWarnings("unused")
     private short  pixwidth;        /* Width for mono fonts */
+    @SuppressWarnings("unused")
     private short  pixheight;
     private byte   kind;            /* Lower bit off in mono */
     private short  avgwidth;        /* Mono if avg=max width */
     private short  maxwidth;        /* Use to compute bounding box */
     private int   firstchar;       /* First char in table */
     private int   lastchar;        /* Last char in table */
+    @SuppressWarnings("unused")
     private byte   defchar;
+    @SuppressWarnings("unused")
     private byte   brkchar;
+    @SuppressWarnings("unused")
     private short  widthby;
+    @SuppressWarnings("unused")
     private int   device;
     private int   face;            /* Face name */
+    @SuppressWarnings("unused")
     private int   bits;
+    @SuppressWarnings("unused")
     private int   bitoff;
     private short  extlen;
     private int   psext;           /* PostScript extension */
     private int   chartab;         /* Character width tables */
+    @SuppressWarnings("unused")
     private int   res1;
     private int   kernpairs;       /* Kerning pairs */
-    private int   res2;
+    @SuppressWarnings("unused")
+	private int   res2;
     private int   fontname;        /* Font name */
 
 /*
@@ -519,29 +537,7 @@ public final class Pfm2afm {
         0,   0,   0,   0,   0,   0,   0,   0,   249, 0,   0,   0,   0,   0,   0,   0    // F0
     };
     
-/**
- *  Character class.  This is a minor attempt to overcome the problem that
- *  in the pfm file, all unused characters are given the width of space.
- *  Note that this array isn't used in iText.
- */
-    private int WinClass[] = {
-        0, 0, 0, 0, 2, 2, 2, 0, 2, 0, 2, 2, 2, 0, 0, 0,   /* 00 */
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,   /* 10 */
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,   /* 20 */
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,   /* 30 */
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,   /* 40 */
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,   /* 50 */
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,   /* 60 */
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2,   /* 70 */
-        0, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0,   /* 80 */
-        0, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 2,   /* 90 */
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,   /* a0 */
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,   /* b0 */
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,   /* c0 */
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,   /* d0 */
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,   /* e0 */
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1   /* f0 */
-    };
+
     
 /**
  *  Windows character names.  Give a name to the used locations

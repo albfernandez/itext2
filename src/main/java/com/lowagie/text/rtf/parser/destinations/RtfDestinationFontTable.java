@@ -75,6 +75,7 @@ public final class RtfDestinationFontTable extends RtfDestination {
 	/**
 	 * The theme (Office 2007)
 	 */
+	@SuppressWarnings("unused")
 	private String themeFont = "";
 	/**
 	 * The number of the font being parsed.
@@ -83,6 +84,7 @@ public final class RtfDestinationFontTable extends RtfDestination {
 	/**
 	 * The family of the font being parsed.
 	 */
+	@SuppressWarnings("unused")
 	private String fontFamily = "";
 	/**
 	 * The \charset value
@@ -92,14 +94,17 @@ public final class RtfDestinationFontTable extends RtfDestination {
 	/**
 	 * The \fprq
 	 */
+	@SuppressWarnings("unused")
 	private int fprq = 0;
 	/**
 	 * The \*\panose font matching value if primary font is not available.
 	 */
+	@SuppressWarnings("unused")
 	private String panose = "";
 	/**
 	 * The \*\fname
 	 */
+	@SuppressWarnings("unused")
 	private String nontaggedname = "";
 	/**
 	 * The name of the font being parsed.
@@ -112,30 +117,37 @@ public final class RtfDestinationFontTable extends RtfDestination {
 	/**
 	 * The \falt alternate font if primary font is not available.
 	 */
+	@SuppressWarnings("unused")
 	private String fontemb = "";
 	/**
 	 * The \falt alternate font if primary font is not available.
 	 */
+	@SuppressWarnings("unused")
 	private String fontType = "";
 	/**
 	 * The \falt alternate font if primary font is not available.
 	 */
+	@SuppressWarnings("unused")
 	private String fontFile = "";
 	/**
 	 * The \falt alternate font if primary font is not available.
 	 */
+	@SuppressWarnings("unused")
 	private String fontFileCpg = "";
 	/**
 	 * The \fbias value
 	 */
+	@SuppressWarnings("unused")
 	private int fbias = 0;
 	/**
 	 * The \cpg value
 	 */
+	@SuppressWarnings("unused")
 	private String cpg = "";
 	/**
 	 * The \fnil, \fttruetype value
 	 */
+	@SuppressWarnings("unused")
 	private String trueType = "";
 
 	/**
@@ -569,9 +581,8 @@ public final class RtfDestinationFontTable extends RtfDestination {
 		} catch (Throwable e) {
 		}
 		String systemRoot = pr.getProperty("SystemRoot");
-		Runtime runtime = Runtime.getRuntime();
 		String fileSeperator = System.getProperty("file.separator");
-		int r = FontFactory.registerDirectory(systemRoot + fileSeperator + "fonts");
+		FontFactory.registerDirectory(systemRoot + fileSeperator + "fonts");
 	}
 	
 	/**

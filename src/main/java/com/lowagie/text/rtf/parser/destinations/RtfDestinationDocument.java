@@ -87,6 +87,7 @@ public final class RtfDestinationDocument extends RtfDestination implements RtfP
 	 * 
 	 * @see com.lowagie.text.Document
 	 */
+	@SuppressWarnings("unused")
 	private Document doc = null;
 	
 	private StringBuffer buffer = null;
@@ -104,6 +105,7 @@ public final class RtfDestinationDocument extends RtfDestination implements RtfP
 	/**
 	 * Indicates the current table level being processed
 	 */
+	@SuppressWarnings("unused")
 	private int tableLevel = 0;
 	
 	private static final List IMPORT_IGNORED_CTRLWORDS = Arrays.asList(new String[]{
@@ -123,6 +125,7 @@ public final class RtfDestinationDocument extends RtfDestination implements RtfP
 		"adeflang",
 		"adeflangfe"});
 
+	@SuppressWarnings("unused")
 	private static final List CONVERT_IGNORED_CTRLWORDS = Arrays.asList(new String[]{"rtf"});
 
 	private Paragraph iTextParagraph = null;
