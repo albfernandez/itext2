@@ -329,7 +329,7 @@ public class ElementFactory {
 			value = attributes.getProperty(ElementTags.WIDTHS);
 			if (value != null) {
 				StringTokenizer widthTokens = new StringTokenizer(value, ";");
-				ArrayList values = new ArrayList();
+				ArrayList<String> values = new ArrayList<String>();
 				while (widthTokens.hasMoreTokens()) {
 					values.add(widthTokens.nextToken());
 				}
