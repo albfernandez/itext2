@@ -293,18 +293,7 @@ public class RtfDestinationColorTable extends RtfDestination  {
 			}
 		}
 	}
-	/**
-	 * Set the theme color value.
-	 * @param value Value to set the theme color to
-	 * @see com.lowagie.text.rtf.parser.enumerations.RtfColorThemes
-	 */
-	private void setThemeColor(int value) {
-		if(value >= RtfColorThemes.THEME_UNDEFINED && value <= RtfColorThemes.THEME_MAX) {
-			this.themeColor = value;
-		} else {
-			this.themeColor = RtfColorThemes.THEME_UNDEFINED;
-		}
-	}
+
 	
 	// conversion functions
 	/**

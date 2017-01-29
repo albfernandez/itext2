@@ -191,14 +191,6 @@ public final class RtfCtrlWordMgr {
 		return true;
 	}
 	
-	private boolean onCtrlWord(RtfCtrlWordData ctrlWordData) {
-		RtfCtrlWordListener listener;
-		for (Iterator iterator = listeners.iterator(); iterator.hasNext();) {
-            listener = (RtfCtrlWordListener) iterator.next();
-            listener.onCtrlWord(ctrlWordData);
-        }
-		return true;
-	}
 	
 	private boolean afterCtrlWord(RtfCtrlWordData ctrlWordData) {
 		RtfCtrlWordListener listener;

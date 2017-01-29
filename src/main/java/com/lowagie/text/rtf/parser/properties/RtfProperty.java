@@ -338,64 +338,12 @@ public class RtfProperty {
 		setModified(propertyName, true);
 		return true;
 	}
-	/**
-	 * Add the value of the property identified by the parameter.
-	 * 
-	 * @param propertyName The property name to set
-	 * @param propertyValue The object to set the property value to
-	 * @return <code>true</code> for handled or <code>false</code> if <code>propertyName</code> is <code>null</code>
-	 */
-	private boolean addToProperty(String propertyName, int propertyValue) {
-		if(propertyName == null) return false;
-		int value = ((Integer)properties.get(propertyName)).intValue();
-		if((value | propertyValue) == value) return true;
-		value |= propertyValue;
-		beforeChange(propertyName);
-		properties.put(propertyName, new Integer(value));
-		afterChange(propertyName);
-		setModified(propertyName, true);
-		return true;
-	}
-	/**
-	 * Set the value of the property identified by the parameter.
-	 * 
-	 * @param propertyName The property name to set
-	 * @param propertyValueNew The object to set the property value to
-	 * @return <code>true</code> for handled or <code>false</code> if <code>propertyName</code> is <code>null</code>
-	 */
-	private boolean setProperty(String propertyName, long propertyValueNew) {
-		if(propertyName == null) return false;
-		Object propertyValueOld = getProperty(propertyName);
-		if(propertyValueOld instanceof Long) {
-			long valueOld = ((Long)propertyValueOld).longValue();
-			if (valueOld==propertyValueNew) return true;
-		} 
-		beforeChange(propertyName);
-		properties.put(propertyName, new Long(propertyValueNew));
-		afterChange(propertyName);
-		setModified(propertyName, true);
-		return true;
-	}
-	/**
-	 * Add the value of the property identified by the parameter.
-	 * 
-	 * @param propertyName The property name to set
-	 * @param propertyValue The object to set the property value to
-	 * @return <code>true</code> for handled or <code>false</code> if <code>propertyName</code> is <code>null</code>
-	 */
-	private boolean addToProperty(String propertyName, long propertyValue) {
-		if(propertyName == null) return false;
-		long value = ((Long)properties.get(propertyName)).longValue();
-		if((value | propertyValue) == value) return true;
-		value |= propertyValue;
-		beforeChange(propertyName);
-		properties.put(propertyName, new Long(value));
-		afterChange(propertyName);
-		setModified(propertyName, true);
-		return true;
-	}
+
+
 	private boolean removeProperty(String propertyName) {
-		if(propertyName == null) return false;
+		if(propertyName == null) {
+			return false;
+		}
 		if(properties.containsKey(propertyName)) {
 			beforeChange(propertyName);
 			properties.remove(propertyName);

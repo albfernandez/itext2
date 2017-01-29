@@ -122,12 +122,7 @@ public class RtfCtrlWordHandler implements Cloneable {
 	 * @since 2.0.8
 	 */
 	protected String ctrlWordSuffix = " ";
-	/**
-	 * Hidden default constructor. Must use constructor with parameters.
-	 * @see com.lowagie.text.rtf.parser.ctrlwords.RtfCtrlWordHandler#RtfCtrlWordHandler(RtfParser rtfParser, String ctrlWord, int defaultParameterValue, boolean passDefaultParameterValue, int ctrlWordType, String prefix, String suffix, String specialHandler)
-	 * @since 2.0.8
-	 */
-	private RtfCtrlWordHandler(){};
+
 	
 	/**
 	 * Constructor:
