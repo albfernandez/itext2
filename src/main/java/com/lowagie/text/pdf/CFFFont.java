@@ -297,21 +297,21 @@ public class CFFFont {
             char b0 = getCard8();
             if (b0 == 29) {
                 int item = getInt();
-                args[arg_count] = new Integer(item);
+                args[arg_count] = Integer.valueOf(item);
                 arg_count++;
                 //System.err.println(item+" ");
                 continue;
             }
             if (b0 == 28) {
                 short item = getShort();
-                args[arg_count] = new Integer(item);
+                args[arg_count] = Integer.valueOf(item);
                 arg_count++;
                 //System.err.println(item+" ");
                 continue;
             }
             if (b0 >= 32 && b0 <= 246) {
                 byte item = (byte) (b0-139);
-                args[arg_count] = new Integer(item);
+                args[arg_count] = Integer.valueOf(item);
                 arg_count++;
                 //System.err.println(item+" ");
                 continue;
@@ -319,7 +319,7 @@ public class CFFFont {
             if (b0 >= 247 && b0 <= 250) {
                 char b1 = getCard8();
                 short item = (short) ((b0-247)*256+b1+108);
-                args[arg_count] = new Integer(item);
+                args[arg_count] = Integer.valueOf(item);
                 arg_count++;
                 //System.err.println(item+" ");
                 continue;
@@ -327,7 +327,7 @@ public class CFFFont {
             if (b0 >= 251 && b0 <= 254) {
                 char b1 = getCard8();
                 short item = (short) (-(b0-251)*256-b1-108);
-                args[arg_count] = new Integer(item);
+                args[arg_count] = Integer.valueOf(item);
                 arg_count++;
                 //System.err.println(item+" ");
                 continue;

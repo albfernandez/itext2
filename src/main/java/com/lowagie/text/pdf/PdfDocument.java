@@ -2562,10 +2562,10 @@ public class PdfDocument extends Document {
 
             Integer i = (Integer) rowspanMap.get(c);
             if (i == null) {
-                i = new Integer(c.rowspan());
+                i = Integer.valueOf(c.rowspan());
             }
 
-            i = new Integer(i.intValue() - 1);
+            i = Integer.valueOf(i.intValue() - 1);
             rowspanMap.put(c, i);
 
             if (i.intValue() < 1) {
@@ -2591,13 +2591,13 @@ public class PdfDocument extends Document {
         public int cellRendered(PdfCell cell, int pageNumber) {
             Integer i = (Integer) pageMap.get(cell);
             if (i == null) {
-                i = new Integer(1);
+                i = Integer.valueOf(1);
             } else {
-                i = new Integer(i.intValue() + 1);
+                i = Integer.valueOf(i.intValue() + 1);
             }
             pageMap.put(cell, i);
 
-            Integer pageInteger = new Integer(pageNumber);
+            Integer pageInteger = Integer.valueOf(pageNumber);
             Set set = (Set) pageMap.get(pageInteger);
 
             if (set == null) {
@@ -2613,13 +2613,13 @@ public class PdfDocument extends Document {
         public int numCellRendered(PdfCell cell) {
             Integer i = (Integer) pageMap.get(cell);
             if (i == null) {
-                i = new Integer(0);
+                i = Integer.valueOf(0);
             }
             return i.intValue();
         }
 
         public boolean isCellRenderedOnPage(PdfCell cell, int pageNumber) {
-            Integer pageInteger = new Integer(pageNumber);
+            Integer pageInteger = Integer.valueOf(pageNumber);
             Set set = (Set) pageMap.get(pageInteger);
 
             if (set != null) {

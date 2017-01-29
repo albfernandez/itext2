@@ -68,7 +68,7 @@ import com.lowagie.text.exceptions.BadPasswordException;
 class PdfCopyFieldsImp extends PdfWriter {
 
     private static final PdfName iTextTag = new PdfName("_iTextTag_");
-    private static final Integer zero = new Integer(0);
+    private static final Integer zero = Integer.valueOf(0);
     ArrayList readers = new ArrayList();
     HashMap readers2intrefs = new HashMap();
     HashMap pages2intrefs = new HashMap();
@@ -242,7 +242,7 @@ class PdfCopyFieldsImp extends PdfWriter {
             for (int k = 0; k < size; ++k) {
                 t.add(zero);
             }
-            t.add(new Integer(v));
+            t.add(Integer.valueOf(v));
             tabOrder.put(annots, t);
             annots.add(ind);
         }
@@ -250,14 +250,14 @@ class PdfCopyFieldsImp extends PdfWriter {
             int size = t.size() - 1;
             for (int k = size; k >= 0; --k) {
                 if (((Integer)t.get(k)).intValue() <= v) {
-                    t.add(k + 1, new Integer(v));
+                    t.add(k + 1, Integer.valueOf(v));
                     annots.add(k + 1, ind);
                     size = -2;
                     break;
                 }
             }
             if (size != -2) {
-                t.add(0, new Integer(v));
+                t.add(0, Integer.valueOf(v));
                 annots.add(0, ind);
             }
         }
@@ -624,7 +624,7 @@ class PdfCopyFieldsImp extends PdfWriter {
     protected static final HashMap widgetKeys = new HashMap();
     protected static final HashMap fieldKeys = new HashMap();
     static {
-        Integer one = new Integer(1);
+        Integer one = Integer.valueOf(1);
         widgetKeys.put(PdfName.SUBTYPE, one);
         widgetKeys.put(PdfName.CONTENTS, one);
         widgetKeys.put(PdfName.RECT, one);

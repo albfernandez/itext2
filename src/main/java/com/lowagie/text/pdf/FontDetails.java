@@ -209,7 +209,7 @@ class FontDetails {
                             metrics = ttu.getMetricsTT(b[k] & 0xff);
                             if (metrics == null)
                                 continue;
-                            longTag.put(new Integer(metrics[0]), new int[]{metrics[0], metrics[1], ttu.getUnicodeDifferences(b[k] & 0xff)});
+                            longTag.put(Integer.valueOf(metrics[0]), new int[]{metrics[0], metrics[1], ttu.getUnicodeDifferences(b[k] & 0xff)});
                             glyph[i++] = (char)metrics[0];
                         }
                     }
@@ -227,7 +227,7 @@ class FontDetails {
                     		if (metrics == null)
                     			continue;
                     		int m0 = metrics[0];
-                    		Integer gl = new Integer(m0);
+                    		Integer gl = Integer.valueOf(m0);
                     		if (!longTag.containsKey(gl))
                     			longTag.put(gl, new int[]{m0, metrics[1], val});
                     		glyph[i++] = (char)m0;
@@ -262,7 +262,7 @@ class FontDetails {
 
 			glyphs[glyphCount++] = (char) code;// FIXME supplementary plane?
 
-			Integer codeKey = new Integer(code);
+			Integer codeKey = Integer.valueOf(code);
 			if (!longTag.containsKey(codeKey)) {
 				int glyphWidth = ttu.getGlyphWidth(code);
 				Integer charCode = ttu.getCharacterCode(code);
@@ -307,7 +307,7 @@ class FontDetails {
                         firstChar = 255;
                         lastChar = 255;
                     }
-                    baseFont.writeFont(writer, indirectReference, new Object[]{new Integer(firstChar), new Integer(lastChar), shortTag, Boolean.valueOf(subset)});
+                    baseFont.writeFont(writer, indirectReference, new Object[]{Integer.valueOf(firstChar), Integer.valueOf(lastChar), shortTag, Boolean.valueOf(subset)});
                     break;
                 }
                 case BaseFont.FONT_TYPE_CJK:

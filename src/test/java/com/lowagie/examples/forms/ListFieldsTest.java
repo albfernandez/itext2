@@ -73,7 +73,7 @@ public class ListFieldsTest {
 			ArrayList fields = form.getFields();
 			for (int k = 0; k < fields.size(); ++k) {
 				PRAcroForm.FieldInformation field = (PRAcroForm.FieldInformation) fields.get(k);
-				refToField.put(new Integer(field.getRef().getNumber()), field);
+				refToField.put(Integer.valueOf(field.getRef().getNumber()), field);
 			}
 			for (int page = 1; page <= reader.getNumberOfPages(); ++page) {
 				PdfDictionary dPage = reader.getPageN(page);
@@ -94,7 +94,7 @@ public class ListFieldsTest {
 						if (tName != null)
 							fName = tName.toString() + "." + fName;
 						if (ref != null) {
-							field = (PRAcroForm.FieldInformation) refToField.get(new Integer(ref.getNumber()));
+							field = (PRAcroForm.FieldInformation) refToField.get(Integer.valueOf(ref.getNumber()));
 						}
 						ref = annotDict.getAsIndirectObject(PdfName.PARENT);
 						annotDict = annotDict.getAsDict(PdfName.PARENT);

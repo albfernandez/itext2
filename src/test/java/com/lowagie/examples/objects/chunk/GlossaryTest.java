@@ -50,7 +50,7 @@ public class GlossaryTest extends PdfPageEventHelper {
 	 *      java.lang.String)
 	 */
 	public void onGenericTag(PdfWriter writer, Document document, Rectangle rect, String text) {
-		glossary.put(text, new Integer(writer.getPageNumber()));
+		glossary.put(text, Integer.valueOf(writer.getPageNumber()));
 	}
 
 	/**

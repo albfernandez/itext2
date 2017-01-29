@@ -254,7 +254,7 @@ public class RtfProperty {
 		
 		Object propertyValue = getProperty(propertyName);
 		if(propertyValue == null) {
-			propertyValue = new Integer(RtfProperty.ON);
+			propertyValue = Integer.valueOf(RtfProperty.ON);
 		} else {
 			if(propertyValue instanceof Integer) {
 				int value = ((Integer)propertyValue).intValue();
@@ -333,7 +333,7 @@ public class RtfProperty {
 			if (valueOld==propertyValueNew) return true;
 		} 
 		beforeChange(propertyName);
-		properties.put(propertyName, new Integer(propertyValueNew));
+		properties.put(propertyName, Integer.valueOf(propertyValueNew));
 		afterChange(propertyName);
 		setModified(propertyName, true);
 		return true;

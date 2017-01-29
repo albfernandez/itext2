@@ -2952,7 +2952,7 @@ public class PdfContentByte {
         if (layerDepth == null)
             layerDepth = new ArrayList();
         if (layer instanceof PdfLayerMembership) {
-            layerDepth.add(new Integer(1));
+            layerDepth.add(Integer.valueOf(1));
             beginLayer2(layer);
             return;
         }
@@ -2965,7 +2965,7 @@ public class PdfContentByte {
             }
             la = la.getParent();
         }
-        layerDepth.add(new Integer(n));
+        layerDepth.add(Integer.valueOf(n));
     }
 
     private void beginLayer2(PdfOCG layer) {

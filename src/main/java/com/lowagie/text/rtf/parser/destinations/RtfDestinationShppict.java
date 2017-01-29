@@ -116,11 +116,11 @@ public class RtfDestinationShppict extends RtfDestination {
 	/* bitapinfo */
 	// wbmbitspixelN - number of bits per pixel - 1 monochrome, 4 16 color, 8 256 color, 24 RGB - Default 1
 	@SuppressWarnings("unused")
-	private Integer bitsPerPixel = new Integer(1);
+	private Integer bitsPerPixel = Integer.valueOf(1);
 
 	// wbmplanesN - number of color planes - must be 1
 	@SuppressWarnings("unused")
-	private Integer planes = new Integer(1);
+	private Integer planes = Integer.valueOf(1);
 
 	// wbmwidthbytesN - number of bytes in each raster line
 	@SuppressWarnings("unused")
@@ -141,10 +141,10 @@ public class RtfDestinationShppict extends RtfDestination {
 	private Long desiredHeight = null;
 
 	// picscalexN
-	private Integer scaleX = new Integer(100);
+	private Integer scaleX = Integer.valueOf(100);
 
 	// picscaleyN
-	private Integer scaleY = new Integer(100);
+	private Integer scaleY = Integer.valueOf(100);
 
 	// picscaled - macpict setting
 	@SuppressWarnings("unused")
@@ -160,19 +160,19 @@ public class RtfDestinationShppict extends RtfDestination {
 
 	// piccroptN
 	@SuppressWarnings("unused")
-	private Integer cropTop = new Integer(0);
+	private Integer cropTop = Integer.valueOf(0);
 
 	// piccropbN
 	@SuppressWarnings("unused")
-	private Integer cropBottom = new Integer(0);
+	private Integer cropBottom = Integer.valueOf(0);
 
 	// piccroplN
 	@SuppressWarnings("unused")
-	private Integer cropLeft = new Integer(0);
+	private Integer cropLeft = Integer.valueOf(0);
 
 	// piccroprN
 	@SuppressWarnings("unused")
-	private Integer cropRight = new Integer(0);
+	private Integer cropRight = Integer.valueOf(0);
 
 	/* metafileinfo */
 	// picbmp
@@ -683,15 +683,15 @@ public class RtfDestinationShppict extends RtfDestination {
 		this.height = null;
 		this.desiredWidth = null;
 		this.desiredHeight = null;
-		this.scaleX = new Integer(100);
-		this.scaleY = new Integer(100);
+		this.scaleX = Integer.valueOf(100);
+		this.scaleY = Integer.valueOf(100);
 		this.scaled = null;
 		this.inlinePicture = Boolean.FALSE;
 		this.wordArt = Boolean.FALSE;
-		this.cropTop = new Integer(0);
-		this.cropBottom = new Integer(0);
-		this.cropLeft = new Integer(0);
-		this.cropRight = new Integer(0);
+		this.cropTop = Integer.valueOf(0);
+		this.cropBottom = Integer.valueOf(0);
+		this.cropLeft = Integer.valueOf(0);
+		this.cropRight = Integer.valueOf(0);
 		this.bitmap = false;
 		this.bbp = 1;
 		this.dataFormat = FORMAT_HEXADECIMAL;

@@ -51,6 +51,7 @@ package com.lowagie.text.pdf;
 import com.lowagie.text.BadElementException;
 import com.lowagie.text.Image;
 import com.lowagie.text.pdf.codec.CCITTG4Encoder;
+
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.image.MemoryImageSource;
@@ -984,7 +985,7 @@ public class BarcodeDatamatrix {
         }
         
         static short[] doPlacement(int nrow, int ncol) {
-            Integer key = new Integer(nrow * 1000 + ncol);
+            Integer key = Integer.valueOf(nrow * 1000 + ncol);
             short[] pc = (short[])cache.get(key);
             if (pc != null)
                 return pc;

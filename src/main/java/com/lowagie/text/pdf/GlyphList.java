@@ -118,6 +118,6 @@ public class GlyphList {
     }
     
     public static String unicodeToName(int num) {
-        return (String)unicode2names.get(new Integer(num));
+        return (String)unicode2names.get(Integer.valueOf(num));
     }
 }

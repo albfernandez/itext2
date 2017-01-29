@@ -107,7 +107,7 @@ public class PdfStructureTreeRoot extends PdfDictionary {
     }
     
     void setPageMark(int page, PdfIndirectReference struc) {
-        Integer i = new Integer(page);
+        Integer i = Integer.valueOf(page);
         PdfArray ar = (PdfArray)parentTree.get(i);
         if (ar == null) {
             ar = new PdfArray();

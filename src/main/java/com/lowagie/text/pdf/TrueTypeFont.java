@@ -888,7 +888,7 @@ class TrueTypeFont extends BaseFont {
                 int[] r = new int[2];
                 r[0] = startGlyphID;
                 r[1] = getGlyphWidth(r[0]);
-                h.put(new Integer(i), r);
+                h.put(Integer.valueOf(i), r);
                 startGlyphID++;
             }
         }
@@ -907,7 +907,7 @@ class TrueTypeFont extends BaseFont {
             int r[] = new int[2];
             r[0] = rf.readUnsignedByte();
             r[1] = getGlyphWidth(r[0]);
-            h.put(new Integer(k), r);
+            h.put(Integer.valueOf(k), r);
         }
         return h;
     }
@@ -959,7 +959,7 @@ class TrueTypeFont extends BaseFont {
                 int r[] = new int[2];
                 r[0] = glyph;
                 r[1] = getGlyphWidth(r[0]);
-                h.put(new Integer(fontSpecific ? ((j & 0xff00) == 0xf000 ? j & 0xff : j) : j), r);
+                h.put(Integer.valueOf(fontSpecific ? ((j & 0xff00) == 0xf000 ? j & 0xff : j) : j), r);
             }
         }
         return h;
@@ -980,7 +980,7 @@ class TrueTypeFont extends BaseFont {
             int r[] = new int[2];
             r[0] = rf.readUnsignedShort();
             r[1] = getGlyphWidth(r[0]);
-            h.put(new Integer(k + start_code), r);
+            h.put(Integer.valueOf(k + start_code), r);
         }
         return h;
     }
@@ -1211,9 +1211,10 @@ class TrueTypeFont extends BaseFont {
             for (Iterator it = usemap.entrySet().iterator(); it.hasNext();) {
                 Map.Entry e = (Map.Entry)it.next();
                 int[] v = (int[])e.getValue();
-                Integer gi = new Integer(v[0]);
-                if (longTag.containsKey(gi))
+                Integer gi = Integer.valueOf(v[0]);
+                if (longTag.containsKey(gi)){
                     continue;
+                }
                 int c = ((Integer)e.getKey()).intValue();
                 boolean skip = true;
                 for (int k = 0; k < rg.length; k += 2) {
@@ -1275,8 +1276,9 @@ class TrueTypeFont extends BaseFont {
                             else
                                 metrics = getMetricsTT(unicodeDifferences[k]);
                         }
-                        if (metrics != null)
-                            glyphs.put(new Integer(metrics[0]), null);
+                        if (metrics != null){
+                            glyphs.put(Integer.valueOf(metrics[0]), null);
+                        }
                     }
                 }
                 addRangeUni(glyphs, false, subsetp);
@@ -1403,16 +1405,21 @@ class TrueTypeFont extends BaseFont {
      * @return an <CODE>int</CODE> array with {glyph index, width}
      */    
     public int[] getMetricsTT(int c) {
-        if (cmapExt != null)
-            return (int[])cmapExt.get(new Integer(c));
-        if (!fontSpecific && cmap31 != null) 
-            return (int[])cmap31.get(new Integer(c));
-        if (fontSpecific && cmap10 != null) 
-            return (int[])cmap10.get(new Integer(c));
-        if (cmap31 != null) 
-            return (int[])cmap31.get(new Integer(c));
-        if (cmap10 != null) 
-            return (int[])cmap10.get(new Integer(c));
+        if (cmapExt != null) {
+            return (int[])cmapExt.get(Integer.valueOf(c));
+        }
+        if (!fontSpecific && cmap31 != null) { 
+            return (int[])cmap31.get(Integer.valueOf(c));
+        }
+        if (fontSpecific && cmap10 != null) { 
+            return (int[])cmap10.get(Integer.valueOf(c));
+        }
+        if (cmap31 != null) { 
+            return (int[])cmap31.get(Integer.valueOf(c));
+        }
+        if (cmap10 != null) {
+            return (int[])cmap10.get(Integer.valueOf(c));
+        }
         return null;
     }
 
@@ -1526,7 +1533,7 @@ class TrueTypeFont extends BaseFont {
             map = cmap31;
         if (map == null)
             return null;
-        int metric[] = (int[])map.get(new Integer(c));
+        int metric[] = (int[])map.get(Integer.valueOf(c));
         if (metric == null || bboxes == null)
             return null;
         return bboxes[metric[0]];

@@ -110,7 +110,7 @@ public class RtfCtrlWordData implements Cloneable {
 	 */
 	public Integer toInteger() {
 		Integer value;
-		value = new Integer(this.isNeg ? Integer.parseInt(this.param)*-1 : Integer.parseInt(this.param));
+		value = Integer.valueOf(this.isNeg ? Integer.parseInt(this.param)*-1 : Integer.parseInt(this.param));
 		return value;
 	}
 	

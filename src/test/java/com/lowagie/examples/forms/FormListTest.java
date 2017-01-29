@@ -51,9 +51,9 @@ public class FormListTest {
 //            fldDef.setOptions( TextField.MULTISELECT );
 //
 //            ArrayList selections = new ArrayList( 3 );
-//            selections.add( new Integer( 1 ) );
-//            selections.add( new Integer( 3 ) );
-//            selections.add( new Integer( 5 ) );
+//            selections.add( Integer.valueOf( 1 ) );
+//            selections.add( Integer.valueOf( 3 ) );
+//            selections.add( Integer.valueOf( 5 ) );
 //            fldDef.setChoiceSelections( selections ); // index into chioces
 //            
 //            PdfFormField field = fldDef.getListField();

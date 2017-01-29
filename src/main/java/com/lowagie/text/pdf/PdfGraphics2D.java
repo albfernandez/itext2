@@ -101,7 +101,9 @@ import java.util.Map;
 import java.util.Set;
 
 import com.lowagie.text.pdf.internal.PolylineShape;
+
 import java.util.Locale;
+
 import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
 import javax.imageio.ImageWriteParam;
@@ -933,7 +935,7 @@ public class PdfGraphics2D extends Graphics2D {
         g2.kid = true;
         if (this.kids == null)
             this.kids = new ArrayList();
-        this.kids.add(new Integer(cb.getInternalBuffer().size()));
+        this.kids.add(Integer.valueOf(cb.getInternalBuffer().size()));
         this.kids.add(g2);
         return g2;
     }

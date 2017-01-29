@@ -293,7 +293,7 @@ public class SequenceList {
                             parse.low -= ((parse.low & 1) == 1 ? 0 : 1);
                     }
                     for (int k = parse.low; k >= parse.high; k += inc)
-                        list.add(new Integer(k));
+                        list.add(Integer.valueOf(k));
                 }
                 else {
                     if (parse.odd || parse.even) {
@@ -304,13 +304,10 @@ public class SequenceList {
                             parse.low += ((parse.low & 1) == 1 ? 1 : 0);
                     }
                     for (int k = parse.low; k <= parse.high; k += inc) {
-                        list.add(new Integer(k));
+                        list.add(Integer.valueOf(k));
                     }
                 }
             }
-//            for (int k = 0; k < list.size(); ++k)
-//                System.out.print(((Integer)list.get(k)).intValue() + ",");
-//            System.out.println();
         }
         return list;
     }
