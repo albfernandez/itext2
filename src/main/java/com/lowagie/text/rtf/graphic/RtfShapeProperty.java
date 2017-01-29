@@ -151,7 +151,7 @@ public class RtfShapeProperty extends RtfAddableElement {
      * @param value The long value to use.
      */
 	public RtfShapeProperty(String name, long value) {
-		this(name, new Long(value));
+		this(name, Long.valueOf(value));
 		this.type = PROPERTY_TYPE_LONG;
 	}
 	

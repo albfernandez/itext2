@@ -135,7 +135,7 @@ public class RtfCtrlWordData implements Cloneable {
 	 */
 	public Long toLong() {
 		Long value;
-		value = new Long(this.isNeg ? Long.parseLong(this.param)*-1 : Long.parseLong(this.param));
+		value = Long.valueOf(this.isNeg ? Long.parseLong(this.param)*-1 : Long.parseLong(this.param));
 		return value;
 	}
 	

@@ -1363,7 +1363,7 @@ public abstract class Image extends Rectangle {
 	/** Creates a new serial id. */
 	static protected synchronized Long getSerialId() {
 		++serialId;
-		return new Long(serialId);
+		return Long.valueOf(serialId);
 	}
 
 	/**
