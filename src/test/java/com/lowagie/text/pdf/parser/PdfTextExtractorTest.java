@@ -15,10 +15,36 @@ import com.lowagie.text.pdf.PdfReader;
 
 public class PdfTextExtractorTest {
 
+	
+	@Test(expected=IOException.class)
+	public void testPageExceeded() throws Exception {
+		getString("HelloWorldMeta.pdf", 5);
+	}
+	@Test(expected=IOException.class)
+	public void testInvalidPageNumber() throws Exception {
+		getString("HelloWorldMeta.pdf", 0);
+	}
+	
 	@Test
 	public void testHelloWorld() throws Exception {
 		String result = getString("HelloWorldMeta.pdf", 1);
 		Assert.assertEquals("Hello World", result);
+
+	}
+	
+	@Test
+	public void testConcatenate() throws Exception {
+		String result = getString("Concatenate.pdf", 5);
+		Assert.assertNotNull(result);
+		Assert.assertTrue(result.contains("2. This is chapter 2"));
+	}
+	
+	@Test
+	public void testConcatenateWatermark() throws Exception {
+		String result = getString("Concatenate-acroforms-watermark.pdf", 5);
+		Assert.assertNotNull(result);
+		Assert.assertTrue(result.contains("2. This is chapter 2"));
+		Assert.assertTrue(result.contains("Hello World watermark-concatenate"));
 	}
 	
 	@Test
