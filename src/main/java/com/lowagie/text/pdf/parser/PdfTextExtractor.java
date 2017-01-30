@@ -93,6 +93,13 @@ public class PdfTextExtractor {
      * @throws IOException
      */
     public String getTextFromPage(int page) throws IOException {
+    	int totalPages = reader.getNumberOfPages();
+    	if (totalPages < page) {
+    		throw new IOException("indicated page does not exists, requested page " + page + " document pages " + totalPages);
+    	}
+    	if (page <= 0) {
+    		throw new IOException("page number must be postive:" + page);
+    	}
         PdfDictionary pageDic = reader.getPageN(page);
         PdfDictionary resourcesDic = pageDic.getAsDict(PdfName.RESOURCES);
         extractionProcessor.processContent(getContentBytesForPage(page), resourcesDic);        
