@@ -33,14 +33,14 @@ This library is a fork of iText 2.1.7. Main goals are:
 ## Versions
 
 ### 2.1.9 (Unreleased)
-* Updated to BouncyCastle 1.56 (1.48 - 1.56)
-* Better text extraction
-* Code cleanup
+* Upgrade BouncyCastle to 1.56 (1.48 - 1.56).
+* Better text extraction.
+* Code cleanup.
 
 ### 2.1.8 (30 August 2016)
 
 * Mavenized project.
-* Patches to image processing to work with JasperReports 6,
+* Patches to image processing to work with JasperReports 6.
 * Removes metadata on generated pdfs.
 * Fix TIFFFaxDecoder, fails in some tiff files.
-* Updated to BouncyCastle 1.54 (1.48 - 1.56)
+* Upgrade BouncyCastle to 1.54 (1.48 - 1.56).
