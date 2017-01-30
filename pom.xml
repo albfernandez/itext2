@@ -9,6 +9,11 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		
+		<version.bouncycastle>1.56</version.bouncycastle>
+		<version.junit>4.12</version.junit>
+		<version.servlet-api>3.1.0</version.servlet-api>
+		<version.jfreechart>1.0.19</version.jfreechart>
 	</properties>
 	<licenses>
 		<license>
@@ -39,19 +44,19 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.12</version>
+			<version>${version.junit}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
-			<version>3.1.0</version>
+			<version>${version.servlet-api}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.jfree</groupId>
 			<artifactId>jfreechart</artifactId>
-			<version>1.0.19</version>
+			<version>${version.jfreechart}</version>
 			<scope>test</scope>
 		</dependency>
 		
@@ -59,17 +64,17 @@
 		<dependency>
 			<groupId>org.bouncycastle</groupId>
 			<artifactId>bcprov-jdk15on</artifactId>
-			<version>1.56</version>
+			<version>${version.bouncycastle}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.bouncycastle</groupId>
 			<artifactId>bcpkix-jdk15on</artifactId>
-			<version>1.56</version>
+			<version>${version.bouncycastle}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.bouncycastle</groupId>
 			<artifactId>bcmail-jdk15on</artifactId>
-			<version>1.56</version>
+			<version>${version.bouncycastle}</version>
 		</dependency>
 	</dependencies>
 
