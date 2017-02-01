@@ -51,6 +51,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 import com.lowagie.text.rtf.parser.ctrlwords.RtfCtrlWordData;
 
@@ -166,7 +167,7 @@ public class RtfProperty {
 	public static final String DOCUMENT_DEFAULT_FONT_NUMER = DOCUMENT + "defaultFontNumber";
 	
 	/** Properties for this RtfProperty object */
-	protected HashMap properties = new HashMap();
+	protected HashMap<String, Object> properties = new HashMap<String, Object>();
 	
 	private boolean modifiedCharacter = false; 
 	private boolean modifiedParagraph = false; 
@@ -369,16 +370,15 @@ public class RtfProperty {
 	 */
 	public HashMap getProperties(String propertyGroup) {
 		HashMap props = new HashMap();
-		if(!properties.isEmpty()) {
-			//properties.get
-			Iterator it = properties.keySet().iterator();
-			while(it.hasNext()) {
-				String key = (String)it.next();
-				if(key.startsWith(propertyGroup)) {
-					props.put(key, this.properties.get(key));
-				}
+		
+		for (Map.Entry<String, Object> entry : properties.entrySet()) {
+			String key = entry.getKey();
+			Object value = entry.getValue();
+			if (key.startsWith(propertyGroup)) {
+				props.put(key, value);
 			}
 		}
+
 		return props;
 	}
 	
