@@ -52,6 +52,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 /**
  * The structure tree root corresponds to the highest hierarchy level in a tagged PDF.
@@ -59,7 +60,7 @@ import java.util.Iterator;
  */
 public class PdfStructureTreeRoot extends PdfDictionary {
     
-    private HashMap parentTree = new HashMap();
+    private Map<Integer, PdfArray> parentTree = new HashMap<Integer, PdfArray>();
     private PdfIndirectReference reference;
 
     /**
@@ -106,12 +107,11 @@ public class PdfStructureTreeRoot extends PdfDictionary {
         return this.reference;
     }
     
-    void setPageMark(int page, PdfIndirectReference struc) {
-        Integer i = Integer.valueOf(page);
-        PdfArray ar = (PdfArray)parentTree.get(i);
+    void setPageMark(int page, PdfIndirectReference struc) {        
+        PdfArray ar = parentTree.get(page);
         if (ar == null) {
             ar = new PdfArray();
-            parentTree.put(i, ar);
+            parentTree.put(page, ar);
         }
         ar.add(struc);
     }
@@ -127,20 +127,22 @@ public class PdfStructureTreeRoot extends PdfDictionary {
                 nodeProcess(e, e.getReference());
             }
         }
-        if (reference != null)
+        if (reference != null) {
             writer.addToBody(struc, reference);
+        }
     }
     
     void buildTree() throws IOException {
         HashMap numTree = new HashMap();
-        for (Iterator it = parentTree.keySet().iterator(); it.hasNext();) {
-            Integer i = (Integer)it.next();
-            PdfArray ar = (PdfArray)parentTree.get(i);
+        for (Map.Entry<Integer, PdfArray> entry: parentTree.entrySet()) {        
+            Integer i = entry.getKey();
+            PdfArray ar = entry.getValue();
             numTree.put(i, writer.addToBody(ar).getIndirectReference());
         }
         PdfDictionary dicTree = PdfNumberTree.writeTree(numTree, writer);
-        if (dicTree != null)
+        if (dicTree != null) {
             put(PdfName.PARENTTREE, writer.addToBody(dicTree).getIndirectReference());
+        }
         
         nodeProcess(this, reference);
     }
