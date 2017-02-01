@@ -575,14 +575,15 @@ public final class RtfDestinationFontTable extends RtfDestination {
 	 * @since 2.0.8
 	 */
 	private void importSystemFonts() {
-		Properties pr = null;
 		try {
-			pr = getEnvironmentVariables();
+			Properties pr = getEnvironmentVariables();
+			String systemRoot = pr.getProperty("SystemRoot");
+			String fileSeperator = System.getProperty("file.separator");
+			FontFactory.registerDirectory(systemRoot + fileSeperator + "fonts");
 		} catch (Throwable e) {
+			// Ignore
 		}
-		String systemRoot = pr.getProperty("SystemRoot");
-		String fileSeperator = System.getProperty("file.separator");
-		FontFactory.registerDirectory(systemRoot + fileSeperator + "fonts");
+
 	}
 	
 	/**
@@ -598,15 +599,12 @@ public final class RtfDestinationFontTable extends RtfDestination {
 		String operatingSystem = System.getProperty("os.name").toLowerCase();
 		Runtime runtime = Runtime.getRuntime();
 		Process process = null;
-		if (operatingSystem.indexOf("windows 95") > -1
-				|| operatingSystem.indexOf("windows 98") > -1
-				|| operatingSystem.indexOf("me") > -1) {
+		if (operatingSystem.startsWith("windows 95")
+				|| operatingSystem.startsWith("windows 98")
+				|| operatingSystem.startsWith("me")) {
 			process = runtime.exec("command.com /c set");
-		} else if ((operatingSystem.indexOf("nt") > -1)
-				|| (operatingSystem.indexOf("windows 2000") > -1)
-				|| (operatingSystem.indexOf("windows xp") > -1)
-				|| (operatingSystem.indexOf("windows 2003") > -1)
-				|| (operatingSystem.indexOf("windows vista") > -1)) {
+		} else if (operatingSystem.startsWith("windows")) {
+			// Modern windows
 			process = runtime.exec("cmd.exe /c set");
 		} else {
 			process = runtime.exec("env");
