@@ -52,7 +52,6 @@ package com.lowagie.text.pdf;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -103,7 +102,7 @@ public class PdfDictionary extends PdfObject {
     private PdfName dictionaryType = null;
     
     /** This is the hashmap that contains all the values and keys of the dictionary */
-    protected HashMap hashMap;
+    protected HashMap<PdfName, PdfObject> hashMap;
     
     // CONSTRUCTORS
     
@@ -112,7 +111,7 @@ public class PdfDictionary extends PdfObject {
      */
     public PdfDictionary() {
         super(DICTIONARY);
-        hashMap = new HashMap();
+        hashMap = new HashMap<PdfName, PdfObject>();
     }
     
     /**
@@ -141,8 +140,8 @@ public class PdfDictionary extends PdfObject {
         os.write('<');
         // loop over all the object-pairs in the HashMap
         
-        Map<PdfName, PdfObject> map = (Map<PdfName, PdfObject>) hashMap;
-        for (Map.Entry<PdfName, PdfObject> entry: map.entrySet()){
+       
+        for (Map.Entry<PdfName, PdfObject> entry: hashMap.entrySet()){
         	PdfName key = entry.getKey();
         	PdfObject value = entry.getValue();
             key.toPdf(writer, os);
@@ -189,7 +188,7 @@ public class PdfDictionary extends PdfObject {
      */
     public void put(PdfName key, PdfObject object) {
         if (object == null || object.isNull()) {
-            hashMap.remove(key);
+            remove(key);
         }
         else {
             hashMap.put(key, object);
@@ -248,7 +247,7 @@ public class PdfDictionary extends PdfObject {
      *   <VAR>key</VAR>
      */
     public PdfObject get(PdfName key) {
-        return (PdfObject) hashMap.get(key);
+        return hashMap.get(key);
     }
     
     /**
@@ -350,12 +349,13 @@ public class PdfDictionary extends PdfObject {
     }
     
     public void mergeDifferent(PdfDictionary other) {
-        for (Iterator i = other.hashMap.keySet().iterator(); i.hasNext();) {
-            Object key = i.next();
-            if (!hashMap.containsKey(key)) {
-                hashMap.put(key, other.hashMap.get(key));
-            }
-        }
+    	for (Map.Entry<PdfName, PdfObject> entry : other.hashMap.entrySet()) {
+    		PdfName key = entry.getKey();
+    		PdfObject value = entry.getValue();
+    		if (!hashMap.containsKey(key)) {
+    			hashMap.put(key, value);
+    		}
+    	}
     }
     
      // DOWNCASTING GETTERS
