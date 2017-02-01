@@ -14,7 +14,7 @@
 		<version.junit>4.12</version.junit>
 		<version.servlet-api>3.1.0</version.servlet-api>
 		<version.jfreechart>1.0.19</version.jfreechart>
-		<version.findbugs-plugin>3.0.3</version.findbugs-plugin>
+		<version.findbugs-plugin>3.0.4</version.findbugs-plugin>
 		<version.pmd-plugin>3.7</version.pmd-plugin>
 		
 		<compiler.level>1.7</compiler.level>
