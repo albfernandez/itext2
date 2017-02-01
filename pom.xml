@@ -14,6 +14,8 @@
 		<version.junit>4.12</version.junit>
 		<version.servlet-api>3.1.0</version.servlet-api>
 		<version.jfreechart>1.0.19</version.jfreechart>
+		<version.findbugs-plugin>3.0.3</version.findbugs-plugin>
+		<version.pmd-plugin>3.7</version.pmd-plugin>
 		
 		<compiler.level>1.7</compiler.level>
 	</properties>
@@ -143,7 +145,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>findbugs-maven-plugin</artifactId>
-				<version>3.0.3</version>
+				<version>${version.findbugs-plugin}</version>
 				<executions>
 					<execution>
 						<id>findbugs-check</id>
@@ -160,7 +162,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-pmd-plugin</artifactId>
-				<version>3.6</version>
+				<version>${version.pmd-plugin}</version>
 				<configuration>
 					<verbose>true</verbose>
 					<failOnViolation>false</failOnViolation>
@@ -214,6 +216,8 @@
         </activation>
         <properties>
         	<compiler.level>1.6</compiler.level>
+        	<version.findbugs-plugin>2.5.5</version.findbugs-plugin>
+        	<version.pmd-plugin>2.7.1</version.pmd-plugin>
         </properties>        
       </profile>
     </profiles>
