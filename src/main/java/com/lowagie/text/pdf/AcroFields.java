@@ -49,6 +49,7 @@ package com.lowagie.text.pdf;
 import java.awt.Color;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -2425,8 +2426,11 @@ public class AcroFields {
         }
     }
 
-    private static class SorterComparator implements Comparator {
-        public int compare(Object o1, Object o2) {
+    private static class SorterComparator implements Comparator, Serializable {
+
+		private static final long serialVersionUID = 1309341976033149592L;
+
+		public int compare(Object o1, Object o2) {
             int n1 = ((int[])((Object[])o1)[1])[0];
             int n2 = ((int[])((Object[])o2)[1])[0];
             return n1 - n2;
