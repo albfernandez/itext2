@@ -76,8 +76,9 @@ public class Hyphenator {
         }
 
         HyphenationTree hTree = getResourceHyphenationTree(key);
-        if (hTree == null)
+        if (hTree == null) {
             hTree = getFileHyphenationTree(key);
+        }
         // put it into the pattern cache
         if (hTree != null) {
             hyphenTrees.put(key, hTree);
@@ -92,10 +93,12 @@ public class Hyphenator {
     public static HyphenationTree getResourceHyphenationTree(String key) {
         try {
             InputStream stream = BaseFont.getResourceStream(defaultHyphLocation + key + ".xml");
-            if (stream == null && key.length() > 2)
+            if (stream == null && key.length() > 2) {
                 stream = BaseFont.getResourceStream(defaultHyphLocation + key.substring(0, 2) + ".xml");
-            if (stream == null)
+            }
+            if (stream == null) {
                 return null;
+            }
             HyphenationTree hTree = new HyphenationTree();
             hTree.loadSimplePatterns(stream);
             return hTree;
@@ -115,15 +118,18 @@ public class Hyphenator {
                 return null;
             InputStream stream = null;
             File hyphenFile = new File(hyphenDir, key + ".xml");
-            if (hyphenFile.canRead())
+            if (hyphenFile.canRead()) {
                 stream = new FileInputStream(hyphenFile);
+            }
             if (stream == null && key.length() > 2) {
                 hyphenFile = new File(hyphenDir, key.substring(0, 2) + ".xml");
-                if (hyphenFile.canRead())
+                if (hyphenFile.canRead()) {
                     stream = new FileInputStream(hyphenFile);
+                }
             }
-            if (stream == null)
+            if (stream == null) {
                 return null;
+            }
             HyphenationTree hTree = new HyphenationTree();
             hTree.loadSimplePatterns(stream);
             return hTree;
@@ -146,8 +152,6 @@ public class Hyphenator {
                                         int rightMin) {
         HyphenationTree hTree = getHyphenationTree(lang, country);
         if (hTree == null) {
-            //log.error("Error building hyphenation tree for language "
-            //                       + lang);
             return null;
         }
         return hTree.hyphenate(word, leftMin, rightMin);
