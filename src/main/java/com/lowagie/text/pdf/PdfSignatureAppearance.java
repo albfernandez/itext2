@@ -826,8 +826,9 @@ public class PdfSignatureAppearance {
         while (!found) {
             ++step;
             String n1 = name + step;
-            if (af.getFieldItem(n1) != null)
+            if (af.getFieldItem(n1) != null) {
                 continue;
+            }
             n1 += ".";
             found = true;
             for (Iterator it = af.getFields().keySet().iterator(); it.hasNext();) {

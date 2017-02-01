@@ -127,10 +127,12 @@ public class XfdfReader implements SimpleXMLDocHandler {
      */    
     public String getFieldValue(String name) {
         String field = (String)fields.get(name);
-        if (field == null)
+        if (field == null) {
             return null;
-        else
+        }
+        else {
         	return field;
+        }
     }
     
     /**
@@ -159,10 +161,12 @@ public class XfdfReader implements SimpleXMLDocHandler {
     public void startElement(String tag, HashMap h)
     {
         if ( !foundRoot ) {
-            if (!tag.equals("xfdf"))
+            if (!tag.equals("xfdf")) {
                 throw new RuntimeException("Root element is not Bookmark.");
-            else 
+            }
+            else { 
             	foundRoot = true;
+            }
         }
 
         if ( tag.equals("xfdf") ){
@@ -184,28 +188,31 @@ public class XfdfReader implements SimpleXMLDocHandler {
      * @param tag the tag name
      */    
     public void endElement(String tag) {
-        if ( tag.equals("value") ) {
-            String	fName = "";
+        if ( "value".equals(tag) ) {
+            StringBuilder fName = new StringBuilder();
             for (int k = 0; k < fieldNames.size(); ++k) {
-                fName += "." + (String)fieldNames.elementAt(k);
+                fName.append(".").append((String)fieldNames.elementAt(k));
             }
-            if (fName.startsWith("."))
-                fName = fName.substring(1);
+            if (fName.charAt(0) == '.') {
+            	fName.deleteCharAt(0);
+            }
+            String fNameString = fName.toString();
             String fVal = (String) fieldValues.pop();
-            String old = (String) fields.put( fName, fVal );
+            String old = (String) fields.put( fNameString, fVal );
             if (old != null) {
-            	List l = (List) listFields.get(fName);
+            	List l = (List) listFields.get(fNameString);
             	if (l == null) {
             		l = new ArrayList();
             		l.add(old);
             	}
             	l.add(fVal);
-            	listFields.put(fName, l);
+            	listFields.put(fNameString, l);
             }
         }
-        else if (tag.equals("field") ) {
-            if (!fieldNames.isEmpty())
+        else if ("field".equals(tag)) {
+            if (!fieldNames.isEmpty()) {
                 fieldNames.pop();
+            }
         }
     }
     

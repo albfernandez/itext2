@@ -207,18 +207,20 @@ public class GifImage {
         in = new DataInputStream(new BufferedInputStream(is));
         readHeader();
         readContents();
-        if (frames.isEmpty())
+        if (frames.isEmpty()) {
             throw new IOException("The file does not contain any valid image.");
+        }
     }
     
     /**
      * Reads GIF file header information.
      */
     protected void readHeader() throws IOException {
-        String id = "";
-        for (int i = 0; i < 6; i++)
-            id += (char)in.read();
-        if (!id.startsWith("GIF8")) {
+        StringBuilder id = new StringBuilder(8);
+        for (int i = 0; i < 6; i++) {
+            id.append((char)in.read());
+        }
+        if (!id.toString().startsWith("GIF8")) {
             throw new IOException("Gif signature nor found.");
         }
         
@@ -260,8 +262,9 @@ public class GifImage {
      */
     protected int readBlock() throws IOException {
         blockSize = in.read();
-        if (blockSize <= 0)
+        if (blockSize <= 0) {
             return blockSize = 0;
+        }
         for (int k = 0; k < blockSize; ++k) {
             int v = in.read();
             if (v < 0) {
@@ -355,9 +358,11 @@ public class GifImage {
         else {
             m_curr_table = m_global_table;
         }
-        if (transparency && transIndex >= m_curr_table.length / 3)
+        if (transparency && transIndex >= m_curr_table.length / 3) {
             transparency = false;
-        if (transparency && m_bpc == 1) { // Acrobat 5.05 doesn't like this combination
+        }
+        if (transparency && m_bpc == 1) { 
+        	// Acrobat 5.05 doesn't like this combination
             byte tp[] = new byte[12];
             System.arraycopy(m_curr_table, 0, tp, 0, 6);
             m_curr_table = tp;
@@ -406,12 +411,15 @@ public class GifImage {
         bits, code, count, i, datum, data_size, first, top, bi;
         boolean skipZero = false;
         
-        if (prefix == null)
+        if (prefix == null) {
             prefix = new short[MaxStackSize];
-        if (suffix == null)
+        }
+        if (suffix == null) {
             suffix = new byte[MaxStackSize];
-        if (pixelStack == null)
+        }
+        if (pixelStack == null) {
             pixelStack = new byte[MaxStackSize+1];
+        }
         
         m_line_stride = (iw * m_bpc + 7) / 8;
         m_out = new byte[m_line_stride * ih];
@@ -466,8 +474,9 @@ public class GifImage {
                 
                 //  Interpret the code
                 
-                if ((code > available) || (code == end_of_information))
+                if ((code > available) || (code == end_of_information)) {
                     break;
+                }
                 if (code == clear) {
                     //  Reset decoder.
                     code_size = data_size + 1;
@@ -495,8 +504,9 @@ public class GifImage {
                 
                 //  Add a new string to the string table,
                 
-                if (available >= MaxStackSize)
+                if (available >= MaxStackSize) {
                     break;
+                }
                 pixelStack[top++] = (byte) first;
                 prefix[available] = (short) old_code;
                 suffix[available] = (byte) first;
@@ -579,8 +589,10 @@ public class GifImage {
         in.read();    // block size
         int packed = in.read();   // packed fields
         dispose = (packed & 0x1c) >> 2;   // disposal method
-        if (dispose == 0)
-            dispose = 1;   // elect to keep old image if discretionary
+        if (dispose == 0) {
+        	// elect to keep old image if discretionary
+        	dispose = 1;   
+        }
         transparency = (packed & 1) != 0;
         delay = readShort() * 10;   // delay in milliseconds
         transIndex = in.read();        // transparent color index

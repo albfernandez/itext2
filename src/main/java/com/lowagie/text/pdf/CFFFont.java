@@ -333,7 +333,7 @@ public class CFFFont {
                 continue;
             }
             if (b0 == 30) {
-                String item = "";
+                StringBuilder item = new StringBuilder();
                 boolean done = false;
                 char buffer = 0;
                 byte avail = 0;
@@ -344,22 +344,23 @@ public class CFFFont {
                     if (avail==1) { nibble = (buffer / 16); avail--; }
                     if (avail==2) { nibble = (buffer % 16); avail--; }
                     switch (nibble) {
-                        case 0xa: item += "." ; break;
-                        case 0xb: item += "E" ; break;
-                        case 0xc: item += "E-"; break;
-                        case 0xe: item += "-" ; break;
+                        case 0xa: item.append(".") ; break;
+                        case 0xb: item.append("E") ; break;
+                        case 0xc: item.append("E-"); break;
+                        case 0xe: item.append("-") ; break;
                         case 0xf: done=true   ; break;
                         default:
-                            if (nibble >= 0 && nibble <= 9)
-                                item += String.valueOf(nibble);
+                            if (nibble >= 0 && nibble <= 9) {
+                                item.append(String.valueOf(nibble));
+                            }
                             else {
-                                item += "<NIBBLE ERROR: " + nibble + '>';
+                                item.append("<NIBBLE ERROR: ").append(nibble).append('>');
                                 done = true;
                             }
                             break;
                     }
                 }
-                args[arg_count] = item;
+                args[arg_count] = item.toString();
                 arg_count++;
                 //System.err.println(" real=["+item+"]");
                 continue;

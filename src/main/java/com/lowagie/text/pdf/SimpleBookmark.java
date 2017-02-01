@@ -570,13 +570,14 @@ public final class SimpleBookmark implements SimpleXMLDocHandler {
      * @throws IOException on error
      */
     public static void exportToXMLNode(List list, Writer out, int indent, boolean onlyASCII) throws IOException {
-        String dep = "";
-        for (int k = 0; k < indent; ++k)
-            dep += "  ";
+        StringBuilder dep = new StringBuilder(8);
+        for (int k = 0; k < indent; ++k) {
+            dep.append("  ");
+        }
         for (Iterator it = list.iterator(); it.hasNext();) {
             HashMap map = (HashMap)it.next();
             String title = null;
-            out.write(dep);
+            out.write(dep.toString());
             out.write("<Title ");
             List kids = null;
             for (Iterator e = map.entrySet().iterator(); e.hasNext();) {
@@ -594,20 +595,22 @@ public final class SimpleBookmark implements SimpleXMLDocHandler {
                     out.write(key);
                     out.write("=\"");
                     String value = (String) entry.getValue();
-                    if (key.equals("Named") || key.equals("NamedN"))
+                    if (key.equals("Named") || key.equals("NamedN")) {
                         value = SimpleNamedDestination.escapeBinaryString(value);
+                    }
                     out.write(SimpleXMLParser.escapeXML(value, onlyASCII));
                     out.write("\" ");
                 }
             }
             out.write(">");
-            if (title == null)
+            if (title == null) {
                 title = "";
+            }
             out.write(SimpleXMLParser.escapeXML(title, onlyASCII));
             if (kids != null) {
                 out.write("\n");
                 exportToXMLNode(kids, out, indent + 1, onlyASCII);
-                out.write(dep);
+                out.write(dep.toString());
             }
             out.write("</Title>\n");
         }

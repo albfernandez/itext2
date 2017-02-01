@@ -1107,10 +1107,13 @@ public abstract class BaseFont {
      * @return the subset prefix
      */
     public static String createSubsetPrefix() {
-        String s = "";
-        for (int k = 0; k < 6; ++k)
-            s += (char)(Math.random() * 26 + 'A');
-        return s + "+";
+    	StringBuilder sb = new StringBuilder(8);
+        
+        for (int k = 0; k < 6; ++k) {
+            sb.append( (char)(Math.random() * 26 + 'A') );
+        }
+        sb.append("+");
+        return sb.toString();
     }
     
     /** Gets the Unicode character corresponding to the byte output to the pdf stream.
