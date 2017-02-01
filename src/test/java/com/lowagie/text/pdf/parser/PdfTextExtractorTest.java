@@ -65,9 +65,11 @@ public class PdfTextExtractorTest {
 	}
 	
 	protected static byte[] readDocument(final File file) throws IOException {
-
-		try (ByteArrayOutputStream fileBytes = new ByteArrayOutputStream();
-				InputStream inputStream = new FileInputStream(file)) {
+		ByteArrayOutputStream fileBytes = null;
+		InputStream inputStream = null;
+		try  {
+			fileBytes = new ByteArrayOutputStream();
+			inputStream = new FileInputStream(file);
 			final byte[] buffer = new byte[8192];
 			while (true) {
 				final int bytesRead = inputStream.read(buffer);
@@ -77,6 +79,14 @@ public class PdfTextExtractorTest {
 				fileBytes.write(buffer, 0, bytesRead);
 			}
 			return fileBytes.toByteArray();
+		}
+		finally {
+			if (fileBytes != null ) {
+				fileBytes.close();
+			}
+			if (inputStream != null) {
+				inputStream.close();
+			}
 		}
 
 	}

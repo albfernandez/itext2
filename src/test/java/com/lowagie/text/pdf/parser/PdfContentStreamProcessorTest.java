@@ -7,9 +7,7 @@ package com.lowagie.text.pdf.parser;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ListIterator;
 
 import org.junit.Assert;
@@ -44,26 +42,11 @@ public class PdfContentStreamProcessorTest {
 	// Replicates iText bug 2817030
 	@Test
 	public void testPositionAfterTstar() throws Exception {
-		final byte[] pdfBytes = readDocument(new File(resourceRoot, "yaxiststar.pdf"));
+		final byte[] pdfBytes = PdfTextExtractorTest.readDocument(new File(resourceRoot, "yaxiststar.pdf"));
 		processBytes(pdfBytes, 1);
 	}
 
-	protected static byte[] readDocument(final File file) throws IOException {
-
-		try (ByteArrayOutputStream fileBytes = new ByteArrayOutputStream();
-				InputStream inputStream = new FileInputStream(file)) {
-			final byte[] buffer = new byte[8192];
-			while (true) {
-				final int bytesRead = inputStream.read(buffer);
-				if (bytesRead == -1) {
-					break;
-				}
-				fileBytes.write(buffer, 0, bytesRead);
-			}
-			return fileBytes.toByteArray();
-		}
-
-	}
+	
 
 	private void processBytes(final byte[] pdfBytes, final int pageNumber) throws IOException {
 		final PdfReader pdfReader = new PdfReader(pdfBytes);
