@@ -50,6 +50,7 @@
 package com.lowagie.text.pdf;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -67,9 +68,11 @@ import com.lowagie.text.Utilities;
  * as Thai.
  * @author  Paulo Soares (psoares@consiste.pt)
  */
-class TrueTypeFontUnicode extends TrueTypeFont implements Comparator{
+class TrueTypeFontUnicode extends TrueTypeFont implements Comparator, Serializable {
     
-    /**
+	private static final long serialVersionUID = 9157255198304171086L;
+
+	/**
      * <CODE>true</CODE> if the encoding is vertical.
      */    
     boolean vertical = false;
