@@ -63,7 +63,7 @@ import com.lowagie.text.pdf.PdfWriter;
  * @author Bruno Lowagie
  * @since 2.1.1 (renamed to follow Java naming conventions)
  */
-public class SplitPdf extends java.lang.Object {
+public class SplitPdf {
     
     /**
      * This class can be used to split an existing PDF file.
