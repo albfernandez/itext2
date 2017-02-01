@@ -78,7 +78,6 @@ class CJKFont extends BaseFont {
     static Properties cjkEncodings = new Properties();
     static Hashtable allCMaps = new Hashtable();
     static Hashtable allFonts = new Hashtable();
-    private static boolean propertiesLoaded = false;
     
     /** The font name */
     private String fontName;
@@ -95,12 +94,8 @@ class CJKFont extends BaseFont {
     private HashMap fontDesc;
     private boolean vertical = false;
     
-    private static void loadProperties() {
-        if (propertiesLoaded)
-            return;
+    static {
         synchronized (allFonts) {
-            if (propertiesLoaded)
-                return;
             try {
                 InputStream is = getResourceStream(RESOURCE_PATH + "cjkfonts.properties");
                 cjkFonts.load(is);
@@ -113,7 +108,6 @@ class CJKFont extends BaseFont {
                 cjkFonts = new Properties();
                 cjkEncodings = new Properties();
             }
-            propertiesLoaded = true;
         }
     }
     
@@ -124,7 +118,6 @@ class CJKFont extends BaseFont {
      * @throws DocumentException on error
      */
     CJKFont(String fontName, String enc, boolean emb) throws DocumentException {
-        loadProperties();
         fontType = FONT_TYPE_CJK;
         String nameBase = getBaseName(fontName);
         if (!isCJKFont(nameBase, enc))
@@ -192,7 +185,6 @@ class CJKFont extends BaseFont {
      * @return <CODE>true</CODE> if it is CJK font
      */
     public static boolean isCJKFont(String fontName, String enc) {
-        loadProperties();
         String encodings = cjkFonts.getProperty(fontName);
         return (encodings != null && (enc.equals("Identity-H") || enc.equals("Identity-V") || encodings.indexOf("_" + enc + "_") >= 0));
     }
