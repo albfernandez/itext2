@@ -52,6 +52,7 @@ package com.lowagie.text.rtf.document;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Random;
 
 import com.lowagie.text.DocWriter;
 import com.lowagie.text.rtf.RtfBasicElement;
@@ -116,7 +117,8 @@ public class RtfDocument extends RtfElement {
     private final static byte[] FSC_BACKSLASH = DocWriter.getISOBytes("\\");
     private final static byte[] FSC_HEX_PREFIX = DocWriter.getISOBytes("\\\'");
     private final static byte[] FSC_UNI_PREFIX = DocWriter.getISOBytes("\\u");
-    
+
+    private Random randomGenerator = new Random();
     /**
      * The default constructor for a RtfDocument
      */
@@ -218,9 +220,10 @@ public class RtfDocument extends RtfElement {
      * @return A random int
      */
     public int getRandomInt() {
+    	
         Integer newInt = null;
         do {
-        	newInt = Integer.valueOf((int) (Math.random() * Integer.MAX_VALUE));
+        	newInt = randomGenerator.nextInt();
         } while(this.previousRandomInts.contains(newInt));
         this.previousRandomInts.add(newInt);
         return newInt.intValue();
