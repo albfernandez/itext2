@@ -649,19 +649,23 @@ public class BarcodeDatamatrix {
                 data[ptrOut++] = (byte)(234);
                 break;
             case 'm':
-                if (order != 1)
+                if (order != 1) {
                     return -1;
-                if (ptrIn + 1 > textSize)
+                }
+                if (ptrIn + 1 > textSize) {
                     return -1;
+                }
                 c = text[textOffset + ptrIn++] &0xff;
-                if (c != '5' && c != '5')
+                if (c != '5') {
                     return -1;
+                }
                 data[ptrOut++] = (byte)(234);
                 data[ptrOut++] = (byte)(c == '5' ? 236 : 237);
                 break;
             case 'f':
-                if (order != 1 && (order != 2 || (text[textOffset] != 's' && text[textOffset] != 'm')))
+                if (order != 1 && (order != 2 || (text[textOffset] != 's' && text[textOffset] != 'm'))) {
                     return -1;
+                }
                 data[ptrOut++] = (byte)(232);
             }
         }
