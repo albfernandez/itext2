@@ -306,16 +306,18 @@ public class PdfGraphics2D extends Graphics2D {
         Set set = iter.getAttributes().keySet();
         for(Iterator iterator = set.iterator(); iterator.hasNext();) {
             AttributedCharacterIterator.Attribute attribute = (AttributedCharacterIterator.Attribute)iterator.next();
-            if (!(attribute instanceof TextAttribute))
+            if (!(attribute instanceof TextAttribute)) {
                 continue;
+            }
             TextAttribute textattribute = (TextAttribute)attribute;
             if(textattribute.equals(TextAttribute.FONT)) {
                 Font font = (Font)iter.getAttributes().get(textattribute);
                 setFont(font);
             }
             else if(textattribute.equals(TextAttribute.UNDERLINE)) {
-                if(iter.getAttributes().get(textattribute) == TextAttribute.UNDERLINE_ON)
+                if(TextAttribute.UNDERLINE_ON.equals(iter.getAttributes().get(textattribute))) {
                     underline = true;
+                }
             }
             else if(textattribute.equals(TextAttribute.SIZE)) {
                 Object obj = iter.getAttributes().get(textattribute);
