@@ -32,7 +32,7 @@ This library is a fork of iText 2.1.7. Main goals are:
 
 ## Versions
 
-### 2.1.9 (Unreleased)
+### 2.1.9 (3 February 2017)
 * Upgrade BouncyCastle to 1.56 (1.48 - 1.56).
 * Better text extraction.
 * Code cleanup.
