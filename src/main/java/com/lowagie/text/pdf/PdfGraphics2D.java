@@ -74,6 +74,7 @@ import java.awt.RenderingHints.Key;
 import java.awt.font.FontRenderContext;
 import java.awt.font.GlyphVector;
 import java.awt.font.TextAttribute;
+import java.awt.font.TextLayout;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Arc2D;
 import java.awt.geom.Area;
@@ -516,13 +517,18 @@ public class PdfGraphics2D extends Graphics2D {
      * @see Graphics2D#drawString(AttributedCharacterIterator, float, float)
      */
     public void drawString(AttributedCharacterIterator iter, float x, float y) {
-/*
-        StringBuffer sb = new StringBuffer();
-        for(char c = iter.first(); c != AttributedCharacterIterator.DONE; c = iter.next()) {
-            sb.append(c);
-        }
-        drawString(sb.toString(),x,y);
-*/
+
+    	if(onlyShapes) {
+    		/*
+    		 * When drawing shapes, always use TextLayout, because it will
+    		 * ensure all chars are correctly layouted. With this even Bidi Texts work
+    		 * perfect.
+    		 */
+    		TextLayout textLayout = new TextLayout(iter, getFontRenderContext());
+    		textLayout.draw(this, x, y);
+    		return;
+    		
+    	}
         StringBuffer stringbuffer = new StringBuffer(iter.getEndIndex());
         for(char c = iter.first(); c != '\uFFFF'; c = iter.next())
         {
