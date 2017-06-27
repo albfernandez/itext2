@@ -379,7 +379,13 @@ public class FactoryProperties {
 					h.put("leading", "0,1.5");
 					return;
 				}
-				h.put("leading", v + ",0");
+				// Covering a case of line-height being a number
+				if (v != 0 && Character.isDigit(ss.charAt(ss.length() - 1))) {
+					h.put("leading", "0," + v);
+				}
+				else {
+					h.put("leading", v + ",0");
+				}
 			} else if (key.equals(Markup.CSS_KEY_TEXTALIGN)) {
 				String ss = prop.getProperty(key).trim().toLowerCase();
 				h.put("align", ss);
