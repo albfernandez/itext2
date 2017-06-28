@@ -13,7 +13,7 @@ MPL / LGPL
 This library is a fork of iText 2.1.7. Main goals are:
 
 * Maintain API compatibility with iText 2.1.7.
-* Maintain JDK compatibility: Update code base to keep runing on new JDK releases.
+* Maintain JDK compatibility: Update code base to keep runing on new and old JDK releases.
 * Maintain BouncyCastle compatibility: Update code base to keep compatibility with new BouncyCastle releases.
 * Better support for Linux.
 * Bug Fixing.
