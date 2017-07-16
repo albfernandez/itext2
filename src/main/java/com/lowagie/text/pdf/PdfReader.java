@@ -571,11 +571,16 @@ public class PdfReader implements PdfViewerPreferences {
      * @throws IOException
      */
     private void readDecryptedDocObj() throws IOException {
-        if (encrypted)
+        if (encrypted) {
             return;
+        }
+        if (trailer == null) {
+        	return;
+        }
         PdfObject encDic = trailer.get(PdfName.ENCRYPT);
-        if (encDic == null || encDic.toString().equals("null"))
+        if (encDic == null || encDic.toString().equals("null")) {
             return;
+        }
         encryptionError = true;
         byte[] encryptionKey = null;
         encrypted = true;
@@ -1521,8 +1526,7 @@ public class PdfReader implements PdfViewerPreferences {
                 }
             }
         }
-        if (trailer == null)
-            throw new InvalidPdfException("trailer not found.");
+
         xref = new int[top * 2];
         for (int k = 0; k < top; ++k) {
             int obj[] = xr[k];

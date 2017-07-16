@@ -240,7 +240,7 @@ public class PRTokeniser {
         String n1 = null;
         String n2 = null;
         int ptr = 0;
-        while (nextToken()) {
+        while (nextToken() || level == 2) {
             if (type == TK_COMMENT)
                 continue;
             switch (level) {
