@@ -101,6 +101,9 @@ public class PdfTextExtractor {
     		throw new IOException("page number must be postive:" + page);
     	}
         PdfDictionary pageDic = reader.getPageN(page);
+		if (pageDic == null) {
+			return "";
+		}
         PdfDictionary resourcesDic = pageDic.getAsDict(PdfName.RESOURCES);
         extractionProcessor.processContent(getContentBytesForPage(page), resourcesDic);        
         return extractionProcessor.getResultantText();
