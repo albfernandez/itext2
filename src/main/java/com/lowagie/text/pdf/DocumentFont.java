@@ -114,7 +114,13 @@ public class DocumentFont extends BaseFont {
         this.refFont = refFont;
         fontType = FONT_TYPE_DOCUMENT;
         font = (PdfDictionary)PdfReader.getPdfObject(refFont);
-        fontName = PdfName.decodeName(font.getAsName(PdfName.BASEFONT).toString());
+        PdfName asName = font.getAsName(PdfName.BASEFONT);
+        if (asName != null) {
+        	fontName = PdfName.decodeName(asName.toString());
+        }
+        else {
+        	fontName = "badFontName";
+        }
         PdfName subType = font.getAsName(PdfName.SUBTYPE);
         if (PdfName.TYPE1.equals(subType) || PdfName.TRUETYPE.equals(subType))
             doType1TT();
@@ -131,24 +137,27 @@ public class DocumentFont extends BaseFont {
                     return;
                 }
             }
-            String enc = PdfName.decodeName(font.getAsName(PdfName.ENCODING).toString());
-            for (int k = 0; k < cjkEncs2.length; ++k) {
-                if (enc.startsWith(cjkEncs2[k])) {
-                    try {
-                        if (k > 3)
-                            k -= 4;
-                        cjkMirror = BaseFont.createFont(cjkNames2[k], cjkEncs2[k], false);
-                    }
-                    catch (Exception e) {
-                        throw new ExceptionConverter(e);
-                    }
-                    return;
-                }
-            }
-            if (PdfName.TYPE0.equals(subType) && enc.equals("Identity-H")) {
-                processType0(font);
-                isType0 = true;
-            }
+            PdfName encName = font.getAsName(PdfName.ENCODING);
+            if (encName != null) {            	
+            	String enc = PdfName.decodeName(encName.toString());
+	            for (int k = 0; k < cjkEncs2.length; ++k) {
+	                if (enc.startsWith(cjkEncs2[k])) {
+	                    try {
+	                        if (k > 3)
+	                            k -= 4;
+	                        cjkMirror = BaseFont.createFont(cjkNames2[k], cjkEncs2[k], false);
+	                    }
+	                    catch (Exception e) {
+	                        throw new ExceptionConverter(e);
+	                    }
+	                    return;
+	                }
+	            }
+	            if (PdfName.TYPE0.equals(subType) && enc.equals("Identity-H")) {
+	                processType0(font);
+	                isType0 = true;
+	            }
+	        }
         }
     }
     
