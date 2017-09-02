@@ -42,7 +42,7 @@ public class AddWatermarkPageNumbersTest {
             // we create a stamper that will copy the document to a new file
             PdfStamper stamp = new PdfStamper(reader,PdfTestBase.getOutputStream("watermark_pagenumbers.pdf"));
             // adding some metadata
-            HashMap moreInfo = new HashMap();
+            HashMap<String, String> moreInfo = new HashMap<String, String>();
             moreInfo.put("Author", "Bruno Lowagie");
             stamp.setMoreInfo(moreInfo);
             // adding content to each page
