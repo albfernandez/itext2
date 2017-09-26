@@ -6,6 +6,9 @@
 	<version>2.1.12-SNAPSHOT</version>
 	<url>https://github.com/albfernandez/itext2</url>
 	<packaging>jar</packaging>
+	<prerequisites>
+		<maven>3.0.4</maven>
+	</prerequisites>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -14,7 +17,7 @@
 		<version.junit>4.12</version.junit>
 		<version.servlet-api>3.1.0</version.servlet-api>
 		<version.jfreechart>1.0.19</version.jfreechart>
-		<version.findbugs-plugin>3.0.4</version.findbugs-plugin>
+		<version.findbugs-plugin>3.0.5</version.findbugs-plugin>
 		<version.pmd-plugin>3.7</version.pmd-plugin>
 		
 		<compiler.level>1.7</compiler.level>
