@@ -205,7 +205,9 @@ public class MappedRandomAccessFile {
                 Boolean success = Boolean.FALSE;
                 try {
                     Method getCleanerMethod = buffer.getClass().getMethod("cleaner", (Class[])null);
-                    getCleanerMethod.setAccessible(true);
+                    if (!getCleanerMethod.isAccessible()) {
+                    	getCleanerMethod.setAccessible(true);
+                    }
                     Object cleaner = getCleanerMethod.invoke(buffer, (Object[])null);
                     Method clean = cleaner.getClass().getMethod("clean", (Class[])null);
                     clean.invoke(cleaner, (Object[])null);
