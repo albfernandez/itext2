@@ -10,7 +10,7 @@ public class FactoryPropertiesTest {
 	 @Test
 	    public void shouldCreateRelativeLeadingForLineHeightNUmber() throws Exception {
 	        // given
-	        final HashMap h = new HashMap();
+	        final HashMap<String, String> h = new HashMap<String, String>();
 	        final String style = "line-height:1.4";
 	        h.put("style", style);
 	        final ChainedProperties cprops = new ChainedProperties();

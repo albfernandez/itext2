@@ -83,7 +83,7 @@ public class MetaDataTest {
 	
 	@Test
 	public void testStamperExtraMetadata() throws Exception {
-		HashMap moreInfo = new HashMap();
+		HashMap<String, String> moreInfo = new HashMap<String, String>();
 		moreInfo.put("Producer", Document.getVersion());
 		moreInfo.put("Author", "Author1");
 		moreInfo.put("Title", "Title2");
@@ -98,7 +98,7 @@ public class MetaDataTest {
 	}
 	
 
-	private byte[] addWatermark(File origin, boolean encrypt, HashMap moreInfo) throws Exception {
+	private byte[] addWatermark(File origin, boolean encrypt, HashMap<String, String> moreInfo) throws Exception {
 		int text_angle = 45;
 		int text1_pos_x = 300;
 		int text_1_pos_y = 430;

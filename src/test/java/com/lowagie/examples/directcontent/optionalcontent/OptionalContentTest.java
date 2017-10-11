@@ -106,7 +106,7 @@ public class OptionalContentTest {
 		tp.setLayer(l4);
 		tp.setBoundingBox(new Rectangle(0, -10, 100, 20));
 		cb.addTemplate(tp, 200, 500);
-		ArrayList state = new ArrayList();
+		ArrayList<Object> state = new ArrayList<Object>();
 		state.add("toggle");
 		state.add(l1);
 		state.add(l2);

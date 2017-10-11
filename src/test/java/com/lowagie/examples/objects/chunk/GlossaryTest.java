@@ -39,7 +39,7 @@ import com.lowagie.text.pdf.PdfWriter;
 public class GlossaryTest extends PdfPageEventHelper {
 
 	/** keeps a glossary of words and the pages they appear on */
-	public TreeMap glossary = new TreeMap();
+	public TreeMap<String, Integer> glossary = new TreeMap<String, Integer>();
 
 	/**
 	 * All the text that is passed to this event, gets registered in the
@@ -113,7 +113,7 @@ public class GlossaryTest extends PdfPageEventHelper {
 
 		// we add the glossary
 		document.newPage();
-		for (Iterator i = generic.glossary.keySet().iterator(); i.hasNext();) {
+		for (Iterator<String> i = generic.glossary.keySet().iterator(); i.hasNext();) {
 			String key = (String) i.next();
 			int page = ((Integer) generic.glossary.get(key)).intValue();
 			Paragraph g = new Paragraph(key);

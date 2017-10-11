@@ -64,7 +64,7 @@ public class LayersTest {
             l4.setPrint("Print", true);
             l2.setOn(false);
             l3.setOn(false);
-            ArrayList radio = new ArrayList();
+            ArrayList<PdfLayer> radio = new ArrayList<PdfLayer>();
             radio.add(l1);
             radio.add(l2);
             radio.add(l3);
