@@ -197,11 +197,12 @@ public class MappedRandomAccessFile {
      * @return boolean true on success
      */
     public static boolean clean(final java.nio.ByteBuffer buffer) {
-        if (buffer == null || !buffer.isDirect())
+        if (buffer == null || !buffer.isDirect()) {
             return false;
+        }
         
-        Boolean b = (Boolean) AccessController.doPrivileged(new PrivilegedAction() {
-            public Object run() {
+        Boolean b = (Boolean) AccessController.doPrivileged(new PrivilegedAction<Boolean>() {
+            public Boolean run() {
                 Boolean success = Boolean.FALSE;
                 try {
                     Method getCleanerMethod = buffer.getClass().getMethod("cleaner", (Class[])null);
