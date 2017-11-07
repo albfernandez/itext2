@@ -103,7 +103,7 @@ public class Document implements DocListener {
      * 
      * @since	2.1.6
      */
-	private static final String ITEXT = "iText";
+	private static final String ITEXT = VersionBean.VERSION.getImplementationTitle();
     /**
      * 
      * @since	2.1.6
