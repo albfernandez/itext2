@@ -15,6 +15,24 @@ public class WritePdfTest {
 	private static final int PAGE_NUMBER_FONT_SIZE = 12;
     private static final int PAGE_NUMBER_HEIGHT = 20;
     private static final int PAGE_NUMBER_WIDTH = 30;
+    
+    
+    @Test
+    public void writeSimpeFile () throws IOException, DocumentException {
+    	File file = File.createTempFile("testfileVersion", ".pdf");
+    	System.out.println(file.getAbsolutePath());
+    	Document document = new Document();
+    	PdfWriter.getInstance(document, new FileOutputStream(file));
+    	document.open();
+    	document.add(new Paragraph(Document.getProduct()));
+    	document.add(new Paragraph(Document.getVersion()));
+    	document.add(new Paragraph(Document.getRelease()));
+    	document.close();
+    	
+    	System.out.println(Document.getProduct());
+    	System.out.println(Document.getVersion());
+    	System.out.println(Document.getRelease());
+    }
 
 	@Test
 	public void writeFile() throws IOException, DocumentException {

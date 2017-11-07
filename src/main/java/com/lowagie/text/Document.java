@@ -108,7 +108,7 @@ public class Document implements DocListener {
      * 
      * @since	2.1.6
      */
-	private static final String RELEASE = "2.1.10";
+	private static final String RELEASE = VersionBean.VERSION.getImplementationVersion();
 	/**  */
 	private static final String ITEXT_VERSION = ITEXT + " " + RELEASE;
     
