@@ -78,6 +78,7 @@ class PdfStamperImp extends PdfWriter {
     protected AcroFields acroFields;
     protected boolean flat = false;
     protected boolean flatFreeText = false;
+    protected boolean flatAnnotations = false;
     protected int namePtr[] = {0};
     protected HashSet partialFlattening = new HashSet();
     protected boolean useVp = false;
@@ -164,6 +165,9 @@ class PdfStamperImp extends PdfWriter {
         }
         if (flatFreeText) {
         	flatFreeTextFields();
+        }
+        if (flatAnnotations) {
+            flattenAnnotations();
         }
         addFieldResources();
         PdfDictionary catalog = reader.getCatalog();
@@ -949,10 +953,22 @@ class PdfStamperImp extends PdfWriter {
         }
     }
 
-    private void flatFreeTextFields()
-	{
-		if (append)
-			throw new IllegalArgumentException("FreeText flattening is not supported in append mode.");
+    public void setFlatAnnotations(boolean flatAnnotations) {
+        this.flatAnnotations = flatAnnotations;
+    }
+
+    protected void flattenAnnotations() {
+        flattenAnnotations(false);
+    }
+
+    private void flattenAnnotations(boolean flattenFreeTextAnnotations) {
+		if (append) {
+            if (flattenFreeTextAnnotations) {
+                throw new IllegalArgumentException("FreeText flattening is not supported in append mode.");
+            } else {
+                throw new IllegalArgumentException("Annotation flattening is not supported in append mode.");
+            }
+        }
 
 		for (int page = 1; page <= reader.getNumberOfPages(); ++page)
 		{
@@ -967,8 +983,18 @@ class PdfStamperImp extends PdfWriter {
 					continue;
 
 				PdfDictionary annDic = (PdfDictionary)annoto;
- 				if (!((PdfName)annDic.get(PdfName.SUBTYPE)).equals(PdfName.FREETEXT))
-					continue;
+                final PdfObject subType = annDic.get(PdfName.SUBTYPE);
+                if (flattenFreeTextAnnotations) {
+                    if (!PdfName.FREETEXT.equals(subType)) {
+                        continue;
+                    }
+                } else {
+                    if (PdfName.WIDGET.equals(subType)) {
+                        // skip widgets
+                        continue;
+                    }
+                }
+
 				PdfNumber ff = annDic.getAsNumber(PdfName.F);
                 int flags = (ff != null) ? ff.intValue() : 0;
 
@@ -1017,21 +1043,13 @@ class PdfStamperImp extends PdfWriter {
 						cb.setLiteral("Q ");
 						cb.addTemplate(app, box.getLeft(), box.getBottom());
 						cb.setLiteral("q ");
+
+                        annots.remove(idx);
+                        --idx;
 					}
 				}
 			}
-			for (int idx = 0; idx < annots.size(); ++idx)
-			{
-			    PdfDictionary annot = annots.getAsDict(idx);
-				if (annot != null)
-				{
-					if (PdfName.FREETEXT.equals(annot.get(PdfName.SUBTYPE)))
-					{
-					    annots.remove(idx);
-						--idx;
-					}
-				}
-			}
+
 			if (annots.isEmpty())
 			{
 				PdfReader.killIndirect(pageDic.get(PdfName.ANNOTS));
@@ -1039,6 +1057,10 @@ class PdfStamperImp extends PdfWriter {
 			}
 		}
 	}
+
+    protected void flatFreeTextFields() {
+        flattenAnnotations(true);
+    }
 
     /**
      * @see com.lowagie.text.pdf.PdfWriter#getPageReference(int)

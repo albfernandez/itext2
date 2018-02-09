@@ -107,7 +107,6 @@
 					<target>${compiler.level}</target>
 				</configuration>
 			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
@@ -118,7 +117,6 @@
 							<Automatic-Module-Name>com.github.albfernandez.itext2</Automatic-Module-Name>
 						</manifestEntries>
 						<manifest>
-
 							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
 							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
 						</manifest>
@@ -138,92 +136,12 @@
 					</execution>
 				</executions>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>3.0.0</version>
-
-				<executions>
-					<execution>
-						<id>attach-javadocs</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-						<configuration>
-							<additionalOptions>${javadoc.opts}</additionalOptions>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>findbugs-maven-plugin</artifactId>
-				<version>${version.findbugs-plugin}</version>
-				<executions>
-					<execution>
-						<id>findbugs-check</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>check</goal>
-						</goals>
-						<configuration>
-							<failOnError>false</failOnError>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-pmd-plugin</artifactId>
-				<version>${version.pmd-plugin}</version>
-				<configuration>
-					<verbose>true</verbose>
-					<failOnViolation>false</failOnViolation>
-				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>check</goal>
-							<goal>cpd-check</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-gpg-plugin</artifactId>
-				<version>1.6</version>
-				<configuration>
-					<keyname>${gpg.keyname}</keyname>
-					<passphraseServerId>${gpg.keyname}</passphraseServerId>
-				</configuration>
-				<executions>
-					<execution>
-						<id>sign-artifacts</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>sign</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.sonatype.plugins</groupId>
-				<artifactId>nexus-staging-maven-plugin</artifactId>
-				<version>1.6.8</version>
-				<extensions>true</extensions>
-				<configuration>
-					<serverId>ossrh</serverId>
-					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
-					<autoReleaseAfterClose>true</autoReleaseAfterClose>
-				</configuration>
-			</plugin>
-
 		</plugins>
 	</build>
 	
-		<profiles>
+	<profiles>
 		<profile>
+			<id>java6</id>
 			<activation>
 				<jdk>1.6</jdk>
 			</activation>
