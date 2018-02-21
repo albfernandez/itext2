@@ -401,6 +401,16 @@ public class PdfStamper
 	}
 
     /**
+     * Flatten annotations with an appearance stream on close().
+     *
+     * @param flat boolean to indicate whether iText should flatten annotations or not.
+     */
+    public void setAnnotationFlattening(boolean flat) {
+        stamper.setFlatAnnotations(flat);
+    }
+
+
+    /**
      * Adds an annotation of form field in a specific page. This page number
      * can be overridden with {@link PdfAnnotation#setPlaceInPage(int)}.
      * @param annot the annotation
