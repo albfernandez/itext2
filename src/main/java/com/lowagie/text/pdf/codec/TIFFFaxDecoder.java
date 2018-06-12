@@ -1194,7 +1194,12 @@ public class TIFFFaxDecoder {
             } else if (bits == 0) {     // ERROR
                 throw new RuntimeException("Invalid code encountered.");
             } else if (bits == 15) {    // EOL
-                throw new RuntimeException("EOL code word encountered in White run.");
+            	if ( runLength == 0 ) {
+            		isWhite = false;
+            	}
+            	else {
+            		throw new RuntimeException("EOL code word encountered in White run.");
+            	}
             } else {
                 // 11 bits - 0000 0111 1111 1111 = 0x07ff
                 code = (entry >>> 5) & 0x07ff;
@@ -1244,8 +1249,13 @@ public class TIFFFaxDecoder {
                     
                     updatePointer(4 - bits);
                 } else if (bits == 15) {
-                    // EOL code
-                    throw new RuntimeException("EOL code word encountered in Black run.");
+                	// EOL code
+                	if ( runLength == 0 ) {
+                		isWhite = true;
+                	}
+                	else {
+                		throw new RuntimeException("EOL code word encountered in Black run.");
+                	}
                 } else {
                     runLength += code;
                     updatePointer(9 - bits);
