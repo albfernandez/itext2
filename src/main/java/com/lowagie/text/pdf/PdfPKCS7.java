@@ -86,6 +86,7 @@ import org.bouncycastle.asn1.ASN1String;
 import org.bouncycastle.asn1.ASN1TaggedObject;
 import org.bouncycastle.asn1.ASN1Enumerated;
 import org.bouncycastle.asn1.ASN1Integer;
+import org.bouncycastle.asn1.BERTaggedObject;
 import org.bouncycastle.asn1.DERNull;
 import org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import org.bouncycastle.asn1.DEROctetString;
@@ -402,7 +403,11 @@ public class PdfPKCS7 {
             ASN1ObjectIdentifier objId = (ASN1ObjectIdentifier)signedData.getObjectAt(0);
             if (!objId.getId().equals(ID_PKCS7_SIGNED_DATA))
                 throw new IllegalArgumentException("Not a valid PKCS#7 object - not signed data");
-            ASN1Sequence content = (ASN1Sequence)((DERTaggedObject)signedData.getObjectAt(1)).getObject();
+            ASN1Sequence content = (ASN1Sequence) (
+            		(signedData.getObjectAt(1) instanceof BERTaggedObject) ?
+            		(BERTaggedObject) signedData.getObjectAt(1) :
+            		(DERTaggedObject) signedData.getObjectAt(1))
+            		.getObject();
             // the positions that we care are:
             //     0 - version
             //     1 - digestAlgorithms
@@ -440,7 +445,7 @@ public class PdfPKCS7 {
 
             // the signerInfos
             int next = 3;
-            while (content.getObjectAt(next) instanceof DERTaggedObject)
+            while (content.getObjectAt(next) instanceof DERTaggedObject || content.getObjectAt(next) instanceof BERTaggedObject)
                 ++next;
             ASN1Set signerInfos = (ASN1Set)content.getObjectAt(next);
             if (signerInfos.size() != 1)
