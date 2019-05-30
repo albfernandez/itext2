@@ -52,32 +52,32 @@ public class ImagesURLTest {
 		// step 4:
 		document.add(new Paragraph("A picture of my dog: otsoe.jpg"));
 		File otsoe = new File(resources, "otsoe.jpg");
-		Image jpg = Image.getInstance(new URL("file://" + otsoe.getAbsolutePath()));
+		Image jpg = Image.getInstance(new URL("file:///" + otsoe.getAbsolutePath()));
 		document.add(jpg);
 
 		document.add(new Paragraph("getacro.gif"));
 		File getacro = new File(resources, "getacro.gif");
-		Image gif = Image.getInstance(new URL("file://" + getacro.getAbsolutePath()));
+		Image gif = Image.getInstance(new URL("file:///" + getacro.getAbsolutePath()));
 		document.add(gif);
 
 		document.add(new Paragraph("pngnow.png"));
 		File pngNow = new File(resources, "pngnow.png");
-		Image png = Image.getInstance(new URL("file://" + pngNow.getAbsolutePath()));
+		Image png = Image.getInstance(new URL("file:///" + pngNow.getAbsolutePath()));
 		document.add(png);
 
 		document.add(new Paragraph("iText.bmp"));
 		File itextBmp = new File(resources, "iText.bmp");
-		Image bmp = Image.getInstance(new URL("file://" + itextBmp.getAbsolutePath()));
+		Image bmp = Image.getInstance(new URL("file:///" + itextBmp.getAbsolutePath()));
 		document.add(bmp);
 
 		document.add(new Paragraph("iText.wmf"));
 		File itextWmf = new File(resources, "iText.wmf");
-		Image wmf = Image.getInstance(new URL("file://" + itextWmf.getAbsolutePath()));
+		Image wmf = Image.getInstance(new URL("file:///" + itextWmf.getAbsolutePath()));
 		document.add(wmf);
 
 		document.add(new Paragraph("iText.tif"));
 		File itextTif = new File(resources, "iText.tif");
-		Image tiff = Image.getInstance(new URL("file://" + itextTif.getAbsolutePath()));
+		Image tiff = Image.getInstance(new URL("file:///" + itextTif.getAbsolutePath()));
 		document.add(tiff);
 
 		// step 5: we close the document
