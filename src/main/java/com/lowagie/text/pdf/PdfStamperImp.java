@@ -226,11 +226,31 @@ class PdfStamperImp extends PdfWriter {
         // metadata
         int skipInfo = -1;
         PRIndirectReference iInfo = (PRIndirectReference)reader.getTrailer().get(PdfName.INFO);
-      
+        PdfDictionary oldInfo = (PdfDictionary)PdfReader.getPdfObject(iInfo);
+        String producer = null;
+        if (iInfo != null)
+            skipInfo = iInfo.getNumber();
+        if (oldInfo != null && oldInfo.get(PdfName.PRODUCER) != null)
+        	producer = oldInfo.getAsString(PdfName.PRODUCER).toString();
+        if (producer == null) {
+        	producer = Document.getVersion();
+        }
+        else if (producer.indexOf(Document.getProduct()) == -1) {
+        	StringBuffer buf = new StringBuffer(producer);
+        	buf.append("; modified using ");
+        	buf.append(Document.getVersion());
+        	producer = buf.toString();
+        }
         // XMP
-        byte[] altMetadata = xmpMetadata;
+        byte[] altMetadata = null;
         PdfObject xmpo = PdfReader.getPdfObject(catalog.get(PdfName.METADATA));
-
+        if (xmpo != null && xmpo.isStream()) {
+        	altMetadata = PdfReader.getStreamBytesRaw((PRStream)xmpo);
+        	PdfReader.killIndirect(catalog.get(PdfName.METADATA));
+        }
+        if (xmpMetadata != null) {
+        	altMetadata = xmpMetadata;
+        }
 
         // if there is XMP data to add: add it
 
@@ -300,13 +320,20 @@ class PdfStamperImp extends PdfWriter {
             }
             fileID = crypto.getFileID();
         }
-        else
+        else {
             fileID = PdfEncryption.createInfoId(PdfEncryption.createDocumentId());
+        }
         PRIndirectReference iRoot = (PRIndirectReference)reader.trailer.get(PdfName.ROOT);
         PdfIndirectReference root = new PdfIndirectReference(0, getNewObjectNumber(reader, iRoot.getNumber(), 0));
         PdfIndirectReference info = null;
         PdfDictionary newInfo = new PdfDictionary();
-       
+        if (oldInfo != null) {
+        	for (Iterator i = oldInfo.getKeys().iterator(); i.hasNext();) {
+        		PdfName key = (PdfName)i.next();
+        		PdfObject value = PdfReader.getPdfObject(oldInfo.get(key));
+        		newInfo.put(key, value);
+        	}
+        }
         if (moreInfo != null) {
             for (Iterator i = moreInfo.entrySet().iterator(); i.hasNext();) {
                 Map.Entry entry = (Map.Entry) i.next();
@@ -318,7 +345,7 @@ class PdfStamperImp extends PdfWriter {
                 else
                     newInfo.put(keyName, new PdfString(value, PdfObject.TEXT_UNICODE));
             }
-        }
+        }        
         if (append) {
             if (iInfo != null) {
             	info = addToBody(newInfo, iInfo.getNumber(), false).getIndirectReference();
