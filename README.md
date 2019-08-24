@@ -18,7 +18,16 @@ This library is a fork of iText 2.1.7. Main goals are:
 * Better support for Linux.
 * Bug Fixing.
 
+## Use iText2 as Maven dependency
+Add this to your pom.xml file to use the latest version of OpenPDF:
 
+```xml
+<dependency>
+    <groupId>com.github.albfernandez</groupId>
+    <artifactId>itext2</artifactId>
+    <version>2.1.17</version>
+</dependency>
+```
 
 ## Building from sources
 
