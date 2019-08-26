@@ -3,6 +3,7 @@ package com.lowagie.text.pdf;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -10,6 +11,7 @@ import org.junit.Test;
 import com.lowagie.text.Document;
 import com.lowagie.text.Element;
 import com.lowagie.text.Paragraph;
+import com.lowagie.text.xml.xmp.XmpWriter;
 
 public class MetaDataTest {
 	
@@ -99,7 +101,44 @@ public class MetaDataTest {
 		r.close();
 
 	}
-	
+	  @Test
+	  public void testXMPMetadata() throws Exception {
+	    File file = new File("src/test/resources/HelloWorldMeta.pdf");
+	    PdfReader reader = new PdfReader(file.getAbsolutePath());
+	    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+	    PdfStamper stamp = new PdfStamper(reader, baos);
+	    HashMap<String, String> moreInfo = createCleanerMoreInfo();
+	    ByteArrayOutputStream meta = new ByteArrayOutputStream();
+	    XmpWriter writer = new XmpWriter(meta, moreInfo);
+	    writer.close();
+	        
+	    stamp.setMoreInfo(moreInfo);
+	    stamp.setXmpMetadata(meta.toByteArray());
+	        
+	    stamp.close();
+	    
+	    
+	    byte[] data = baos.toByteArray();
+	    PdfReader r = new PdfReader(data);
+	    Assert.assertNull(r.getInfo().get("Producer"));
+	    Assert.assertNull(r.getInfo().get("Author"));
+	    Assert.assertNull(r.getInfo().get("Title"));
+	    Assert.assertNull(r.getInfo().get("Subject"));  
+	    byte[] metadata = r.getMetadata();
+	    r.close();
+	    String dataString = new String(data);
+
+	    Assert.assertFalse(dataString.contains("Bruno Lowagie"));
+	    Assert.assertFalse(dataString.contains(" 1.2.12.SNAPSHOT"));
+	    if (metadata != null) {
+	      String metadataString = new String(metadata);
+	      Assert.assertFalse(metadataString.contains("Bruno Lowagie"));
+	      Assert.assertFalse(metadataString.contains(" 1.2.12.SNAPSHOT"));
+	      Assert.assertTrue(metadataString.contains("<pdf:Producer></pdf:Producer>"));
+	    }
+	    
+	  
+	  }
 	
 	@Test
 	public void testStamperExtraMetadata() throws Exception {

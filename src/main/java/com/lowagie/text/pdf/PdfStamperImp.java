@@ -49,6 +49,7 @@ package com.lowagie.text.pdf;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -63,6 +64,7 @@ import com.lowagie.text.exceptions.BadPasswordException;
 import com.lowagie.text.pdf.collection.PdfCollection;
 import com.lowagie.text.pdf.interfaces.PdfViewerPreferences;
 import com.lowagie.text.pdf.internal.PdfViewerPreferencesImp;
+import com.lowagie.text.xml.xmp.XmpReader;
 
 class PdfStamperImp extends PdfWriter {
     HashMap readers2intrefs = new HashMap();
@@ -92,6 +94,7 @@ class PdfStamperImp extends PdfWriter {
     protected PdfAction openAction;
     private boolean includeFileID = true;
     private PdfObject overrideFileId = null;
+    private Calendar modificationDate = null;
 
     /** Creates new PdfStamperImp.
      * @param reader the read PDF
@@ -238,10 +241,10 @@ class PdfStamperImp extends PdfWriter {
         	producer = Document.getVersion();
         }
         else if (producer.indexOf(Document.getProduct()) == -1) {
-        	StringBuffer buf = new StringBuffer(producer);
-        	buf.append("; modified using ");
-        	buf.append(Document.getVersion());
-        	producer = buf.toString();
+        	producer += "; modified using " + Document.getVersion();
+        }
+        if (moreInfo != null && moreInfo.containsKey("Producer")) {
+        	producer = (String) moreInfo.get("Producer");
         }
         // XMP
         byte[] altMetadata = null;
@@ -253,26 +256,55 @@ class PdfStamperImp extends PdfWriter {
         if (xmpMetadata != null) {
         	altMetadata = xmpMetadata;
         }
-
+        PdfDate date = null;
+        if (modificationDate == null) {
+          date = new PdfDate();
+        }
+        else {
+          date = new PdfDate(modificationDate);
+        }
         // if there is XMP data to add: add it
 
         if (altMetadata != null) {
-        	PdfStream xmp = new PdfStream(altMetadata);
-        	xmp.put(PdfName.TYPE, PdfName.METADATA);
-        	xmp.put(PdfName.SUBTYPE, PdfName.XML);
-        	if (crypto != null && !crypto.isMetadataEncrypted()) {
-        		PdfArray ar = new PdfArray();
-        		ar.add(PdfName.CRYPT);
-        		xmp.put(PdfName.FILTER, ar);
-        	}
-        	if (append && xmpo != null) {
-        		body.add(xmp, xmpo.getIndRef());
-        	}
-        	else {
-        		catalog.put(PdfName.METADATA, body.add(xmp).getIndirectReference());
-        		markUsed(catalog);
-        	}
-        }
+            PdfStream xmp = null;
+            try {
+              XmpReader xmpr = new XmpReader(altMetadata);
+              String producerXMP = producer;
+              if (producerXMP != null) {
+                producerXMP = "";
+              }
+              if (!xmpr.replace("http://ns.adobe.com/pdf/1.3/", "Producer", producerXMP)) {
+                if (!"".equals(producerXMP)) {
+                 xmpr.add("rdf:Description", "http://ns.adobe.com/pdf/1.3/", "pdf:Producer", producerXMP);
+                }
+              }
+              
+              if (!xmpr.replace("http://ns.adobe.com/xap/1.0/", "ModifyDate", date.getW3CDate())) {
+                xmpr.add("rdf:Description", "http://ns.adobe.com/xap/1.0/", "xmp:ModifyDate", date.getW3CDate());
+              }
+              xmpr.replace("http://ns.adobe.com/xap/1.0/", "MetadataDate", date.getW3CDate());
+              xmp = new PdfStream(xmpr.serializeDoc()); 
+            }
+            catch (Exception e) {
+              xmp = new PdfStream(altMetadata);
+            }
+
+              xmp.put(PdfName.TYPE, PdfName.METADATA);
+              xmp.put(PdfName.SUBTYPE, PdfName.XML);
+              if (crypto != null && !crypto.isMetadataEncrypted()) {
+                  PdfArray ar = new PdfArray();
+                  ar.add(PdfName.CRYPT);
+                  xmp.put(PdfName.FILTER, ar);
+              }
+              if (append && xmpo != null) {
+                body.add(xmp, xmpo.getIndRef());
+              }
+              else {
+                catalog.put(PdfName.METADATA, body.add(xmp).getIndirectReference());
+                markUsed(catalog);
+              }
+                    
+          }
         try {
             file.reOpen();
             alterContents();
@@ -974,8 +1006,7 @@ class PdfStamperImp extends PdfWriter {
             acrodic.put(PdfName.FIELDS, new PdfArray());
         }
         acrodic.remove(PdfName.SIGFLAGS);
-//        PdfReader.killIndirect(acro);
-//        reader.getCatalog().remove(PdfName.ACROFORM);
+
     }
 
     void sweepKids(PdfObject obj) {
@@ -1730,4 +1761,13 @@ class PdfStamperImp extends PdfWriter {
     public void setOverrideFileId(PdfObject overrideFileId) {
         this.overrideFileId = overrideFileId;
     }
+    
+    public Calendar getModificationDate() {
+        return modificationDate;
+    }
+
+    public void setModificationDate(Calendar modificationDate) {
+        this.modificationDate = modificationDate;
+    }
+
 }
