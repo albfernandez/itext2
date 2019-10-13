@@ -524,9 +524,15 @@ public class PdfDocument extends Document {
                         PdfPTable table = new PdfPTable(1);
                         table.setWidthPercentage(100f);
                         PdfPCell cell = new PdfPCell();
-                        cell.addElement(paragraph);
                         cell.setBorder(Table.NO_BORDER);
                         cell.setPadding(0);
+                        Iterator iterator = paragraph.iterator();
+                        while (iterator.hasNext()) {
+                        	Object o = iterator.next();
+                        	if (o instanceof Element) {
+                        		cell.addElement((Element) o); 
+                        	}
+                        }
                         table.addCell(cell);
                         indentation.indentLeft -= paragraph.getIndentationLeft();
                         indentation.indentRight -= paragraph.getIndentationRight();
