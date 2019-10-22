@@ -6,9 +6,6 @@
 	<version>2.1.19-SNAPSHOT</version>
 	<url>https://github.com/albfernandez/itext2</url>
 	<packaging>jar</packaging>
-	<prerequisites>
-		<maven>3.0.4</maven>
-	</prerequisites>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
