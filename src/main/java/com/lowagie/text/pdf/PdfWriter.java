@@ -2328,7 +2328,7 @@ public class PdfWriter extends DocWriter implements
 
 // [F10] extended graphics state (for instance for transparency)
 
-    protected HashMap documentExtGState = new HashMap();
+    protected HashMap documentExtGState = new LinkedHashMap();
 
     PdfObject[] addSimpleExtGState(PdfDictionary gstate) {
         if (!documentExtGState.containsKey(gstate)) {
