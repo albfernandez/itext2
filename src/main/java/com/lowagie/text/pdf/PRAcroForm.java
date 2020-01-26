@@ -158,7 +158,15 @@ public class PRAcroForm extends PdfDictionary {
             PdfArray kids = (PdfArray)dict.get(PdfName.KIDS);
             if (kids != null) {
                 pushAttrib(dict);
-                iterateFields(kids, myFieldDict, myTitle);
+                ArrayList elements = new ArrayList(kids.getArrayList());
+                Iterator kidIter = elements.iterator();
+                while(kidIter.hasNext()) {
+                	PdfIndirectReference kidRef = (PdfIndirectReference) kidIter.next();
+                	if (ref.getNumber() == kidRef.getNumber()) {
+                		kidIter.remove();
+                	}
+                }
+                iterateFields(new PdfArray(elements), myFieldDict, myTitle);
                 stack.remove(stack.size() - 1);   // pop
             }
             else {          // leaf node
