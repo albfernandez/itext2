@@ -110,11 +110,18 @@ public class PdfLayer extends PdfDictionary implements PdfOCG {
      * @param child the child layer
      */    
     public void addChild(PdfLayer child) {
-        if (child.parent != null)
-            throw new IllegalArgumentException("The layer '" + ((PdfString)child.get(PdfName.NAME)).toUnicodeString() + "' already has a parent.");
+        if (child.parent != null) {
+            String name = null;
+            PdfString pdfName = child.getAsString(PdfName.NAME);
+            if (pdfName != null) {
+              name = pdfName.toUnicodeString();
+            }
+            throw new IllegalArgumentException("The layer '" + name + "' already has a parent.");
+          }
         child.parent = this;
-        if (children == null)
+        if (children == null) {
             children = new ArrayList();
+        }
         children.add(child);
     }
 
