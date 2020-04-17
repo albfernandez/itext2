@@ -62,12 +62,14 @@ import java.security.Signature;
 import java.security.SignatureException;
 import java.security.cert.CRL;
 import java.security.cert.Certificate;
+import java.security.cert.CertificateParsingException;
 import java.security.cert.X509CRL;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -77,49 +79,45 @@ import java.util.Set;
 
 import org.bouncycastle.asn1.ASN1EncodableVector;
 import org.bouncycastle.asn1.ASN1Encoding;
+import org.bouncycastle.asn1.ASN1Enumerated;
 import org.bouncycastle.asn1.ASN1InputStream;
+import org.bouncycastle.asn1.ASN1Integer;
+import org.bouncycastle.asn1.ASN1ObjectIdentifier;
+import org.bouncycastle.asn1.ASN1OctetString;
 import org.bouncycastle.asn1.ASN1OutputStream;
 import org.bouncycastle.asn1.ASN1Primitive;
 import org.bouncycastle.asn1.ASN1Sequence;
 import org.bouncycastle.asn1.ASN1Set;
 import org.bouncycastle.asn1.ASN1String;
 import org.bouncycastle.asn1.ASN1TaggedObject;
-import org.bouncycastle.asn1.ASN1Enumerated;
-import org.bouncycastle.asn1.ASN1Integer;
-import org.bouncycastle.asn1.BERTaggedObject;
 import org.bouncycastle.asn1.DERNull;
-import org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import org.bouncycastle.asn1.DEROctetString;
 import org.bouncycastle.asn1.DERSequence;
 import org.bouncycastle.asn1.DERSet;
 import org.bouncycastle.asn1.DERTaggedObject;
 import org.bouncycastle.asn1.DERUTCTime;
-import org.bouncycastle.asn1.cms.AttributeTable;
 import org.bouncycastle.asn1.cms.Attribute;
+import org.bouncycastle.asn1.cms.AttributeTable;
+import org.bouncycastle.asn1.cms.ContentInfo;
 import org.bouncycastle.asn1.ocsp.BasicOCSPResponse;
 import org.bouncycastle.asn1.ocsp.OCSPObjectIdentifiers;
-import org.bouncycastle.jce.provider.X509CRLParser;
-import org.bouncycastle.jce.provider.X509CertParser;
-
-import com.lowagie.text.ExceptionConverter;
-
-import java.security.cert.CertificateParsingException;
-import java.util.Date;
-
-import org.bouncycastle.asn1.ASN1OctetString;
-import org.bouncycastle.asn1.cms.ContentInfo;
 import org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers;
 import org.bouncycastle.asn1.tsp.MessageImprint;
 import org.bouncycastle.asn1.x509.Extension;
-import org.bouncycastle.tsp.TimeStampToken;
 import org.bouncycastle.cert.jcajce.JcaX509CertificateHolder;
-import org.bouncycastle.cms.SignerInformationVerifier;
-import org.bouncycastle.cms.jcajce.JcaSimpleSignerInfoVerifierBuilder;
 import org.bouncycastle.cert.ocsp.BasicOCSPResp;
 import org.bouncycastle.cert.ocsp.CertificateID;
 import org.bouncycastle.cert.ocsp.SingleResp;
+import org.bouncycastle.cms.SignerInformationVerifier;
+import org.bouncycastle.cms.jcajce.JcaSimpleSignerInfoVerifierBuilder;
+import org.bouncycastle.jce.provider.X509CRLParser;
+import org.bouncycastle.jce.provider.X509CertParser;
 import org.bouncycastle.operator.jcajce.JcaContentVerifierProviderBuilder;
 import org.bouncycastle.operator.jcajce.JcaDigestCalculatorProviderBuilder;
+import org.bouncycastle.tsp.TimeStampToken;
+import org.bouncycastle.tsp.TimeStampTokenInfo;
+
+import com.lowagie.text.ExceptionConverter;
 
 /**
  * This class does all the processing related to signing and verifying a PKCS#7
@@ -657,7 +655,9 @@ public class PdfPKCS7 {
         if (timeStampToken == null)
             return false;
         MessageImprint imprint = timeStampToken.getTimeStampInfo().toASN1Structure().getMessageImprint();
-        byte[] md = MessageDigest.getInstance("SHA-1").digest(digest);
+        TimeStampTokenInfo info = timeStampToken.getTimeStampInfo();
+        String algOID = info.getMessageImprintAlgOID().getId();
+        byte[] md =  MessageDigest.getInstance(getStandardJavaName(getDigest(algOID))).digest(digest);
         byte[] imphashed = imprint.getHashedMessage();
         boolean res = Arrays.equals(md, imphashed);
         return res;
@@ -1473,7 +1473,25 @@ public class PdfPKCS7 {
     public void setSignName(String signName) {
         this.signName = signName;
     }
-    
+    private static String getStandardJavaName(String algName) {
+    	if ("SHA1".equals(algName)) {
+    		return "SHA-1";
+    	}
+    	if ("SHA224".equals(algName)) {
+    		return "SHA-224";
+    	}
+    	if ("SHA256".equals(algName)) {
+    		return "SHA-256";
+    	}
+    	if ("SHA384".equals(algName)) {
+    		return "SHA-384";
+    	}
+    	if ("SHA512".equals(algName)) {
+    		return "SHA-512";
+    	}
+    	return algName;
+
+    }
     /**
      * a class that holds an X509 name
      */
