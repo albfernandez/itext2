@@ -13,6 +13,7 @@
  */
 package com.lowagie.examples.html;
 
+import java.io.File;
 import java.io.FileOutputStream;
 
 import org.junit.Test;
@@ -43,7 +44,8 @@ public class ImagesTest {
 		// step 2:
 		// we create a writer that listens to the document
 		// and directs a PDF-stream to a file
-		HtmlWriter.getInstance(document, new FileOutputStream(PdfTestBase.OUTPUT_DIR + "images_wrong.html"));
+		File outputFile = new File (PdfTestBase.getOutputDir(), "images_wrong.html");
+		HtmlWriter.getInstance(document, new FileOutputStream(outputFile));
 		HtmlWriter writer = HtmlWriter.getInstance(document, PdfTestBase.getOutputStream("images_right.html"));
 		writer.setImagepath("./");
 
