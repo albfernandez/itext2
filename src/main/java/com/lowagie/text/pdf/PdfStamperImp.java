@@ -66,7 +66,7 @@ import com.lowagie.text.pdf.interfaces.PdfViewerPreferences;
 import com.lowagie.text.pdf.internal.PdfViewerPreferencesImp;
 import com.lowagie.text.xml.xmp.XmpReader;
 
-class PdfStamperImp extends PdfWriter {
+public class PdfStamperImp extends PdfWriter {
     HashMap readers2intrefs = new HashMap();
     HashMap readers2file = new HashMap();
     RandomAccessFileOrArray file;
@@ -105,7 +105,7 @@ class PdfStamperImp extends PdfWriter {
      * @throws DocumentException on error
      * @throws IOException
      */
-    PdfStamperImp(PdfReader reader, OutputStream os, char pdfVersion, boolean append) throws DocumentException, IOException {
+    protected PdfStamperImp(PdfReader reader, OutputStream os, char pdfVersion, boolean append) throws DocumentException, IOException {
         super(new PdfDocument(), os);
         if (!reader.isOpenedWithFullPermissions()) {
             throw new BadPasswordException("PdfReader not opened with owner password");
@@ -157,7 +157,7 @@ class PdfStamperImp extends PdfWriter {
         initialXrefSize = reader.getXrefSize();
     }
 
-    void close(HashMap moreInfo) throws IOException {
+    protected void close(HashMap moreInfo) throws IOException {
         if (closed) {
             return;
         }
@@ -682,7 +682,7 @@ class PdfStamperImp extends PdfWriter {
         return ps;
     }
 
-    PdfContentByte getUnderContent(int pageNum) {
+    protected PdfContentByte getUnderContent(int pageNum) {
         if (pageNum < 1 || pageNum > reader.getNumberOfPages())
             return null;
         PageStamp ps = getPageStamp(pageNum);
@@ -691,7 +691,7 @@ class PdfStamperImp extends PdfWriter {
         return ps.under;
     }
 
-    PdfContentByte getOverContent(int pageNum) {
+    protected PdfContentByte getOverContent(int pageNum) {
         if (pageNum < 1 || pageNum > reader.getNumberOfPages())
             return null;
         PageStamp ps = getPageStamp(pageNum);
@@ -826,14 +826,14 @@ class PdfStamperImp extends PdfWriter {
         return body.size() > 1;
     }
 
-    AcroFields getAcroFields() {
+    protected AcroFields getAcroFields() {
         if (acroFields == null) {
             acroFields = new AcroFields(reader, this);
         }
         return acroFields;
     }
 
-    void setFormFlattening(boolean flat) {
+    protected void setFormFlattening(boolean flat) {
         this.flat = flat;
     }
 
