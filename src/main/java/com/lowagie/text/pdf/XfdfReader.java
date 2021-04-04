@@ -51,6 +51,7 @@ package com.lowagie.text.pdf;
 import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -85,13 +86,15 @@ public class XfdfReader implements SimpleXMLDocHandler {
      * @throws IOException on error
      */    
     public XfdfReader(String filename) throws IOException {
-        FileInputStream fin = null;
+        this(new FileInputStream(filename));
+    }
+
+    public XfdfReader(InputStream fin) throws IOException {
         try {
-            fin = new FileInputStream(filename);
             SimpleXMLParser.parse(this, fin);
         }
         finally {
-            try{if (fin != null) {fin.close();}}catch(Exception e){}
+            try{fin.close();}catch(Exception e){}
         }
     }
     
@@ -100,7 +103,7 @@ public class XfdfReader implements SimpleXMLDocHandler {
      * @throws IOException on error
      */    
     public XfdfReader(byte xfdfIn[]) throws IOException {
-        SimpleXMLParser.parse( this, new ByteArrayInputStream(xfdfIn));
+        this(new ByteArrayInputStream(xfdfIn));
    }
     
     /** Gets all the fields. The map is keyed by the fully qualified
