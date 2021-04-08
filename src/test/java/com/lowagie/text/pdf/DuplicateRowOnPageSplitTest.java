@@ -36,8 +36,7 @@ public class DuplicateRowOnPageSplitTest {
 	
 	@Test
 	public void test () throws Exception {
-		File file = File.createTempFile("testfile", ".pdf");
-		System.out.println(file.getAbsolutePath());
+		File file = File.createTempFile("testfile", ".pdf", PdfTestBase.getOutputDir());
 		Document document = new Document();
 		PdfWriter.getInstance(document, new FileOutputStream(file));
 		document.open();

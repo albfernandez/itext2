@@ -16,11 +16,13 @@ public class WritePdfTest {
     private static final int PAGE_NUMBER_HEIGHT = 20;
     private static final int PAGE_NUMBER_WIDTH = 30;
     
+    public WritePdfTest() {
+    	super();
+    }
     
     @Test
     public void writeSimpeFile () throws IOException, DocumentException {
-    	File file = File.createTempFile("testfileVersion", ".pdf");
-    	System.out.println(file.getAbsolutePath());
+    	File file = PdfTestBase.getOutputFile("testfileVersion.pdf");
     	Document document = new Document();
     	PdfWriter.getInstance(document, new FileOutputStream(file));
     	document.open();
@@ -28,28 +30,22 @@ public class WritePdfTest {
     	document.add(new Paragraph(Document.getVersion()));
     	document.add(new Paragraph(Document.getRelease()));
     	document.close();
-    	
-    	System.out.println(Document.getProduct());
-    	System.out.println(Document.getVersion());
-    	System.out.println(Document.getRelease());
     }
 
 	@Test
 	public void writeFile() throws IOException, DocumentException {
-		File file = File.createTempFile("testfile", ".pdf");
-		File fileWithPageNumbers = File.createTempFile("testfilewithpagenumbers", ".pdf");
+		File file = PdfTestBase.getOutputFile("testfile01.pdf");
+		File fileWithPageNumbers = PdfTestBase.getOutputFile("testfile01withpagenumbers.pdf");
 		Document document = new Document();
 		PdfWriter.getInstance(document, new FileOutputStream(file));
 		document.open();
 		for(int i = 0; i < 100; i++) {
-		document.add(new Paragraph("Test"));
+			document.add(new Paragraph("Test"));
 		}
 		document.close();
 		addPageNumbers(file, fileWithPageNumbers.getAbsolutePath());
 		Assert.assertTrue(file.length() > 0);
 		Assert.assertTrue(fileWithPageNumbers.length() > 0);
-		file.delete();
-		fileWithPageNumbers.delete();
 	}
 	
 	private void addPageNumbers(File file, String fileName) throws IOException, DocumentException {

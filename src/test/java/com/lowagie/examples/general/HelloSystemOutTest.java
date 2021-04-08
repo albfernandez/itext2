@@ -14,6 +14,8 @@
 
 package com.lowagie.examples.general;
 
+import java.io.ByteArrayOutputStream;
+
 import org.junit.Test;
 
 import com.lowagie.text.Document;
@@ -41,9 +43,11 @@ public class HelloSystemOutTest {
 		// step 2:
 		// we create a writer that listens to the document
 		// and directs a PDF-stream to System.out (and a txt file)
-		PdfWriter w = PdfWriter.getInstance(document, System.out);
+//		PdfWriter w = PdfWriter.getInstance(document, System.out);
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		PdfWriter w = PdfWriter.getInstance(document, baos);
 		w.setCloseStream(false); // System.out should not be closed
-		PdfWriter.getInstance(document, PdfTestBase.getOutputStream("HelloWorld.txt"));
+		PdfWriter.getInstance(document, PdfTestBase.getOutputStream("HelloWorldOut.pdf"));
 
 		// step 3: we open the document
 		document.open();

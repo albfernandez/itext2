@@ -81,7 +81,6 @@ public class MetaDataTest {
 		Assert.assertNull(r.getInfo().get("Author"));
 		Assert.assertNull(r.getInfo().get("Title"));
 		Assert.assertNull(r.getInfo().get("Subject"));
-		System.out.println(r.getInfo());
 		r.close();
 		String dataString = new String(data);
 		Assert.assertFalse(dataString.contains("This example explains how to add metadata."));
