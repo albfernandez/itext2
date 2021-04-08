@@ -56,7 +56,8 @@ final class VersionBean {
         private String implementationVendor = UNKNOWN;
         // TODO nick - default value for manifest file absense - review
         private String implementationVersion = "2.1.7";
-        private String implementationTitle = UNKNOWN;
+        private String implementationTitle = "iText";
+        
         private String scmTimestamp = UNKNOWN;
         private String fullVersionString = UNKNOWN;
         private boolean containsDataFromManifest = false;
