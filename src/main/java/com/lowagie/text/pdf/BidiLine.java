@@ -51,6 +51,8 @@ package com.lowagie.text.pdf;
 import java.util.ArrayList;
 
 import com.lowagie.text.Chunk;
+import com.lowagie.text.ConversionUtility;
+import com.lowagie.text.SurrogateUtility;
 import com.lowagie.text.Utilities;
 
 /** Does all the line bidirectional processing with PdfChunk assembly.
@@ -352,9 +354,9 @@ public class BidiLine {
         boolean surrogate = false;
         for (; currentChar < totalTextLength; ++currentChar) {
             ck = detailChunks[currentChar];
-            surrogate = Utilities.isSurrogatePair(text, currentChar);
+            surrogate = SurrogateUtility.isSurrogatePair(text, currentChar);
             if (surrogate)
-                uniC = ck.getUnicodeEquivalent(Utilities.convertToUtf32(text, currentChar));
+                uniC = ck.getUnicodeEquivalent(ConversionUtility.convertToUtf32(text, currentChar));
             else
                 uniC = ck.getUnicodeEquivalent(text[currentChar]);
             if (PdfChunk.noPrint(uniC))
@@ -441,9 +443,9 @@ public class BidiLine {
         PdfChunk ck = null;
         float width = 0;
         for (; startIdx <= lastIdx; ++startIdx) {
-            boolean surrogate = Utilities.isSurrogatePair(text, startIdx);
+            boolean surrogate = SurrogateUtility.isSurrogatePair(text, startIdx);
             if (surrogate) {
-                width += detailChunks[startIdx].getCharWidth(Utilities.convertToUtf32(text, startIdx));
+                width += detailChunks[startIdx].getCharWidth(ConversionUtility.convertToUtf32(text, startIdx));
                 ++startIdx;
             }
             else {

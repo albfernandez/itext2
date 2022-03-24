@@ -53,7 +53,9 @@ import java.awt.font.GlyphVector;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 
+import com.lowagie.text.ConversionUtility;
 import com.lowagie.text.ExceptionConverter;
+import com.lowagie.text.SurrogateUtility;
 import com.lowagie.text.Utilities;
 
 /**
@@ -216,8 +218,8 @@ class FontDetails {
                     else {
                     	for (int k = 0; k < len; ++k) {
                     		int val;
-                    		if (Utilities.isSurrogatePair(text, k)) {
-                    			val = Utilities.convertToUtf32(text, k);
+                    		if (SurrogateUtility.isSurrogatePair(text, k)) {
+                    			val = ConversionUtility.convertToUtf32(text, k);
                     			k++;
                     		}
                     		else {

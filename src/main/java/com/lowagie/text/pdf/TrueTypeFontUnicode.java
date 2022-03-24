@@ -59,7 +59,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import com.lowagie.text.ConversionUtility;
 import com.lowagie.text.DocumentException;
+import com.lowagie.text.SurrogateUtility;
 import com.lowagie.text.Utilities;
 
 /** Represents a True Type font with Unicode encoding. All the character
@@ -190,8 +192,8 @@ class TrueTypeFontUnicode extends TrueTypeFont implements Comparator, Serializab
         else {
             int len = text.length();
             for (int k = 0; k < len; ++k) {
-                if (Utilities.isSurrogatePair(text, k)) {
-                    total += getRawWidth(Utilities.convertToUtf32(text, k), encoding);
+                if (SurrogateUtility.isSurrogatePair(text, k)) {
+                    total += getRawWidth(ConversionUtility.convertToUtf32(text, k), encoding);
                     ++k;
                 }
                 else

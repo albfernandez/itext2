@@ -55,9 +55,11 @@ import java.util.Iterator;
 import java.util.Map;
 
 import com.lowagie.text.Chunk;
+import com.lowagie.text.ConversionUtility;
 import com.lowagie.text.Font;
 import com.lowagie.text.Image;
 import com.lowagie.text.SplitCharacter;
+import com.lowagie.text.SurrogateUtility;
 import com.lowagie.text.Utilities;
 
 /**
@@ -372,9 +374,9 @@ public class PdfChunk {
                     PdfChunk pc = new PdfChunk(returnValue, this);
                     return pc;
                 }
-                surrogate = Utilities.isSurrogatePair(valueArray, currentPosition);
+                surrogate = SurrogateUtility.isSurrogatePair(valueArray, currentPosition);
                 if (surrogate)
-                    currentWidth += font.width(Utilities.convertToUtf32(valueArray[currentPosition], valueArray[currentPosition + 1]));
+                    currentWidth += font.width(ConversionUtility.convertToUtf32(valueArray[currentPosition], valueArray[currentPosition + 1]));
                 else
                     currentWidth += font.width(character);
                 if (character == ' ') {
@@ -464,9 +466,9 @@ public class PdfChunk {
         boolean surrogate = false;
         while (currentPosition < length) {
             // the width of every character is added to the currentWidth
-            surrogate = Utilities.isSurrogatePair(value, currentPosition);
+            surrogate = SurrogateUtility.isSurrogatePair(value, currentPosition);
             if (surrogate)
-                currentWidth += font.width(Utilities.convertToUtf32(value, currentPosition));
+                currentWidth += font.width(ConversionUtility.convertToUtf32(value, currentPosition));
             else
                 currentWidth += font.width(value.charAt(currentPosition));
             if (currentWidth > width)
@@ -795,7 +797,7 @@ public class PdfChunk {
         int total = 0;
         int len = value.length();
         for (int k = 0; k < len; ++k) {
-            if (Utilities.isSurrogateHigh(value.charAt(k)))
+            if (SurrogateUtility.isSurrogateHigh(value.charAt(k)))
                 ++k;
             ++total;
         }

@@ -49,8 +49,10 @@ package com.lowagie.text.pdf;
 import java.util.ArrayList;
 
 import com.lowagie.text.Chunk;
+import com.lowagie.text.ConversionUtility;
 import com.lowagie.text.Font;
 import com.lowagie.text.Phrase;
+import com.lowagie.text.SurrogateUtility;
 import com.lowagie.text.Utilities;
 
 /** Selects the appropriate fonts that contain the glyphs needed to
@@ -101,8 +103,8 @@ public class FontSelector {
                 sb.append(c);
                 continue;
             }
-            if (Utilities.isSurrogatePair(cc, k)) {
-                int u = Utilities.convertToUtf32(cc, k);
+            if (SurrogateUtility.isSurrogatePair(cc, k)) {
+                int u = ConversionUtility.convertToUtf32(cc, k);
                 for (int f = 0; f < fsize; ++f) {
                     font = (Font)fonts.get(f);
                     if (font.getBaseFont().charExists(u)) {
