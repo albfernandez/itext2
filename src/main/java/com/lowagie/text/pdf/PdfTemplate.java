@@ -63,11 +63,7 @@ public class PdfTemplate extends PdfContentByte {
     protected int type;
     /** The indirect reference to this template */
     protected PdfIndirectReference thisReference;
-    
-    /** The resources used by this template */
-    protected PageResources pageResources;
-    
-    
+        
     /** The bounding box of this template */
     protected Rectangle bBox = new Rectangle(0, 0);
     

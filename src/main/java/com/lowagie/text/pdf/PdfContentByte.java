@@ -79,6 +79,12 @@ public class PdfContentByte {
     /**
      * This class keeps the graphic state of the current page
      */
+	
+	/**
+	 * Applied pull up filed refactoring 
+	 * Moved field from Type3Glyph,PdfTemplate,StampContent to this class
+	 */
+	  PageResources pageResources;
 
     static class GraphicState {
 

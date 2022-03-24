@@ -48,7 +48,7 @@ package com.lowagie.text.pdf;
 
 public class StampContent extends PdfContentByte {
     PdfStamperImp.PageStamp ps;
-    PageResources pageResources;
+  
     
     /** Creates a new instance of StampContent */
     StampContent(PdfStamperImp stamper, PdfStamperImp.PageStamp ps) {
