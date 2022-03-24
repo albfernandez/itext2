@@ -648,12 +648,12 @@ public class AcroFields {
         PdfDictionary mk = merged.getAsDict(PdfName.MK);
         if (mk != null) {
             PdfArray ar = mk.getAsArray(PdfName.BC);
-            Color border = getMKColor(ar);
+            Color border = ar.getMKColor();
             tx.setBorderColor(border);
             if (border != null)
                 tx.setBorderWidth(1);
             ar = mk.getAsArray(PdfName.BG);
-            tx.setBackgroundColor(getMKColor(ar));
+            tx.setBackgroundColor(ar.getMKColor());
             PdfNumber rotation = mk.getAsNumber(PdfName.R);
             if (rotation != null)
                 tx.setRotation(rotation.intValue());
@@ -795,21 +795,6 @@ public class AcroFields {
         PdfAppearance app = tx.getListAppearance();
         topFirst = tx.getTopFirst();
         return app;
-    }
-
-    Color getMKColor(PdfArray ar) {
-        if (ar == null)
-            return null;
-        switch (ar.size()) {
-            case 1:
-                return new GrayColor(ar.getAsNumber(0).floatValue());
-            case 3:
-                return new Color(ExtendedColor.normalize(ar.getAsNumber(0).floatValue()), ExtendedColor.normalize(ar.getAsNumber(1).floatValue()), ExtendedColor.normalize(ar.getAsNumber(2).floatValue()));
-            case 4:
-                return new CMYKColor(ar.getAsNumber(0).floatValue(), ar.getAsNumber(1).floatValue(), ar.getAsNumber(2).floatValue(), ar.getAsNumber(3).floatValue());
-            default:
-                return null;
-        }
     }
 
     /**

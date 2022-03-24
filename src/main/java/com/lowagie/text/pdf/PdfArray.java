@@ -49,6 +49,7 @@
 
 package com.lowagie.text.pdf;
 
+import java.awt.Color;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -550,4 +551,22 @@ public class PdfArray extends PdfObject {
             ref = (PdfIndirectReference) orig;
         return ref;
     }
+
+	Color getMKColor() {
+	    if (this == null)
+	        return null;
+	    switch (size()) {
+	        case 1:
+	            return new GrayColor(getAsNumber(0).floatValue());
+	        case 3:
+	            return new Color(ExtendedColor.normalize(getAsNumber(0).floatValue()), ExtendedColor.normalize(getAsNumber(1).floatValue()), ExtendedColor.normalize(getAsNumber(2).floatValue()));
+	        case 4:
+	            return new CMYKColor(getAsNumber(0).floatValue(), getAsNumber(1).floatValue(), getAsNumber(2).floatValue(), getAsNumber(3).floatValue());
+	        default:
+	            return null;
+	    }
+	}
+    
+    
+    
 }
