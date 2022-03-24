@@ -69,7 +69,7 @@ public class Meta implements Element {
     // membervariables
     
 	/** This is the type of Meta-information this object contains. */
-    private int type;
+    private int metaInfoType;
     
     /** This is the content of the Meta-information. */
     private StringBuffer content;
@@ -83,7 +83,7 @@ public class Meta implements Element {
      * @param	content		the content
      */
     Meta(int type, String content) {
-        this.type = type;
+        this.metaInfoType = type;
         this.content = new StringBuffer(content);
     }
     
@@ -94,7 +94,7 @@ public class Meta implements Element {
      * @param	content		the content
      */
     public Meta(String tag, String content) {
-        this.type = Meta.getType(tag);
+        this.metaInfoType = Meta.getType(tag);
         this.content = new StringBuffer(content);
     }
     
@@ -122,7 +122,7 @@ public class Meta implements Element {
      * @return	a type
      */
     public int type() {
-        return type;
+        return metaInfoType;
     }
     
     /**
@@ -180,7 +180,7 @@ public class Meta implements Element {
      */
     
     public String getName() {
-        switch (type) {
+        switch (metaInfoType) {
             case Element.SUBJECT:
                 return ElementTags.SUBJECT;
             case Element.KEYWORDS:
