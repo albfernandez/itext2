@@ -2977,11 +2977,12 @@ public class PdfReader implements PdfViewerPreferences {
         String sortedNames[] = new String[jscript.size()];
         sortedNames = (String[])jscript.keySet().toArray(sortedNames);
         Arrays.sort(sortedNames);
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         for (int k = 0; k < sortedNames.length; ++k) {
             PdfDictionary j = (PdfDictionary)getPdfObjectRelease((PdfIndirectReference)jscript.get(sortedNames[k]));
-            if (j == null)
+            if (j == null) {
                 continue;
+            }
             PdfObject obj = getPdfObjectRelease(j.get(PdfName.JS));
             if (obj != null) {
                 if (obj.isString())

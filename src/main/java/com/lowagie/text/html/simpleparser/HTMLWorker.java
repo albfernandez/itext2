@@ -647,7 +647,7 @@ public class HTMLWorker implements SimpleXMLDocHandler, DocListener {
 			return;
 		}
 
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		int len = content.length();
 		char character;
 		boolean newline = false;

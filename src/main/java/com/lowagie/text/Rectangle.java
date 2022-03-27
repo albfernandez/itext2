@@ -863,7 +863,7 @@ public class Rectangle implements Element {
 	 * @see java.lang.Object#toString()
 	 */
 	public String toString() {
-		StringBuffer buf = new StringBuffer("Rectangle: ");
+		StringBuilder buf = new StringBuilder("Rectangle: ");
 		buf.append(getWidth());
 		buf.append('x');
 		buf.append(getHeight());

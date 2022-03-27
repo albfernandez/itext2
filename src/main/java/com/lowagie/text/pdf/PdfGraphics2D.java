@@ -530,24 +530,24 @@ public class PdfGraphics2D extends Graphics2D {
     		return;
     		
     	}
-        StringBuffer stringbuffer = new StringBuffer(iter.getEndIndex());
+    	StringBuilder builder = new StringBuilder(iter.getEndIndex());
         for(char c = iter.first(); c != '\uFFFF'; c = iter.next())
         {
             if(iter.getIndex() == iter.getRunStart())
             {
-                if(stringbuffer.length() > 0)
+                if(builder.length() > 0)
                 {
-                    drawString(stringbuffer.toString(), x, y);
+                    drawString(builder.toString(), x, y);
                     FontMetrics fontmetrics = getFontMetrics();
-                    x = (float)(x + fontmetrics.getStringBounds(stringbuffer.toString(), this).getWidth());
-                    stringbuffer.delete(0, stringbuffer.length());
+                    x = (float)(x + fontmetrics.getStringBounds(builder.toString(), this).getWidth());
+                    builder.delete(0, builder.length());
                 }
                 doAttributes(iter);
             }
-            stringbuffer.append(c);
+            builder.append(c);
         }
         
-        drawString(stringbuffer.toString(), x, y);
+        drawString(builder.toString(), x, y);
         underline = false;
     }
     

@@ -448,7 +448,7 @@ class CJKFont extends BaseFont {
         }
         if (lastValue == 0)
             return null;
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         buf.append('[');
         buf.append(lastCid);
         int state = FIRST;
@@ -514,8 +514,9 @@ class CJKFont extends BaseFont {
     }
     
     static String convertToVCIDMetrics(int keys[], IntHashtable v, IntHashtable h) {
-        if (keys.length == 0)
+        if (keys.length == 0) {
             return null;
+        }
         int lastCid = 0;
         int lastValue = 0;
         int lastHValue = 0;
@@ -527,14 +528,17 @@ class CJKFont extends BaseFont {
                 ++start;
                 break;
             }
-            else
+            else {
                 lastHValue = h.get(lastCid);
+            }
         }
-        if (lastValue == 0)
+        if (lastValue == 0) {
             return null;
-        if (lastHValue == 0)
+        }
+        if (lastHValue == 0) {
             lastHValue = 1000;
-        StringBuffer buf = new StringBuffer();
+        }
+        StringBuilder buf = new StringBuilder();
         buf.append('[');
         buf.append(lastCid);
         int state = FIRST;

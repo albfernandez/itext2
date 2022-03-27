@@ -468,19 +468,20 @@ public class BidiLine {
         ArrayList ar = new ArrayList();
         PdfChunk refCk = detailChunks[startIdx];
         PdfChunk ck = null;
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         char c;
         int idx = 0;
         for (; startIdx <= endIdx; ++startIdx) {
             idx = bidi ? indexChars[startIdx] : startIdx;
             c = text[idx];
             ck = detailChunks[idx];
-            if (PdfChunk.noPrint(ck.getUnicodeEquivalent(c)))
+            if (PdfChunk.noPrint(ck.getUnicodeEquivalent(c))) {
                 continue;
+            }
             if (ck.isImage() || ck.isSeparator() || ck.isTab()) {
                 if (buf.length() > 0) {
                     ar.add(new PdfChunk(buf.toString(), refCk));
-                    buf = new StringBuffer();
+                    buf = new StringBuilder();
                 }
                 ar.add(ck);
             }
@@ -490,18 +491,20 @@ public class BidiLine {
             else {
                 if (buf.length() > 0) {
                     ar.add(new PdfChunk(buf.toString(), refCk));
-                    buf = new StringBuffer();
+                    buf = new StringBuilder();
                 }
-                if (!ck.isImage() && !ck.isSeparator() && !ck.isTab())
+                if (!ck.isImage() && !ck.isSeparator() && !ck.isTab()) {
                     buf.append(c);
+                }
                 refCk = ck;
             }
         }
         if (buf.length() > 0) {
             ar.add(new PdfChunk(buf.toString(), refCk));
         }
-        if (extraPdfChunk != null)
+        if (extraPdfChunk != null) {
             ar.add(extraPdfChunk);
+        }
         return ar;
     }
     
@@ -510,11 +513,13 @@ public class BidiLine {
         int first = idx;
         // forward
         for (; last < totalTextLength; ++last) {
-            if (!Character.isLetter(text[last]))
+            if (!Character.isLetter(text[last])) {
                 break;            
+            }
         }
-        if (last == idx)
+        if (last == idx) {
             return null;
+        }
         // backward
         for (; first >= startIdx; --first) {
             if (!Character.isLetter(text[first]))
@@ -529,8 +534,9 @@ public class BidiLine {
         char c;
         for (; idx >= startIdx; --idx) {
             c = (char)detailChunks[idx].getUnicodeEquivalent(text[idx]);
-            if (!isWS(c))
+            if (!isWS(c)) {
                 break;
+            }
         }
         return idx;
     }
@@ -540,8 +546,9 @@ public class BidiLine {
         char c;
         for (; idx <= endIdx; ++idx) {
             c = (char)detailChunks[idx].getUnicodeEquivalent(text[idx]);
-            if (!isWS(c))
+            if (!isWS(c)) {
                 break;
+            }
         }
         return idx;
     }
@@ -551,8 +558,9 @@ public class BidiLine {
         char c = 0;
         for (; idx >= startIdx; --idx) {
             c = (char)detailChunks[idx].getUnicodeEquivalent(text[idx]);
-            if (!isWS(c) && !PdfChunk.noPrint(c))
+            if (!isWS(c) && !PdfChunk.noPrint(c)) {
                 break;
+            }
         }
         return idx;
     }
@@ -562,8 +570,9 @@ public class BidiLine {
         char c = 0;
         for (; idx <= endIdx; ++idx) {
             c = (char)detailChunks[idx].getUnicodeEquivalent(text[idx]);
-            if (!isWS(c) && !PdfChunk.noPrint(c))
+            if (!isWS(c) && !PdfChunk.noPrint(c)) {
                 break;
+            }
         }
         return idx;
     }
@@ -575,15 +584,18 @@ public class BidiLine {
         byte onlyEvenLevels = maxLevel;
         for (int k = start + 1; k <= end; ++k) {
             byte b = orderLevels[k];
-            if (b > maxLevel)
+            if (b > maxLevel) {
                 maxLevel = b;
-            else if (b < minLevel)
+            }
+            else if (b < minLevel) {
                 minLevel = b;
+            }
             onlyOddLevels &= b;
             onlyEvenLevels |= b;
         }
-        if ((onlyEvenLevels & 1) == 0) // nothing to do
+        if ((onlyEvenLevels & 1) == 0) { // nothing to do
             return;
+        }
         if ((onlyOddLevels & 1) == 1) { // single inversion
             flip(start, end + 1);
             return;
@@ -596,8 +608,9 @@ public class BidiLine {
                     if (orderLevels[pstart] >= maxLevel)
                         break;
                 }
-                if (pstart > end)
+                if (pstart > end) {
                     break;
+                }
                 int pend = pstart + 1;
                 for (; pend <= end; ++pend) {
                     if (orderLevels[pend] < maxLevel)

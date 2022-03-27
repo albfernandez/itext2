@@ -147,12 +147,13 @@ public class PRTokeniser {
     }
     
     public String readString(int size) throws IOException {
-        StringBuffer buf = new StringBuffer();
+    	StringBuilder buf = new StringBuilder();
         int ch;
         while ((size--) > 0) {
             ch = file.read();
-            if (ch == -1)
+            if (ch == -1) {
                 break;
+            }
             buf.append((char)ch);
         }
         return buf.toString();
@@ -306,7 +307,7 @@ public class PRTokeniser {
         // Note:  We have to initialize stringValue here, after we've looked for the end of the stream,
         // to ensure that we don't lose the value of a token that might end exactly at the end
         // of the stream
-        StringBuffer outBuf = null;
+        StringBuilder outBuf = null;
         stringValue = EMPTY;
 
         switch (ch) {
@@ -318,7 +319,7 @@ public class PRTokeniser {
                 break;
             case '/':
             {
-                outBuf = new StringBuffer();
+                outBuf = new StringBuilder();
                 type = TK_NAME;
                 while (true) {
                     ch = file.read();
@@ -348,7 +349,7 @@ public class PRTokeniser {
                     type = TK_START_DIC;
                     break;
                 }
-                outBuf = new StringBuffer();
+                outBuf = new StringBuilder();
                 type = TK_STRING;
                 hexString = true;
                 int v2 = 0;
@@ -387,7 +388,7 @@ public class PRTokeniser {
                 break;
             case '(':
             {
-                outBuf = new StringBuffer();
+                outBuf = new StringBuilder();
                 type = TK_STRING;
                 hexString = false;
                 int nesting = 0;
@@ -481,7 +482,7 @@ public class PRTokeniser {
             }
             default:
             {
-                outBuf = new StringBuffer();
+                outBuf = new StringBuilder();
                 if (ch == '-' || ch == '+' || ch == '.' || (ch >= '0' && ch <= '9')) {
                     type = TK_NUMBER;
                     do {
@@ -500,8 +501,9 @@ public class PRTokeniser {
                 break;
             }
         }
-        if (outBuf != null)
+        if (outBuf != null) {
             stringValue = outBuf.toString();
+        }
         return true;
     }
     

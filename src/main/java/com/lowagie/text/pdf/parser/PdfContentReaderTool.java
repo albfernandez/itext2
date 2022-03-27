@@ -85,14 +85,15 @@ public class PdfContentReaderTool {
      * @return	a String representation of the dictionary
      */
     static public String getDictionaryDetail(PdfDictionary dic, int depth){
-        StringBuffer builder = new StringBuffer();
+    	StringBuilder builder = new StringBuilder();
         builder.append('(');
         List subDictionaries = new ArrayList();
         for (Iterator i = dic.getKeys().iterator(); i.hasNext(); ) {
             PdfName key = (PdfName)i.next();
             PdfObject val = dic.getDirectObject(key);
-            if (val.isDictionary())
+            if (val.isDictionary()) {
                 subDictionaries.add(key);
+            }
             builder.append(key);
             builder.append('=');
             builder.append(val);

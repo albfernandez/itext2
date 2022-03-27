@@ -142,9 +142,9 @@ public final class SimpleXMLParser {
 	/** Are we parsing HTML? */
 	boolean html;
 	/** current text (whatever is encountered between tags) */
-	StringBuffer text = new StringBuffer();
+	StringBuilder text = new StringBuilder();
 	/** current entity (whatever is encountered between & and ;) */
-	StringBuffer entity = new StringBuffer();
+	StringBuilder entity = new StringBuilder();
 	/** current tagname */
 	String tag = null;
 	/** current attributes */
@@ -591,8 +591,8 @@ public final class SimpleXMLParser {
             throw new IOException("Insufficient length.");
         String encoding = getEncodingName(b4);
         String decl = null;
-        if (encoding.equals("UTF-8")) {
-            StringBuffer sb = new StringBuffer();
+        if ("UTF-8".equals(encoding)) {
+        	StringBuilder sb = new StringBuilder();
             int c;
             while ((c = in.read()) != -1) {
                 if (c == '>')
@@ -657,7 +657,7 @@ public final class SimpleXMLParser {
     public static String escapeXML(String s, boolean onlyASCII) {
         char cc[] = s.toCharArray();
         int len = cc.length;
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for (int k = 0; k < len; ++k) {
             int c = cc[k];
             switch (c) {

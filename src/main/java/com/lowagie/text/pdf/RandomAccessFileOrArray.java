@@ -586,7 +586,7 @@ public class RandomAccessFileOrArray implements DataInput {
     }
     
     public String readLine() throws IOException {
-        StringBuffer input = new StringBuffer();
+    	StringBuilder input = new StringBuilder();
         int c = -1;
         boolean eol = false;
         

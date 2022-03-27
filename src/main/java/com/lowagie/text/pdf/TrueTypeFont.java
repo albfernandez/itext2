@@ -710,7 +710,7 @@ class TrueTypeFont extends BaseFont {
      * @throws IOException the font file could not be read
      */
     protected String readUnicodeString(int length) throws IOException {
-        StringBuffer buf = new StringBuffer();
+    	StringBuilder buf = new StringBuilder();
         length /= 2;
         for (int k = 0; k < length; ++k) {
             buf.append(rf.readChar());

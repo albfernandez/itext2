@@ -400,7 +400,7 @@ public class PdfSignatureAppearance {
         if (app[2] == null) {
             String text;
             if (layer2Text == null) {
-                StringBuffer buf = new StringBuffer();
+            	StringBuilder buf = new StringBuilder();
                 buf.append("Digitally signed by ").append(PdfPKCS7.getSubjectFields((X509Certificate)certChain[0]).getField("CN")).append('\n');
                 SimpleDateFormat sd = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss z");
                 buf.append("Date: ").append(sd.format(signDate.getTime()));

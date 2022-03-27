@@ -268,7 +268,7 @@ public class PdfOutline extends PdfDictionary {
      */
     public PdfOutline(PdfOutline parent, PdfAction action, Paragraph title, boolean open) {
         super();
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         for (Iterator i = title.getChunks().iterator(); i.hasNext(); ) {
             Chunk chunk = (Chunk) i.next();
             buf.append(chunk.getContent());
@@ -304,7 +304,7 @@ public class PdfOutline extends PdfDictionary {
      */
     public PdfOutline(PdfOutline parent, PdfDestination destination, Paragraph title, boolean open) {
         super();
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         for (Iterator i = title.getChunks().iterator(); i.hasNext(); ) {
             Chunk chunk = (Chunk) i.next();
             buf.append(chunk.getContent());

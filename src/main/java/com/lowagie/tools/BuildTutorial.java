@@ -182,9 +182,11 @@ public class BuildTutorial {
 			// passing 2 parameters
 			String branch = outfile.getParentFile().getCanonicalPath().substring(root.length());
 			branch = branch.replace(File.separatorChar, '/');
-			StringBuffer path = new StringBuffer();
+			StringBuilder path = new StringBuilder();
 			for (int i = 0; i < branch.length(); i++) {
-				if (branch.charAt(i) == '/') path.append("/..");
+				if (branch.charAt(i) == '/') {
+					path.append("/..");
+				}
 			}
 			
 			xformer.setParameter("branch", branch);

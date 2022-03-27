@@ -983,7 +983,7 @@ public class PngImage {
  */
     
     public static final String getString(InputStream is) throws IOException {
-        StringBuffer buf = new StringBuffer();
+    	StringBuilder buf = new StringBuilder();
         for (int i = 0; i < 4; i++) {
             buf.append((char)is.read());
         }

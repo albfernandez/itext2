@@ -1125,6 +1125,6 @@ public class HtmlWriter extends DocWriter {
      * @throws IOException
      */
     protected void writeCssProperty(String prop, String value) throws IOException {
-        write(new StringBuffer(prop).append(": ").append(value).append("; ").toString());
+        write(new StringBuilder(prop).append(": ").append(value).append("; ").toString());
     }
 }

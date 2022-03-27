@@ -89,7 +89,7 @@ public class HyphenationTree extends TernaryTree
     }
 
     protected String unpackValues(int k) {
-        StringBuffer buf = new StringBuffer();
+    	StringBuilder buf = new StringBuilder();
         byte v = vspace.get(k++);
         while (v != 0) {
             char c = (char)((v >>> 4) - 1 + '0');
@@ -147,7 +147,7 @@ public class HyphenationTree extends TernaryTree
     }
 
     protected byte[] getValues(int k) {
-        StringBuffer buf = new StringBuffer();
+    	StringBuilder buf = new StringBuilder();
         byte v = vspace.get(k++);
         while (v != 0) {
             char c = (char)((v >>> 4) - 1);

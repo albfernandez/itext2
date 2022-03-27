@@ -91,7 +91,7 @@ public class FontSelector {
             throw new IndexOutOfBoundsException("No font is defined.");
         char cc[] = text.toCharArray();
         int len = cc.length;
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         Font font = null;
         int lastidx = -1;
         Phrase ret = new Phrase();

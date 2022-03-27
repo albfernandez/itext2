@@ -115,11 +115,12 @@ public class BarcodeInter25 extends Barcode{
      * @return a <CODE>String</CODE> with only numeric characters
      */    
     public static String keepNumbers(String text) {
-        StringBuffer sb = new StringBuffer();
+    	StringBuilder sb = new StringBuilder();
         for (int k = 0; k < text.length(); ++k) {
             char c = text.charAt(k);
-            if (c >= '0' && c <= '9')
+            if (c >= '0' && c <= '9') {
                 sb.append(c);
+            }
         }
         return sb.toString();
     }

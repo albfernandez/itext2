@@ -104,7 +104,7 @@ public class MultiColumnR2LTest {
 	 * @return a poem that is generated with some keywords.
 	 */
 	public static String poemLine() {
-		StringBuffer results = new StringBuffer(150);
+		StringBuilder results = new StringBuilder(150);
 		results.append(randomWord(adjective));
 		results.append(' ');
 		results.append(randomWord(noun));

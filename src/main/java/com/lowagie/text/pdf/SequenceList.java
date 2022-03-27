@@ -109,7 +109,7 @@ public class SequenceList {
     }
     
     protected int getType() {
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         int state = FIRST;
         while (true) {
             char c = nextChar();

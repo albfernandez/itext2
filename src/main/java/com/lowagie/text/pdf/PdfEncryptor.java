@@ -215,15 +215,31 @@ public final class PdfEncryptor {
      * @return a String that explains the meaning of the permissions value
      */
     public static String getPermissionsVerbose(int permissions) {
-    	StringBuffer buf = new StringBuffer("Allowed:");
-    	if ((PdfWriter.ALLOW_PRINTING & permissions) == PdfWriter.ALLOW_PRINTING) buf.append(" Printing");
-        if ((PdfWriter.ALLOW_MODIFY_CONTENTS & permissions) == PdfWriter.ALLOW_MODIFY_CONTENTS) buf.append(" Modify contents");
-        if ((PdfWriter.ALLOW_COPY & permissions) == PdfWriter.ALLOW_COPY) buf.append(" Copy");
-        if ((PdfWriter.ALLOW_MODIFY_ANNOTATIONS & permissions) == PdfWriter.ALLOW_MODIFY_ANNOTATIONS) buf.append(" Modify annotations");
-        if ((PdfWriter.ALLOW_FILL_IN & permissions) == PdfWriter.ALLOW_FILL_IN) buf.append(" Fill in");
-        if ((PdfWriter.ALLOW_SCREENREADERS & permissions) == PdfWriter.ALLOW_SCREENREADERS) buf.append(" Screen readers");
-        if ((PdfWriter.ALLOW_ASSEMBLY & permissions) == PdfWriter.ALLOW_ASSEMBLY) buf.append(" Assembly");
-        if ((PdfWriter.ALLOW_DEGRADED_PRINTING & permissions) == PdfWriter.ALLOW_DEGRADED_PRINTING) buf.append(" Degraded printing");
+    	StringBuilder buf = new StringBuilder("Allowed:");
+    	if ((PdfWriter.ALLOW_PRINTING & permissions) == PdfWriter.ALLOW_PRINTING) {
+    		buf.append(" Printing");
+    	}
+        if ((PdfWriter.ALLOW_MODIFY_CONTENTS & permissions) == PdfWriter.ALLOW_MODIFY_CONTENTS) {
+        	buf.append(" Modify contents");
+        }
+        if ((PdfWriter.ALLOW_COPY & permissions) == PdfWriter.ALLOW_COPY) {
+        	buf.append(" Copy");
+        }
+        if ((PdfWriter.ALLOW_MODIFY_ANNOTATIONS & permissions) == PdfWriter.ALLOW_MODIFY_ANNOTATIONS) {
+        	buf.append(" Modify annotations");
+        }
+        if ((PdfWriter.ALLOW_FILL_IN & permissions) == PdfWriter.ALLOW_FILL_IN) {
+        	buf.append(" Fill in");
+        }
+        if ((PdfWriter.ALLOW_SCREENREADERS & permissions) == PdfWriter.ALLOW_SCREENREADERS) {
+        	buf.append(" Screen readers");
+        }
+        if ((PdfWriter.ALLOW_ASSEMBLY & permissions) == PdfWriter.ALLOW_ASSEMBLY) {
+        	buf.append(" Assembly");
+        }
+        if ((PdfWriter.ALLOW_DEGRADED_PRINTING & permissions) == PdfWriter.ALLOW_DEGRADED_PRINTING) {
+        	buf.append(" Degraded printing");
+        }
         return buf.toString();
     }
     

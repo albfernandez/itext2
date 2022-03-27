@@ -570,7 +570,7 @@ public class PdfAcroForm extends PdfDictionary {
     public PdfFormField addSelectList(String name, String[] options, String defaultValue, BaseFont font, float fontSize, float llx, float lly, float urx, float ury) {
         PdfFormField choice = PdfFormField.createList(writer, options, 0);
         setChoiceParams(choice, name, defaultValue, llx, lly, urx, ury);
-        StringBuffer text = new StringBuffer();
+        StringBuilder text = new StringBuilder();
         for (int i = 0; i < options.length; i++) {
             text.append(options[i]).append('\n');
         }
@@ -594,7 +594,7 @@ public class PdfAcroForm extends PdfDictionary {
     public PdfFormField addSelectList(String name, String[][] options, String defaultValue, BaseFont font, float fontSize, float llx, float lly, float urx, float ury) {
         PdfFormField choice = PdfFormField.createList(writer, options, 0);
         setChoiceParams(choice, name, defaultValue, llx, lly, urx, ury);
-        StringBuffer text = new StringBuffer();
+        StringBuilder text = new StringBuilder();
         for (int i = 0; i < options.length; i++) {
             text.append(options[i][1]).append('\n');
         }

@@ -195,7 +195,7 @@ public class CMapAwareDocumentFont extends DocumentFont {
      * @since 2.1.7
      */
     public String decode(byte[] cidbytes, final int offset, final int len){
-        StringBuffer sb = new StringBuffer(); // it's a shame we can't make this StringBuilder
+    	StringBuilder sb = new StringBuilder();
         for(int i = offset; i < offset + len; i++){
             String rslt = decodeSingleCID(cidbytes, i, 1);
             if (rslt == null){

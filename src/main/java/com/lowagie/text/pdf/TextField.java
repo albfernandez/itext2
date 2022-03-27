@@ -138,7 +138,7 @@ public class TextField extends BaseField {
     public static String removeCRLF(String text) {
         if (text.indexOf('\n') >= 0 || text.indexOf('\r') >= 0) {
             char[] p = text.toCharArray();
-            StringBuffer sb = new StringBuffer(p.length);
+            StringBuilder sb = new StringBuilder(p.length);
             for (int k = 0; k < p.length; ++k) {
                 char c = p[k];
                 if (c == '\n')

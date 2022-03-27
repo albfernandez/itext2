@@ -1678,7 +1678,7 @@ public class PdfPKCS7 {
     public static class X509NameTokenizer {
         private String          oid;
         private int             index;
-        private StringBuffer    buf = new StringBuffer();
+
         
         public X509NameTokenizer(
         String oid) {
@@ -1699,7 +1699,7 @@ public class PdfPKCS7 {
             boolean quoted = false;
             boolean escaped = false;
             
-            buf.setLength(0);
+            StringBuilder buf = new StringBuilder();
             
             while (end != oid.length()) {
                 char    c = oid.charAt(end);

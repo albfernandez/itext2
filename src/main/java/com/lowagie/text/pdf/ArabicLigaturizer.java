@@ -507,9 +507,9 @@ public class ArabicLigaturizer {
             str[k - srcoffset] = src[k];
         StringBuffer string = new StringBuffer(srclength);
         shape(str, string, level);
-        if ((level & (ar_composedtashkeel | ar_lig)) != 0)
+        if ((level & (ar_composedtashkeel | ar_lig)) != 0) {
             doublelig(string, level);
-//        string.reverse();
+        }
         System.arraycopy(string.toString().toCharArray(), 0, dest, destoffset, string.length());
         return string.length();
     }

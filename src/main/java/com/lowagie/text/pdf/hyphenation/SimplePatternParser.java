@@ -108,7 +108,7 @@ public class SimplePatternParser implements SimpleXMLDocHandler,
 	}
 
 	protected static String getPattern(String word) {
-		StringBuffer pat = new StringBuffer();
+		StringBuilder pat = new StringBuilder();
 		int len = word.length();
 		for (int i = 0; i < len; i++) {
 			if (!Character.isDigit(word.charAt(i))) {
@@ -124,7 +124,7 @@ public class SimplePatternParser implements SimpleXMLDocHandler,
 			Object item = ex.get(i);
 			if (item instanceof String) {
 				String str = (String) item;
-				StringBuffer buf = new StringBuffer();
+				StringBuilder buf = new StringBuilder();
 				for (int j = 0; j < str.length(); j++) {
 					char c = str.charAt(j);
 					if (c != hyphenChar) {
@@ -150,7 +150,7 @@ public class SimplePatternParser implements SimpleXMLDocHandler,
 	}
 
 	protected String getExceptionWord(ArrayList ex) {
-		StringBuffer res = new StringBuffer();
+		StringBuilder res = new StringBuilder();
 		for (int i = 0; i < ex.size(); i++) {
 			Object item = ex.get(i);
 			if (item instanceof String) {
@@ -165,7 +165,7 @@ public class SimplePatternParser implements SimpleXMLDocHandler,
 	}
 
 	protected static String getInterletterValues(String pat) {
-		StringBuffer il = new StringBuffer();
+		StringBuilder il = new StringBuilder();
 		String word = pat + "a"; // add dummy letter to serve as sentinel
 		int len = word.length();
 		for (int i = 0; i < len; i++) {

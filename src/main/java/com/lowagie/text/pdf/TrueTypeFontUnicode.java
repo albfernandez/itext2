@@ -210,7 +210,7 @@ class TrueTypeFontUnicode extends TrueTypeFont implements Comparator, Serializab
     	metrics = filterCmapMetrics(metrics);
         if (metrics.length == 0)
             return null;
-        StringBuffer buf = new StringBuffer(
+        StringBuilder buf = new StringBuilder(
         "/CIDInit /ProcSet findresource begin\n" +
         "12 dict begin\n" +
         "begincmap\n" +
@@ -318,7 +318,7 @@ class TrueTypeFontUnicode extends TrueTypeFont implements Comparator, Serializab
         dic.put(PdfName.CIDSYSTEMINFO, cdic);
         if (!vertical) {
             dic.put(PdfName.DW, new PdfNumber(1000));
-            StringBuffer buf = new StringBuffer("[");
+            StringBuilder buf = new StringBuilder("[");
             int lastNumber = -10;
             boolean firstTime = true;
             for (int k = 0; k < metrics.length; ++k) {

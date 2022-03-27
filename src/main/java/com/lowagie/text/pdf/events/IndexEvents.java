@@ -381,7 +381,7 @@ public class IndexEvents extends PdfPageEventHelper {
          * @return the toString implementation of the entry
          */
         public String toString() {
-            StringBuffer buf = new StringBuffer();
+        	StringBuilder buf = new StringBuilder();
             buf.append(in1).append(' ');
             buf.append(in2).append(' ');
             buf.append(in3).append(' ');

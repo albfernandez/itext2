@@ -83,7 +83,7 @@ public final class SimpleNamedDestination implements SimpleXMLDocHandler {
         for (Iterator it = names.entrySet().iterator(); it.hasNext();) {
             Map.Entry entry = (Map.Entry)it.next();
             PdfArray arr = (PdfArray)entry.getValue();
-            StringBuffer s = new StringBuffer();
+            StringBuilder s = new StringBuilder();
             try {
                 s.append(pages.get(arr.getAsIndirectObject(0).getNumber()));
                 s.append(' ').append(arr.getPdfObject(1).toString().substring(1));
@@ -233,7 +233,7 @@ public final class SimpleNamedDestination implements SimpleXMLDocHandler {
     }
     
     public static String escapeBinaryString(String s) {
-        StringBuffer buf = new StringBuffer();
+    	StringBuilder buf = new StringBuilder();
         char cc[] = s.toCharArray();
         int len = cc.length;
         for (int k = 0; k < len; ++k) {
@@ -252,7 +252,7 @@ public final class SimpleNamedDestination implements SimpleXMLDocHandler {
     }
     
     public static String unEscapeBinaryString(String s) {
-        StringBuffer buf = new StringBuffer();
+    	StringBuilder buf = new StringBuilder();
         char cc[] = s.toCharArray();
         int len = cc.length;
         for (int k = 0; k < len; ++k) {

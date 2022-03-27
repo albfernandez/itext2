@@ -1906,7 +1906,7 @@ public class PdfName extends PdfObject implements Comparable{
      * @return the decoded name
      */
     public static String decodeName(String name) {
-        StringBuffer buf = new StringBuffer();
+    	StringBuilder buf = new StringBuilder();
         try {
             int len = name.length();
             for (int k = 1; k < len; ++k) {

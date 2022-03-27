@@ -81,7 +81,7 @@ public class XmpArray extends ArrayList {
 	 * @return a String representation
 	 */
 	public String toString() {
-		StringBuffer buf = new StringBuffer("<");
+		StringBuilder buf = new StringBuilder("<");
 		buf.append(type);
 		buf.append('>');
 		String s;

@@ -256,21 +256,23 @@ public abstract class BaseField {
         ArrayList arr = new ArrayList();
         char cs[] = text.toCharArray();
         int len = cs.length;
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         for (int k = 0; k < len; ++k) {
             char c = cs[k];
             if (c == '\r') {
-                if (k + 1 < len && cs[k + 1] == '\n')
+                if (k + 1 < len && cs[k + 1] == '\n') {
                     ++k;
+                }
                 arr.add(buf.toString());
-                buf = new StringBuffer();
+                buf = new StringBuilder();
             }
             else if (c == '\n') {
                 arr.add(buf.toString());
-                buf = new StringBuffer();
+                buf = new StringBuilder();
             }
-            else
+            else {
                 buf.append(c);
+            }
         }
         arr.add(buf.toString());
         return arr;
@@ -279,10 +281,12 @@ public abstract class BaseField {
     protected static void trimRight(StringBuffer buf) {
         int len = buf.length();
         while (true) {
-            if (len == 0)
+            if (len == 0) {
                 return;
-            if (buf.charAt(--len) != ' ')
+            }
+            if (buf.charAt(--len) != ' ') {
                 return;
+            }
             buf.setLength(len);
         }
     }

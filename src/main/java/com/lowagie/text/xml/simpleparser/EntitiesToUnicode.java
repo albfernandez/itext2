@@ -400,7 +400,7 @@ public class EntitiesToUnicode {
     	
     	int pos_sc;
     	int pos_a;
-    	StringBuffer buf = new StringBuffer(s.substring(0, pos_amp));
+    	StringBuilder buf = new StringBuilder(s.substring(0, pos_amp));
     	char replace;
     	while (true) {
     		pos_sc = s.indexOf(';', pos_amp);

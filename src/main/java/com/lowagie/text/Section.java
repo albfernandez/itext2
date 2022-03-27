@@ -476,7 +476,7 @@ public class Section extends ArrayList implements TextElementArray, LargeElement
         if (depth < 1) {
             return title;
         }
-        StringBuffer buf = new StringBuffer(" ");
+        StringBuilder buf = new StringBuilder(" ");
         for (int i = 0; i < depth; i++) {
             buf.insert(0, ".");
             buf.insert(0, ((Integer) numbers.get(i)).intValue());

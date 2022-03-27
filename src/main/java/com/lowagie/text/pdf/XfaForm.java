@@ -534,7 +534,7 @@ public class XfaForm {
             int idx = s.indexOf('.');
             if (idx < 0)
                 return s;
-            StringBuffer sb = new StringBuffer();
+            StringBuilder sb = new StringBuilder();
             int last = 0;
             while (idx >= 0) {
                 sb.append(s.substring(last, idx));
@@ -555,7 +555,7 @@ public class XfaForm {
             int idx = s.indexOf('\\');
             if (idx < 0)
                 return s;
-            StringBuffer sb = new StringBuffer();
+            StringBuilder sb = new StringBuilder();
             int last = 0;
             while (idx >= 0) {
                 sb.append(s.substring(last, idx));
@@ -574,7 +574,7 @@ public class XfaForm {
         protected String printStack() {
             if (stack.empty())
                 return "";
-            StringBuffer s = new StringBuffer();
+            StringBuilder s = new StringBuilder();
             for (int k = 0; k < stack.size(); ++k)
                 s.append('.').append((String)stack.get(k));
             return s.substring(1);
@@ -590,7 +590,7 @@ public class XfaForm {
             if (idx < 0)
                 return s;
             int last = 0;
-            StringBuffer sb = new StringBuffer();
+            StringBuilder sb = new StringBuilder();
             while (idx >= 0) {
                 sb.append(s.substring(last, idx));
                 idx = s.indexOf("]", idx + 10);

@@ -193,9 +193,9 @@ public class PdfWriter extends DocWriter implements
              */
 
             public void toPdf(OutputStream os) throws IOException {
-                StringBuffer off = new StringBuffer("0000000000").append(offset);
+            	StringBuilder off = new StringBuilder("0000000000").append(offset);
                 off.delete(0, off.length() - 10);
-                StringBuffer gen = new StringBuffer("00000").append(generation);
+                StringBuilder gen = new StringBuilder("00000").append(generation);
                 gen.delete(0, gen.length() - 5);
 
                 off.append(' ').append(gen).append(generation == GENERATION_MAX ? " f \n" : " n \n");

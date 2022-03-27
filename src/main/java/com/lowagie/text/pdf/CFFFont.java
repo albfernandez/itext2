@@ -176,7 +176,7 @@ public class CFFFont {
         //java.lang.System.err.println("going for "+j);
         int p = getPosition();
         seek(stringOffsets[j]);
-        StringBuffer s = new StringBuffer();
+        StringBuilder s = new StringBuilder();
         for (int k=stringOffsets[j]; k<stringOffsets[j+1]; k++) {
             s.append(getCard8());
         }

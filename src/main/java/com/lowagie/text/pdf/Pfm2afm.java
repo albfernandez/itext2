@@ -200,11 +200,12 @@ public final class Pfm2afm {
     }
     
     private String readString() throws IOException {
-        StringBuffer buf = new StringBuffer();
+    	StringBuilder buf = new StringBuilder();
         while (true) {
             int c = in.read();
-            if (c <= 0)
+            if (c <= 0) {
                 break;
+            }
             buf.append((char)c);
         }
         return buf.toString();

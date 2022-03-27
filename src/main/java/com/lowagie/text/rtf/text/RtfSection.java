@@ -99,7 +99,7 @@ public class RtfSection extends RtfElement {
                 this.title = (RtfParagraph) doc.getMapper().mapElement(section.getTitle())[0];
             }
             if(document.getAutogenerateTOCEntries()) {
-                StringBuffer titleText = new StringBuffer();
+            	StringBuilder titleText = new StringBuilder();
                 Iterator it = section.getTitle().iterator();
                 while(it.hasNext()) {
                     Element element = (Element) it.next();

@@ -397,7 +397,7 @@ public class PdfEncodings {
     }
     
     static String decodeSequence(byte seq[], int start, int length, char planes[][]) {
-        StringBuffer buf = new StringBuffer();
+    	StringBuilder buf = new StringBuilder();
         int end = start + length;
         int currentPlane = 0;
         for (int k = start; k < end; ++k) {

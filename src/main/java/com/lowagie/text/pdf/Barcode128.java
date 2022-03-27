@@ -252,11 +252,12 @@ public class Barcode128 extends Barcode{
      */    
     public static String removeFNC1(String code) {
         int len = code.length();
-        StringBuffer buf = new StringBuffer(len);
+        StringBuilder buf = new StringBuilder(len);
         for (int k = 0; k < len; ++k) {
             char c = code.charAt(k);
-            if (c >= 32 && c <= 126)
+            if (c >= 32 && c <= 126) {
                 buf.append(c);
+            }
         }
         return buf.toString();
     }
@@ -267,7 +268,7 @@ public class Barcode128 extends Barcode{
      * @return the human readable text
      */    
     public static String getHumanReadableUCCEAN(String code) {
-        StringBuffer buf = new StringBuffer();
+    	StringBuilder buf = new StringBuilder();
         String fnc1 = String.valueOf(FNC1);
         try {
             while (true) {
@@ -278,8 +279,9 @@ public class Barcode128 extends Barcode{
                 int n = 0;
                 int idlen = 0;
                 for (int k = 2; k < 5; ++k) {
-                    if (code.length() < k)
+                    if (code.length() < k) {
                         break;
+                    }
                     if ((n = ais.get(Integer.parseInt(code.substring(0, k)))) != 0) {
                         idlen = k;
                         break;
@@ -291,15 +293,17 @@ public class Barcode128 extends Barcode{
                 code = code.substring(idlen);
                 if (n > 0) {
                     n -= idlen;
-                    if (code.length() <= n)
+                    if (code.length() <= n) {
                         break;
+                    }
                     buf.append(removeFNC1(code.substring(0, n)));
                     code = code.substring(n);
                 }
                 else {
                     int idx = code.indexOf(FNC1);
-                    if (idx < 0)
+                    if (idx < 0) {
                         break;
+                    }
                     buf.append(code.substring(0,idx));
                     code = code.substring(idx + 1);
                 }

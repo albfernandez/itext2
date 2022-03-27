@@ -583,7 +583,7 @@ public class SAXiTextHandler extends DefaultHandler {
             return;
         }
 
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         int len = content.length();
         char character;
         boolean newline = false;

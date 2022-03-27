@@ -170,7 +170,7 @@ public final class SimpleBookmark implements SimpleXMLDocHandler {
                                     map.put("NamedN", PdfName.decodeName(dest.toString()));
                                 else if (dest.isArray()) {
                                     PdfArray arr = (PdfArray)dest;
-                                    StringBuffer s = new StringBuffer();
+                                    StringBuilder s = new StringBuilder();
                                     s.append(arr.getPdfObject(0).toString());
                                     s.append(' ').append(arr.getPdfObject(1).toString());
                                     for (int k = 2; k < arr.size(); ++k)
@@ -239,16 +239,19 @@ public final class SimpleBookmark implements SimpleXMLDocHandler {
 	{
 		if (dest.size() == 0) {
 	        throw new IllegalArgumentException("Illegal bookmark destination");
-	      }
-		StringBuffer s = new StringBuffer();
+	    }
+		StringBuilder s = new StringBuilder();
 		PdfObject obj = dest.getPdfObject(0);
-        if (obj.isNumber())
+        if (obj.isNumber()) {
             s.append(((PdfNumber)obj).intValue() + 1);
-        else
-            s.append(pages.get(getNumber((PdfIndirectReference)obj))); //changed by ujihara 2004-06-13
+        }
+        else {
+            s.append(pages.get(getNumber((PdfIndirectReference)obj))); 
+        }
 		s.append(' ').append(dest.getPdfObject(1).toString().substring(1));
-		for (int k = 2; k < dest.size(); ++k)
+		for (int k = 2; k < dest.size(); ++k) {
 			s.append(' ').append(dest.getPdfObject(k).toString());
+		}
 		return s.toString();
 	}
 	

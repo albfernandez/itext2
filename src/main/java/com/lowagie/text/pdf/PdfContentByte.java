@@ -1457,7 +1457,7 @@ public class PdfContentByte {
      */
     public static PdfTextArray getKernArray(String text, BaseFont font) {
         PdfTextArray pa = new PdfTextArray();
-        StringBuffer acc = new StringBuffer();
+        StringBuilder acc = new StringBuilder();
         int len = text.length() - 1;
         char c[] = text.toCharArray();
         if (len >= 0)

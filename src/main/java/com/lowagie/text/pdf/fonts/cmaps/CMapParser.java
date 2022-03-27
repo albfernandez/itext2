@@ -191,7 +191,7 @@ public class CMapParser
             {
                 //header operations, for now return the entire line 
                 //may need to smarter in the future
-                StringBuffer buffer = new StringBuffer();
+            	StringBuilder buffer = new StringBuilder();
                 buffer.append( (char)nextByte );
                 readUntilEndOfLine( is, buffer );
                 retval = buffer.toString();
@@ -199,11 +199,10 @@ public class CMapParser
             }
             case '(':
             {
-                StringBuffer buffer = new StringBuffer();
+            	StringBuilder buffer = new StringBuilder();
                 int stringByte = is.read();
                 
-                while( stringByte != -1 && stringByte != ')' )
-                {
+                while( stringByte != -1 && stringByte != ')' ) {
                     buffer.append( (char)stringByte );
                     stringByte = is.read();
                 }
@@ -213,12 +212,10 @@ public class CMapParser
             case '>':
             {
                 int secondCloseBrace = is.read();
-                if( secondCloseBrace == '>' )
-                {
+                if( secondCloseBrace == '>' ) {
                     retval = MARK_END_OF_DICTIONARY;
                 }
-                else
-                {
+                else {
                     throw new IOException( "Error: expected the end of a dictionary.");
                 }
                 break;
@@ -305,7 +302,7 @@ public class CMapParser
             }
             case '/':
             {
-                StringBuffer buffer = new StringBuffer();
+            	StringBuilder buffer = new StringBuilder();
                 int stringByte = is.read();
                 
                 while( !isWhitespaceOrEOF( stringByte ) )
@@ -332,7 +329,7 @@ public class CMapParser
             case '8':
             case '9':
             {
-                StringBuffer buffer = new StringBuffer();
+            	StringBuilder buffer = new StringBuilder();
                 buffer.append( (char)nextByte );
                 nextByte = is.read();
                 
@@ -357,13 +354,12 @@ public class CMapParser
             }
             default:
             {
-                StringBuffer buffer = new StringBuffer();
+            	StringBuilder buffer = new StringBuilder();
                 buffer.append( (char)nextByte );
                 nextByte = is.read();
                 
-                while( !isWhitespaceOrEOF( nextByte ) )
-                {
-                    buffer.append( (char)nextByte );
+                while( !isWhitespaceOrEOF(nextByte))  {
+                    buffer.append( (char) nextByte );
                     nextByte = is.read();
                 }
                 retval = new Operator( buffer.toString() );                        
@@ -374,7 +370,7 @@ public class CMapParser
         return retval;
     }
     
-    private void readUntilEndOfLine( InputStream is, StringBuffer buf ) throws IOException
+    private void readUntilEndOfLine( InputStream is, StringBuilder buf ) throws IOException
     {
         int nextByte = is.read();
         while( nextByte != -1 && nextByte != 0x0D && nextByte != 0x0A )

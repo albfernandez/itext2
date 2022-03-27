@@ -900,7 +900,7 @@ public class PdfAnnotation extends PdfDictionary {
     	 * @since	2.1.6
     	 */
     	public String toString() {
-    		StringBuffer buf = new StringBuffer("Imported link: location [");
+    		StringBuilder buf = new StringBuilder("Imported link: location [");
     		buf.append(llx);
     		buf.append(' ');
     		buf.append(lly);

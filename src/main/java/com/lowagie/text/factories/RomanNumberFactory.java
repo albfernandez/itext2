@@ -97,7 +97,7 @@ public class RomanNumberFactory {
 	 * @return the roman number (lower case)
 	 */
 	public static final String getString(int index) {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 
 		// lower than 0 ? Add minus
 		if (index < 0) {

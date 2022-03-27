@@ -1204,7 +1204,7 @@ public class RtfParser {
 							break;
 						}
 						if(this.getTokeniserState() == TOKENISER_HEX) {
-							StringBuffer hexChars = new StringBuffer();
+							StringBuilder hexChars = new StringBuilder();
 							hexChars.append(nextChar);
 //							if(pbReader.read(nextChar) == -1) {
 							if((nextChar = pbReader.read()) == -1) {
@@ -1285,8 +1285,8 @@ public class RtfParser {
 		}
 		this.byteCount++;
 
-		StringBuffer parsedCtrlWord = new StringBuffer();
-		StringBuffer parsedParam= new StringBuffer();
+		StringBuilder parsedCtrlWord = new StringBuilder();
+		StringBuilder parsedParam= new StringBuilder();
 		RtfCtrlWordData ctrlWordParam = new RtfCtrlWordData();
 		
 		if(!Character.isLetterOrDigit((char)nextChar)) {

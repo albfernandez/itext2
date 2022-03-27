@@ -115,7 +115,7 @@ public class EventsTest {
 		 */
 		public void onChapter(PdfWriter writer, Document document,
 				float paragraphPosition, Paragraph title) {
-			StringBuffer buf = new StringBuffer();
+			StringBuilder buf = new StringBuilder();
 			for (Iterator i = title.getChunks().iterator(); i.hasNext();) {
 				Chunk chunk = (Chunk) i.next();
 				buf.append(chunk.getContent());
