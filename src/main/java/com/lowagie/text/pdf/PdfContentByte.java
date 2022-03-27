@@ -193,6 +193,13 @@ public class PdfContentByte {
     private boolean inText = false;
 
     private static HashMap abrev = new HashMap();
+    
+    
+    /**
+	 * Applied pull up filed refactoring 
+	 * Moved field from Type3Glyph,PdfTemplate,StampContent to this class
+	 */
+	protected PageResources pageResources;
 
     static {
         abrev.put(PdfName.BITSPERCOMPONENT, "/BPC ");

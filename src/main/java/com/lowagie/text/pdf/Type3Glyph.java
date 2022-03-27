@@ -53,7 +53,6 @@ import com.lowagie.text.Image;
  */
 public final class Type3Glyph extends PdfContentByte {
 
-    private PageResources pageResources;
     private boolean colorized;
     
     private Type3Glyph() {
