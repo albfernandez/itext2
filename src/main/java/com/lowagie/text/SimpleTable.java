@@ -118,20 +118,17 @@ public class SimpleTable extends Rectangle implements PdfPTableEvent, TextElemen
 		table.setPadding(cellpadding);
 		table.cloneNonPositionParameters(this);
 		int pos;
-		for (Iterator rows = content.iterator(); rows.hasNext(); ) {
-			row = (SimpleCell)rows.next();
-			pos = 0;
-			for (Iterator cells = row.getContent().iterator(); cells.hasNext(); ) {
-				cell = (SimpleCell)cells.next();
-				table.addCell(cell.createCell(row));
-				if (cell.getColspan() == 1) {
-					if (cell.getWidth() > 0) widths[pos] = cell.getWidth();
-					if (cell.getWidthpercentage() > 0) widthpercentages[pos] = cell.getWidthpercentage();
-				}
-				pos += cell.getColspan();
-			}
-		}
+		iterateRows(widths, widthpercentages, table);
 		float sumWidths = 0f;
+		calWidth(columns, widths, widthpercentages, table, sumWidths);
+		return table;
+	}
+
+	/**
+	 * Extract logic to cal width from createTable method.
+	 */
+	private void calWidth(int columns, float[] widths, float[] widthpercentages, Table table, float sumWidths)
+			throws BadElementException {
 		for(int i = 0; i < columns; i++) {
 			if (widths[i] == 0) {
 				sumWidths = 0;
@@ -139,6 +136,14 @@ public class SimpleTable extends Rectangle implements PdfPTableEvent, TextElemen
 			}
 			sumWidths += widths[i];
 		}
+		setWidth(columns, widths, widthpercentages, table, sumWidths);
+	}
+
+	/**
+	 * Extract logic to set width from findWidth method once width is calculated.
+	 */
+	private void setWidth(int columns, float[] widths, float[] widthpercentages, Table table, float sumWidths)
+			throws BadElementException {
 		if (sumWidths > 0) {
 			table.setWidth(sumWidths);
 			table.setLocked(true);
@@ -163,7 +168,26 @@ public class SimpleTable extends Rectangle implements PdfPTableEvent, TextElemen
 		else if (widthpercentage > 0) {
 			table.setWidth(widthpercentage);
 		}
-		return table;
+	}
+	
+	//Create sepertae method to iterate rows from createTable
+	private void iterateRows(float[] widths, float[] widthpercentages, Table table) throws BadElementException {
+		SimpleCell row;
+		SimpleCell cell;
+		int pos;
+		for (Iterator rows = content.iterator(); rows.hasNext(); ) {
+			row = (SimpleCell)rows.next();
+			pos = 0;
+			for (Iterator cells = row.getContent().iterator(); cells.hasNext(); ) {
+				cell = (SimpleCell)cells.next();
+				table.addCell(cell.createCell(row));
+				if (cell.getColspan() == 1) {
+					if (cell.getWidth() > 0) widths[pos] = cell.getWidth();
+					if (cell.getWidthpercentage() > 0) widthpercentages[pos] = cell.getWidthpercentage();
+				}
+				pos += cell.getColspan();
+			}
+		}
 	}
 	
 	/**
