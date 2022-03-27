@@ -16,6 +16,7 @@ JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/ mvn clean package install verify
 
 ```bash
 # change release in pom.xml
+# change release in README.md
 mvn clean package install verify
 mvn -Psign clean package install deploy
 git add -A
