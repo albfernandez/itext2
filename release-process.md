@@ -8,7 +8,7 @@ This guide provides a chronological steps which goes through release tagging, st
 Check that the project builds in java 8 and java 11.
 
 ```bash
-mvn clean package install verify 
+JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/ mvn clean package install verify 
 JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/ mvn clean package install verify
 ```
 
@@ -17,8 +17,8 @@ JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/ mvn clean package install verify
 ```bash
 # change release in pom.xml
 # change release in README.md
-mvn clean package install verify
-mvn -Psign clean package install deploy
+mvn clean package install verify -Pdeploy
+mvn -Psign clean package install deploy -Pdeploy
 git add -A
 git commit -S -m 'Release <2.2.0>'
 git tag -a <v.2.2.0> -m "Tagging release <2.2.0>"

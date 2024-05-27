@@ -214,7 +214,7 @@
 			</properties>
 		</profile>
 		<profile>
-			<id>sign</id>
+			<id>deploy</id>
 			<build>
 				<plugins>
 					<plugin>
