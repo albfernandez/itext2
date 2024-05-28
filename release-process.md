@@ -18,7 +18,7 @@ JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/ mvn clean package install verify
 # change release in pom.xml
 # change release in README.md
 mvn clean package install verify -Pdeploy
-mvn -Psign clean package install deploy -Pdeploy
+mvn clean package install verify deploy -Pdeploy
 git add -A
 git commit -S -m 'Release <2.2.0>'
 git tag -a <v.2.2.0> -m "Tagging release <2.2.0>"

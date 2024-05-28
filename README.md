@@ -25,7 +25,7 @@ Add this to your pom.xml file to use the latest version of OpenPDF:
 <dependency>
     <groupId>com.github.albfernandez</groupId>
     <artifactId>itext2</artifactId>
-    <version>2.2.1</version>
+    <version>2.2.2</version>
 </dependency>
 ```
 
