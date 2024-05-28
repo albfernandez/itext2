@@ -195,6 +195,7 @@
 	
 	<profiles>
 		<profile>
+			<id>java6</id>
 			<activation>
 				<jdk>1.6</jdk>
 			</activation>
@@ -211,6 +212,19 @@
 			</activation>
 			<properties>
 				<javadoc.opts>-Xdoclint:none</javadoc.opts>
+			</properties>
+		</profile>
+		<profile>
+			<id>java</id>
+			<activation>
+				<!--
+					release 1.7 is removed in java 20
+					https://bugs.openjdk.org/browse/JDK-8173605 
+				-->
+				<jdk>[20,)</jdk>
+			</activation>
+			<properties>
+				<compiler.level>1.8</compiler.level>				
 			</properties>
 		</profile>
 		<profile>
