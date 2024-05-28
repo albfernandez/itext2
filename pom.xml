@@ -10,7 +10,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-		<version.bouncycastle>1.74</version.bouncycastle>
+		<version.bouncycastle>1.78.1</version.bouncycastle>
 		<version.junit>4.13.1</version.junit>
 		<version.servlet-api>3.1.0</version.servlet-api>
 		<version.jfreechart>1.0.19</version.jfreechart>
